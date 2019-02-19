@@ -302,22 +302,30 @@
 
     A resolução deste trabalho prático tem como objetivo servir de iniciação
 à componente prática da unidade curricular de Estruturas criptográficas,
-onde se pretende: - Instalar as ferramentas computacionais necessárias
-para a realização dos trabalhos práticos. - Demonstrar pequenas
-aplicações implementadas em \textbf{Python} e em \textbf{SageMath}.
+onde se pretende:
+\begin{itemize}
+    \item Instalar as ferramentas computacionais necessárias
+    para a realização dos trabalhos práticos. 
+    \item Demonstrar pequenas
+    aplicações implementadas em \textbf{Python} e em \textbf{SageMath}.
+\end{itemize}
 
 A aplicação em \textbf{Python} deve ser implementada de tal forma que
 permita a comunicação entre um emissor e um recetor, com as seguintes
-caracteristicas: - Criptograma e metadados devem ser autenticados. -
-Utilizar uma cifra simétrica em modo \emph{stream cipher}. - Autenticar
-previamente a chave.
+caracteristicas:
+\begin{itemize}
+    \item Criptograma e metadados devem ser autenticados.
+    \item Utilizar uma cifra simétrica em modo \emph{stream cipher}. 
+    \item Autenticar previamente a chave.
+\end{itemize}
+
 
 A aplicação em \textbf{SageMath} deve ser implementada de tal forma que:
-- Crie 4 corpos finitos primos. - Crie um \emph{plot} de uma função em
-cada um dos corpos finitos primos. - Teste, por amostragem, o facto de
-que, considerando um expoente \emph{n}, um elemento primitivo de um
-corpo \emph{g} e um número primo \emph{p}, se \(g ^ n = 1\) , então
-\(n = 0 mod (p-1)\).
+\begin{itemize}
+    \item Crie 4 corpos finitos primos.
+    \item Crie um \emph{plot} de uma função em cada um dos corpos finitos primos. 
+    \item Teste, por amostragem, o facto de que, considerando um expoente \emph{n}, um elemento primitivo de um corpo \emph{g} e um número primo \emph{p}, se \(g ^ n = 1\) , então \(n = 0 mod (p-1)\).
+\end{itemize}
 
     \hypertarget{aplicauxe7uxe3o-python}{%
 \section{Aplicação Python}\label{aplicauxe7uxe3o-python}}
@@ -397,9 +405,11 @@ do recetor que participam na comunicação bidireccional da aplicação.
                     \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{l+m+mi}{64}\PY{p}{]}
                     \PY{n}{mac\PYZus{}passwd\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{64}\PY{p}{:}\PY{p}{]}
                     
-                    \PY{c+c1}{\PYZsh{} Utilizar o AES com um dos modos que o torna numa stream cipher para cifrar o criptograma.}
+                    \PY{c+c1}{\PYZsh{} Utilizar o AES com um dos modos que o torna numa stream cipher}
+                    \PY{c+c1}{\PYZsh{} para cifrar o criptograma.}
                     \PY{n}{nonce} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
-                    \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{mode}\PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{mode}\PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
                     \PY{n}{cryptogram} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{encryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}
                     
                     \PY{c+c1}{\PYZsh{}geração do código de autenticação do criptograma e dos metadados}
@@ -413,7 +423,8 @@ do recetor que participam na comunicação bidireccional da aplicação.
                     \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}passwd\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
                     \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
                     \PY{n}{hash\PYZus{}pass} \PY{o}{=} \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
-                    \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}msg}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}pass}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{con\PYZus{}salt}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nonce}\PY{p}{\PYZcb{}}
+                    \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}msg}
+                    \PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}pass}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{con\PYZus{}salt}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nonce}\PY{p}{\PYZcb{}}
                     \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
                 \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
@@ -458,7 +469,8 @@ do recetor que participam na comunicação bidireccional da aplicação.
                         \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{mac\PYZus{}code}\PY{p}{)}
                         
                         \PY{c+c1}{\PYZsh{}Decifrar criptograma}
-                        \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{mode} \PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                        \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{mode} \PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
                         \PY{n}{plain\PYZus{}text} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{decryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cryptogram}\PY{p}{)}
                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto decifrado:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
                         \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{plain\PYZus{}text}\PY{p}{)}\PY{p}{)}
