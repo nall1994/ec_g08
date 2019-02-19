@@ -375,101 +375,101 @@ Recetor}\label{definiuxe7uxe3o-do-emissor-e-do-recetor}}
     Nesta secção encontram-se implementados os comportamentos do emissor e
 do recetor que participam na comunicação bidireccional da aplicação.
 
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{Emissor}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
-            \PY{n}{con\PYZus{}salt} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
-            \PY{n}{passwd} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{getpass}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Password do emissor: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-            \PY{n}{text\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{)}
-            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto a cifrar e enviar:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-            \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}\PY{p}{)}
-            \PY{k}{try}\PY{p}{:}
-                \PY{c+c1}{\PYZsh{}derivar a chave apartir da password}
-                \PY{n}{derivation} \PY{o}{=} \PY{n}{PBKDF2HMAC}\PY{p}{(}
-                        \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
-                        \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{64}\PY{p}{,}
-                        \PY{n}{salt} \PY{o}{=} \PY{n}{con\PYZus{}salt}\PY{p}{,}
-                        \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}\PY{p}{,}
-                        \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
-                \PY{p}{)}
-                \PY{c+c1}{\PYZsh{}Separar a password para cifragem e autenticação}
-                \PY{n}{full\PYZus{}key} \PY{o}{=} \PY{n}{derivation}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{passwd}\PY{p}{)}
-                \PY{n}{cript\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{32}\PY{p}{]}
-                \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{p}{]}
-                
-                \PY{c+c1}{\PYZsh{} Utilizar o AES com um dos modos que o torna numa stream cipher}
-                \PY{c+c1}{\PYZsh{} para cifrar o criptograma.}
-                \PY{n}{nonce} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
-                \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{mode}\PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}
-                \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-                \PY{n}{cryptogram} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{encryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}
-                
-                \PY{c+c1}{\PYZsh{}geração do código de autenticação do criptograma e dos metadados}
-                \PY{n}{message\PYZus{}to\PYZus{}authenticate} \PY{o}{=} \PY{n}{cryptogram} \PY{o}{+} \PY{n}{nonce} \PY{o}{+} \PY{n}{con\PYZus{}salt}
-                \PY{n}{hasher} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-                \PY{n}{hasher}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}authenticate}\PY{p}{)}
-                \PY{n}{hash\PYZus{}msg} \PY{o}{=} \PY{n}{hasher}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
-                
-                \PY{c+c1}{\PYZsh{}geração do código de autenticação da chave}
-                \PY{c+c1}{\PYZsh{}esforço computacional é reduzido no recetor caso insira a password errada.}
-                \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-                \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
-                \PY{n}{hash\PYZus{}pass} \PY{o}{=} \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
-                \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}msg}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
-                \PY{n}{hash\PYZus{}pass}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{con\PYZus{}salt}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nonce}\PY{p}{\PYZcb{}}
-                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
-            \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
-                \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
-        \PY{k}{def} \PY{n+nf}{Recetor}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
-            \PY{n}{passwd} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{getpass}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Password do recetor: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-            \PY{k}{try}\PY{p}{:}
-                \PY{n}{obj} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
-                
-                \PY{c+c1}{\PYZsh{}Obter parâmetros no objeto}
-                \PY{n}{pass\PYZus{}code} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-                \PY{n}{cryptogram} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-                \PY{n}{mac\PYZus{}code} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-                \PY{n}{salt} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-                \PY{n}{nonce} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-                
-                \PY{c+c1}{\PYZsh{}derivar a chave apartir da password lida}
-                \PY{n}{derivation} \PY{o}{=} \PY{n}{PBKDF2HMAC}\PY{p}{(}
-                        \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
-                        \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{64}\PY{p}{,}
-                        \PY{n}{salt} \PY{o}{=} \PY{n}{salt}\PY{p}{,}
-                        \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}\PY{p}{,}
-                        \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
-                \PY{p}{)}
-                \PY{c+c1}{\PYZsh{}Separar a password para cifragem e autenticação}
-                \PY{n}{full\PYZus{}key} \PY{o}{=} \PY{n}{derivation}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{passwd}\PY{p}{)}
-                \PY{n}{cript\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{32}\PY{p}{]}
-                \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{p}{]}
-                
-                \PY{c+c1}{\PYZsh{}Autenticação prévia da chave}
-                \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-                \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
-                \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{pass\PYZus{}code}\PY{p}{)}
-                
-                \PY{c+c1}{\PYZsh{}Autenticação do criptograma e metadados}
-                \PY{n}{message\PYZus{}to\PYZus{}authenticate} \PY{o}{=} \PY{n}{cryptogram} \PY{o}{+} \PY{n}{nonce} \PY{o}{+} \PY{n}{salt}
-                \PY{n}{hash\PYZus{}msg} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-                \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}authenticate}\PY{p}{)}
+\begin{Verbatim}[commandchars=\\\{\}]
+    {\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{Emissor}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+                \PY{n}{con\PYZus{}salt} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
+                \PY{n}{passwd} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{getpass}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Password do emissor: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{text\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto a cifrar e enviar:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}\PY{p}{)}
                 \PY{k}{try}\PY{p}{:}
-                    \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{mac\PYZus{}code}\PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}derivar a chave apartir da password}
+                    \PY{n}{derivation} \PY{o}{=} \PY{n}{PBKDF2HMAC}\PY{p}{(}
+                            \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{96}\PY{p}{,}
+                            \PY{n}{salt} \PY{o}{=} \PY{n}{con\PYZus{}salt}\PY{p}{,}
+                            \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}\PY{p}{,}
+                            \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+                    \PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}Separar a password para cifragem e autenticação}
+                    \PY{n}{full\PYZus{}key} \PY{o}{=} \PY{n}{derivation}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{passwd}\PY{p}{)}
+                    \PY{n}{cript\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{32}\PY{p}{]}
+                    \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{l+m+mi}{64}\PY{p}{]}
+                    \PY{n}{mac\PYZus{}passwd\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{64}\PY{p}{:}\PY{p}{]}
                     
-                    \PY{c+c1}{\PYZsh{}Decifrar criptograma}
-                    \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}
-                    \PY{n}{mode} \PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-                    \PY{n}{plain\PYZus{}text} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{decryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cryptogram}\PY{p}{)}
-                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto decifrado:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{plain\PYZus{}text}\PY{p}{)}\PY{p}{)}
-                \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
-                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Código de autenticação não é válido!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-            \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
-                \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
-            \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
-                
-                
-\end{Verbatim}
+                    \PY{c+c1}{\PYZsh{} Utilizar o AES com um dos modos que o torna numa stream cipher para cifrar o criptograma.}
+                    \PY{n}{nonce} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
+                    \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{mode}\PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{cryptogram} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{encryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{}geração do código de autenticação do criptograma e dos metadados}
+                    \PY{n}{message\PYZus{}to\PYZus{}authenticate} \PY{o}{=} \PY{n}{cryptogram} \PY{o}{+} \PY{n}{nonce} \PY{o}{+} \PY{n}{con\PYZus{}salt}
+                    \PY{n}{hasher} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{hasher}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}authenticate}\PY{p}{)}
+                    \PY{n}{hash\PYZus{}msg} \PY{o}{=} \PY{n}{hasher}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{}geração do código de autenticação da chave}
+                    \PY{c+c1}{\PYZsh{}esforço computacional é reduzido no recetor caso insira a password errada.}
+                    \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}passwd\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
+                    \PY{n}{hash\PYZus{}pass} \PY{o}{=} \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}msg}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}pass}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{con\PYZus{}salt}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nonce}\PY{p}{\PYZcb{}}
+                    \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+                \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+            \PY{k}{def} \PY{n+nf}{Recetor}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+                \PY{n}{passwd} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{getpass}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Password do recetor: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{n}{obj} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{}Obter parâmetros no objeto}
+                    \PY{n}{pass\PYZus{}code} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    \PY{n}{cryptogram} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    \PY{n}{mac\PYZus{}code} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    \PY{n}{salt} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    \PY{n}{nonce} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                    
+                    \PY{c+c1}{\PYZsh{}derivar a chave apartir da password lida}
+                    \PY{n}{derivation} \PY{o}{=} \PY{n}{PBKDF2HMAC}\PY{p}{(}
+                            \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                            \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{96}\PY{p}{,}
+                            \PY{n}{salt} \PY{o}{=} \PY{n}{salt}\PY{p}{,}
+                            \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}\PY{p}{,}
+                            \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+                    \PY{p}{)}
+                    \PY{c+c1}{\PYZsh{}Separar a password para cifragem e autenticação}
+                    \PY{n}{full\PYZus{}key} \PY{o}{=} \PY{n}{derivation}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{passwd}\PY{p}{)}
+                    \PY{n}{cript\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{32}\PY{p}{]}
+                    \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{l+m+mi}{64}\PY{p}{]}
+                    \PY{n}{mac\PYZus{}passwd\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{64}\PY{p}{:}\PY{p}{]}
+                    
+                    
+                    
+                    \PY{c+c1}{\PYZsh{}Autenticação prévia da chave}
+                    \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}passwd\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
+                    \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{pass\PYZus{}code}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{}Autenticação do criptograma e metadados}
+                    \PY{n}{message\PYZus{}to\PYZus{}authenticate} \PY{o}{=} \PY{n}{cryptogram} \PY{o}{+} \PY{n}{nonce} \PY{o}{+} \PY{n}{salt}
+                    \PY{n}{hash\PYZus{}msg} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}authenticate}\PY{p}{)}
+                    \PY{k}{try}\PY{p}{:}
+                        \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{mac\PYZus{}code}\PY{p}{)}
+                        
+                        \PY{c+c1}{\PYZsh{}Decifrar criptograma}
+                        \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{mode} \PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                        \PY{n}{plain\PYZus{}text} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{decryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cryptogram}\PY{p}{)}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto decifrado:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{plain\PYZus{}text}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
+                        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Código de autenticação não é válido!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+                \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                    
+                    
+    \end{Verbatim}    
 
     \hypertarget{iniciauxe7uxe3o-do-processo}{%
 \subsection{Iniciação do
@@ -526,7 +526,7 @@ primos}\label{criauxe7uxe3o-dos-corpos-finitos-primos}}
 \end{Verbatim}
 
     \hypertarget{definiuxe7uxe3o-iniciais}{%
-\subsection{Definição iniciais}\label{definiuxe7uxe3o-iniciais}}
+\subsection{Definições Iniciais}\label{definiuxe7uxe3o-iniciais}}
 
     De seguida, definiu-se a função que será aplicada aos pontos dos corpos
 finitos primos. Esta recebe um ponto \emph{x} e um primo \emph{p} e
@@ -772,7 +772,7 @@ ferramenta, especificamente, na produção do ficheiro necessário, que
 representa o relatório na sua totalidade.
 
     \hypertarget{referuxeancias}{%
-\subsection{Referências}\label{referuxeancias}}
+\section{Referências}\label{referuxeancias}}
 
     \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
