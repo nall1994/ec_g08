@@ -1,0 +1,808 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{MIEI/MI - Estruturas Criptográficas\\
+            \large Trabalho Prático 0}
+    
+    \author{
+        João Alves\\
+        \texttt{a77070@alunos.uminho.pt}
+        \and
+        Nuno Leite\\
+        \texttt{a70132@alunos.uminho.pt}
+      }
+    \date{Universidade do Minho}
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+    \hypertarget{introduuxe7uxe3o}{%
+\section{Introdução}\label{introduuxe7uxe3o}}
+
+    A resolução deste trabalho prático tem como objetivo servir de iniciação
+à componente prática da unidade curricular de Estruturas criptográficas,
+onde se pretende: - Instalar as ferramentas computacionais necessárias
+para a realização dos trabalhos práticos. - Demonstrar pequenas
+aplicações implementadas em \textbf{Python} e em \textbf{SageMath}.
+
+A aplicação em \textbf{Python} deve ser implementada de tal forma que
+permita a comunicação entre um emissor e um recetor, com as seguintes
+caracteristicas: - Criptograma e metadados devem ser autenticados. -
+Utilizar uma cifra simétrica em modo \emph{stream cipher}. - Autenticar
+previamente a chave.
+
+A aplicação em \textbf{SageMath} deve ser implementada de tal forma que:
+- Crie 4 corpos finitos primos. - Crie um \emph{plot} de uma função em
+cada um dos corpos finitos primos. - Teste, por amostragem, o facto de
+que, considerando um expoente \emph{n}, um elemento primitivo de um
+corpo \emph{g} e um número primo \emph{p}, se \(g ^ n = 1\) , então
+\(n = 0 mod (p-1)\).
+
+    \hypertarget{aplicauxe7uxe3o-python}{%
+\section{Aplicação Python}\label{aplicauxe7uxe3o-python}}
+
+    \hypertarget{imports}{%
+\subsection{Imports}\label{imports}}
+
+    Esta secção executa os \emph{imports} de \textbf{Python} que contêm as
+funções necessárias para desenvolver a aplicação enunciada.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{from} \PY{n+nn}{getpass} \PY{k}{import} \PY{n}{getpass}
+        \PY{k+kn}{from} \PY{n+nn}{multiprocessing} \PY{k}{import} \PY{n}{Process}\PY{p}{,}\PY{n}{Pipe}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{backends} \PY{k}{import} \PY{n}{default\PYZus{}backend}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives} \PY{k}{import} \PY{n}{hashes}\PY{p}{,} \PY{n}{hmac}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{kdf}\PY{n+nn}{.}\PY{n+nn}{pbkdf2} \PY{k}{import} \PY{n}{PBKDF2HMAC}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{ciphers} \PY{k}{import} \PY{n}{Cipher}\PY{p}{,} \PY{n}{algorithms}\PY{p}{,} \PY{n}{modes}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{exceptions} \PY{k}{import} \PY{n}{InvalidSignature}
+        \PY{k+kn}{from} \PY{n+nn}{base64} \PY{k}{import} \PY{n}{b64encode}\PY{p}{,} \PY{n}{b64decode}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-da-classe-de-multiprocessamento}{%
+\subsection{Definição da classe de
+multiprocessamento}\label{definiuxe7uxe3o-da-classe-de-multiprocessamento}}
+
+    Esta secção tem o propósito de definir a classe de multiprocessamento,
+que permite uma comunicação bidireccional com o \emph{Emitter} e o
+\emph{Receiver}, sendo estes dois processos criados e implementados pela
+\textbf{API}
+\href{https://docs.python.org/2/library/multiprocessing.html}{\textbf{multiprocessing}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{class} \PY{n+nc}{BiConnection}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{left}\PY{p}{,}\PY{n}{right}\PY{p}{)}\PY{p}{:}
+                \PY{n}{left\PYZus{}side}\PY{p}{,}\PY{n}{right\PYZus{}side} \PY{o}{=} \PY{n}{Pipe}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{timeout} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left\PYZus{}process} \PY{o}{=} \PY{n}{Process}\PY{p}{(}\PY{n}{target}\PY{o}{=}\PY{n}{left}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{left\PYZus{}side}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right\PYZus{}process} \PY{o}{=} \PY{n}{Process}\PY{p}{(}\PY{n}{target}\PY{o}{=}\PY{n}{right}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{right\PYZus{}side}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left} \PY{o}{=} \PY{k}{lambda} \PY{p}{:} \PY{n}{left}\PY{p}{(}\PY{n}{left\PYZus{}side}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right} \PY{o}{=} \PY{k}{lambda} \PY{p}{:} \PY{n}{right}\PY{p}{(}\PY{n}{right\PYZus{}side}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Execução manual apenas devido ao facto de a password}
+            \PY{c+c1}{\PYZsh{} ter que ser lida em ambos os lados do Pipe}            
+            \PY{k}{def} \PY{n+nf}{manual}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right}\PY{p}{(}\PY{p}{)}
+            
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-emissor-e-do-recetor}{%
+\subsection{Definição do Emissor e do
+Recetor}\label{definiuxe7uxe3o-do-emissor-e-do-recetor}}
+
+    Nesta secção encontram-se implementados os comportamentos do emissor e
+do recetor que participam na comunicação bidireccional da aplicação.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{Emissor}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+            \PY{n}{con\PYZus{}salt} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
+            \PY{n}{passwd} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{getpass}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Password do emissor: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{text\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto a cifrar e enviar:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}derivar a chave apartir da password}
+                \PY{n}{derivation} \PY{o}{=} \PY{n}{PBKDF2HMAC}\PY{p}{(}
+                        \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{64}\PY{p}{,}
+                        \PY{n}{salt} \PY{o}{=} \PY{n}{con\PYZus{}salt}\PY{p}{,}
+                        \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}\PY{p}{,}
+                        \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+                \PY{p}{)}
+                \PY{c+c1}{\PYZsh{}Separar a password para cifragem e autenticação}
+                \PY{n}{full\PYZus{}key} \PY{o}{=} \PY{n}{derivation}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{passwd}\PY{p}{)}
+                \PY{n}{cript\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{32}\PY{p}{]}
+                \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{} Utilizar o AES com um dos modos que o torna numa stream cipher}
+                \PY{c+c1}{\PYZsh{} para cifrar o criptograma.}
+                \PY{n}{nonce} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{)}
+                \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{mode}\PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}
+                \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{cryptogram} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{encryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{text\PYZus{}to\PYZus{}send}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}geração do código de autenticação do criptograma e dos metadados}
+                \PY{n}{message\PYZus{}to\PYZus{}authenticate} \PY{o}{=} \PY{n}{cryptogram} \PY{o}{+} \PY{n}{nonce} \PY{o}{+} \PY{n}{con\PYZus{}salt}
+                \PY{n}{hasher} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{hasher}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}authenticate}\PY{p}{)}
+                \PY{n}{hash\PYZus{}msg} \PY{o}{=} \PY{n}{hasher}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}geração do código de autenticação da chave}
+                \PY{c+c1}{\PYZsh{}esforço computacional é reduzido no recetor caso insira a password errada.}
+                \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
+                \PY{n}{hash\PYZus{}pass} \PY{o}{=} \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
+                \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{hash\PYZus{}msg}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                \PY{n}{hash\PYZus{}pass}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{con\PYZus{}salt}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{nonce}\PY{p}{\PYZcb{}}
+                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+            \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+        \PY{k}{def} \PY{n+nf}{Recetor}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+            \PY{n}{passwd} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{getpass}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Password do recetor: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{obj} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}Obter parâmetros no objeto}
+                \PY{n}{pass\PYZus{}code} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pass\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{cryptogram} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cryptogram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{mac\PYZus{}code} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mac\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{salt} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{nonce} \PY{o}{=} \PY{n}{obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonce}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{}derivar a chave apartir da password lida}
+                \PY{n}{derivation} \PY{o}{=} \PY{n}{PBKDF2HMAC}\PY{p}{(}
+                        \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                        \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{64}\PY{p}{,}
+                        \PY{n}{salt} \PY{o}{=} \PY{n}{salt}\PY{p}{,}
+                        \PY{n}{iterations} \PY{o}{=} \PY{l+m+mi}{100000}\PY{p}{,}
+                        \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+                \PY{p}{)}
+                \PY{c+c1}{\PYZsh{}Separar a password para cifragem e autenticação}
+                \PY{n}{full\PYZus{}key} \PY{o}{=} \PY{n}{derivation}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{passwd}\PY{p}{)}
+                \PY{n}{cript\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{32}\PY{p}{]}
+                \PY{n}{mac\PYZus{}key} \PY{o}{=} \PY{n}{full\PYZus{}key}\PY{p}{[}\PY{l+m+mi}{32}\PY{p}{:}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{}Autenticação prévia da chave}
+                \PY{n}{hasher\PYZus{}passwd} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}
+                \PY{n}{hasher\PYZus{}passwd}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{pass\PYZus{}code}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}Autenticação do criptograma e metadados}
+                \PY{n}{message\PYZus{}to\PYZus{}authenticate} \PY{o}{=} \PY{n}{cryptogram} \PY{o}{+} \PY{n}{nonce} \PY{o}{+} \PY{n}{salt}
+                \PY{n}{hash\PYZus{}msg} \PY{o}{=} \PY{n}{hmac}\PY{o}{.}\PY{n}{HMAC}\PY{p}{(}\PY{n}{mac\PYZus{}key}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}authenticate}\PY{p}{)}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{n}{hash\PYZus{}msg}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{mac\PYZus{}code}\PY{p}{)}
+                    
+                    \PY{c+c1}{\PYZsh{}Decifrar criptograma}
+                    \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithm} \PY{o}{=} \PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{cript\PYZus{}key}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{mode} \PY{o}{=} \PY{n}{modes}\PY{o}{.}\PY{n}{CTR}\PY{p}{(}\PY{n}{nonce}\PY{p}{)}\PY{p}{,}\PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{plain\PYZus{}text} \PY{o}{=} \PY{n}{cipher}\PY{o}{.}\PY{n}{decryptor}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{cryptogram}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Texto decifrado:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{b64encode}\PY{p}{(}\PY{n}{plain\PYZus{}text}\PY{p}{)}\PY{p}{)}
+                \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Código de autenticação não é válido!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{e}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+            \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                
+                
+\end{Verbatim}
+
+    \hypertarget{iniciauxe7uxe3o-do-processo}{%
+\subsection{Iniciação do
+processo}\label{iniciauxe7uxe3o-do-processo}}
+
+    Por último, resta apenas criar um objeto de conexão bidireccional
+passando-lhe como argumentos o emissor e o recetor definidos e,
+finalmente, prosseguindo com a execução de ambos os processos através da
+chamada à função manual.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{BiConnection}\PY{p}{(}\PY{n}{Emissor}\PY{p}{,}\PY{n}{Recetor}\PY{p}{)}\PY{o}{.}\PY{n}{manual}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Password do emissor: ········
+Texto a cifrar e enviar:
+b'Bp7wjCNmvFlppA98akTDp/GDIHBqUOWiF7rSNuZRFzKEJ3dkCZV7xGeqJt+Y8XSeR820m0AVgckpMAY
++GRcTP1UPT+8osucvorZ1pN4RcWZCFH1Nburz1wcIZRwFOYHmMYFubBToo/ZwlqSoJvcESi5vjiceWxc='
+Password do recetor: ········
+Texto decifrado:
+b'Bp7wjCNmvFlppA98akTDp/GDIHBqUOWiF7rSNuZRFzKEJ3dkCZV7xGeqJt+Y8XSeR820m0AVgckpMAY
++GRcTP1UPT+8osucvorZ1pN4RcWZCFH1Nburz1wcIZRwFOYHmMYFubBToo/ZwlqSoJvcESi5vjiceWxc='
+
+    \end{Verbatim}
+
+    Através de uma ligera comparação entre o texto antes de ser cifrado e
+depois de ser decifrado, pode-se verificar que é exatamente o mesmo.
+
+
+\hypertarget{aplicauxe7uxe3o-sagemath}{%
+\section{Aplicação SageMath}\label{aplicauxe7uxe3o-sagemath}}
+
+    \hypertarget{criauxe7uxe3o-dos-corpos-finitos-primos}{%
+\subsection{Criação dos corpos finitos
+primos}\label{criauxe7uxe3o-dos-corpos-finitos-primos}}
+
+    Nesta secção são criadas duas listas:
+
+\begin{itemize}
+\tightlist
+\item
+  A primeira (\emph{P}) corresponde à lista de números primos que serão
+  analisados.
+\item
+  A segunda (\emph{GP}) corresponde à lista de corpos finitos primos,
+  onde cada elemento corresponde ao corpo finito primo de um dos números
+  primos, previamente adicionados à lista \emph{P}.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{n}{P} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{37}\PY{p}{,} \PY{l+m+mi}{163}\PY{p}{,} \PY{l+m+mi}{263}\PY{p}{,} \PY{l+m+mi}{1009}\PY{p}{]}
+        \PY{n}{GP} \PY{o}{=} \PY{p}{[}\PY{n}{GF}\PY{p}{(}\PY{n}{p}\PY{p}{)} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{P}\PY{p}{]}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-iniciais}{%
+\subsection{Definição iniciais}\label{definiuxe7uxe3o-iniciais}}
+
+    De seguida, definiu-se a função que será aplicada aos pontos dos corpos
+finitos primos. Esta recebe um ponto \emph{x} e um primo \emph{p} e
+calcula ``\emph{x elevado a p menos 2}''. Além disso, é definida também
+uma lista de listas \emph{L}, onde cada uma das mesmas contém os pontos
+resultantes da aplicação da função aos pontos de um dos corpos finitos
+primos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{\PYZca{}}\PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{L} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{p}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{GF}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{]} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{P}\PY{p}{]}
+\end{Verbatim}
+
+    \hypertarget{plot-da-funuxe7uxe3o-aplicada-a-cada-um-dos-corpos-finitos}{%
+\subsection{Plot da função aplicada a cada um dos corpos
+finitos}\label{plot-da-funuxe7uxe3o-aplicada-a-cada-um-dos-corpos-finitos}}
+
+    Esta secção tem como objetivo fazer o \textbf{plot} dos pontos
+resultantes da aplicação da função definida anteriormente como
+\texttt{f(x,p)} a cada um dos corpos finitos primos, sendo que o
+resultado deverá ser apresentado como um gráfico por cada lista de
+pontos do corpo finito respetivo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Plot dos pontos resultantes da aplicação da função aos pontos do}
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} corpo finito primo GF(37)}
+        \PY{n}{list\PYZus{}plot}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}3}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Plot dos pontos resultantes da aplicação da função aos pontos do}
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} corpo finito primo GF(163)}
+        \PY{n}{list\PYZus{}plot}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}4}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Plot dos pontos resultantes da aplicação da função aos pontos do}
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} corpo finito primo GF(263)}
+        \PY{n}{list\PYZus{}plot}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}5}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Plot dos pontos resultantes da aplicação da função aos pontos do}
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} corpo finito primo GF(1009)}
+        \PY{n}{list\PYZus{}plot}\PY{p}{(}\PY{n}{L}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}6}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    A partir da análise dos gráficos previamente gerados podemos verificar
+que, em todos eles, à primeira vista, parece existir uma certa
+aleatoriedade nos pontos desenhados mas, analisando melhor cada um
+deles, podemos confirmar a existência de um padrão simétrico que existe
+no gráfico.
+
+    \hypertarget{funuxe7uxf5es-da-proposiuxe7uxe3o-e-auxiliares}{%
+\subsection{Funções da proposição e
+auxiliares}\label{funuxe7uxf5es-da-proposiuxe7uxe3o-e-auxiliares}}
+
+    Resta agora definir duas funções que são utilizadas para garantir a
+proposição na totalidade. A função \texttt{checker(n,g,p)} testa, com o
+auxílio das funções anteriormente referidas, a veracidade da proposição
+para um dado expoente, elemento primitivo e número primo, ao tentar
+encontrar, por amostragem, elementos que provem que a proposição é
+incorrecta, seguindo o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Se $g^{n} = 1$:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Se \(n = 0 mod (p-1)\), a proposição verifica-se, pelo que o
+    resultado retornado é 0 (não existe erro a ser somado).
+  \item
+    Se \(n != 0 mod (p-1)\), a proposição falha, pelo que o resultado
+    retornado é 1 (proposição é falsa para estes elementos, erro deve
+    ser somado).
+  \end{itemize}
+\item
+  Se $g^{n} != 1$, a proposição não é testada.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{prop1}\PY{p}{(}\PY{n}{g}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:} 
+            \PY{k}{return} \PY{n}{g}\PY{o}{\PYZca{}}\PY{n}{n}
+        
+        \PY{k}{def} \PY{n+nf}{prop2}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{:} 
+            \PY{k}{return} \PY{n}{Mod}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{checker}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if}\PY{p}{(}\PY{n}{prop1}\PY{p}{(}\PY{n}{g}\PY{p}{,}\PY{n}{n}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if}\PY{p}{(}\PY{n}{prop2}\PY{p}{(}\PY{n}{p}\PY{p}{)} \PY{o}{==} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{l+m+mi}{0}
+                \PY{k}{else}\PY{p}{:} \PY{k}{return} \PY{l+m+mi}{1}
+            \PY{k}{else}\PY{p}{:} \PY{k}{return} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+    \hypertarget{criauxe7uxe3o-da-lista-de-expoentes-aleatuxf3rios}{%
+\subsection{Criação da lista de expoentes
+aleatórios}\label{criauxe7uxe3o-da-lista-de-expoentes-aleatuxf3rios}}
+
+    Por último criou-se uma lista de expoentes, por amostragem, para que
+seja averiguada a veracidade da proposição enunciada. São criados 100000
+expoentes aleatórios que variam entre 1 e 1 bilião.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{import} \PY{n+nn}{numpy}
+        \PY{n}{exponents\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{n}{numpy}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1000000000000}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{xrange}\PY{p}{(}\PY{l+m+mi}{100000}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+    \hypertarget{prova-da-proposiuxe7uxe3o-por-amostragem}{%
+\subsection{Prova da proposição por
+amostragem}\label{prova-da-proposiuxe7uxe3o-por-amostragem}}
+
+    Nesta secção pretendemos, com o auxílio da função
+\texttt{checker(n,g,p)} definida anteriormente, verificar, para todos os
+corpos finitos primos criados, que a proposição enunciada se verifica,
+seguindo o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Para todo o número primo \emph{p} em \emph{P}, onde \emph{P} é a lista
+  dos números primos utilizados para criar os corpos finitos:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Para todo o expoente \emph{n} na lista de expoentes previamente
+    calculada:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Calcular o resultado de
+      \texttt{checker(n,GF(p).primitive\_element(),p)}, onde o segundo
+      argumento é o elemento primitivo do corpo finito do primo
+      \emph{p}.
+    \item
+      Se a proposição se verificar falsa, a variável \emph{checkFalses}
+      será incrementada de uma unidade, caso contrário será incrementada
+      de 0 (sem falsos).
+    \end{itemize}
+  \item
+    Imprimir o número primo e o número de falsos encontrados na
+    aplicação da proposição ao mesmo.
+  \end{itemize}
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{checkFalses} \PY{o}{=} \PY{l+m+mi}{0}
+        \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{P}\PY{p}{:}
+            \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{exponents\PYZus{}list}\PY{p}{:}
+                \PY{n}{checkFalses} \PY{o}{+}\PY{o}{=} \PY{n}{checker}\PY{p}{(}\PY{n}{n}\PY{p}{,}\PY{n}{GF}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{o}{.}\PY{n}{primitive\PYZus{}element}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{p}\PY{p}{)}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Primo:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{print}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nº de erros na proposição:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{print}\PY{p}{(}\PY{n}{checkFalses}\PY{p}{)}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{checkFalses} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Primo:
+37
+Nº de erros na proposição:
+0
+
+
+Primo:
+163
+Nº de erros na proposição:
+0
+
+
+Primo:
+263
+Nº de erros na proposição:
+0
+
+
+Primo:
+1009
+Nº de erros na proposição:
+0
+
+
+
+    \end{Verbatim}
+
+    Como é possível verificar pelo output produzido, a proposição enunciada
+verifica-se para todos os expoentes gerados por amostragem e para todos
+os corpos finitos primos criados.
+
+    \hypertarget{conclusuxe3o}{%
+\section{Conclusão}\label{conclusuxe3o}}
+
+    Os resultados da resolução deste trabalho prático são, na nossa opinião,
+bastante satisfatórios, tendo em conta que os mesmos são os que eram
+esperados. O desenvolvimento das aplicações foi feito de um modo gradual
+(texto de explicação pelo entre o código), de forma a tornar a leitura e
+compreensão do trabalho mais agradável.
+
+As maiores dificuldades que surgiram durante a resolução deste trabalho
+prático resumiram-se, na sua maior parte, aos aspetos que dizem respeito
+ao desenvolvimento utilizando \textbf{sagemath}, visto que este foi o
+primeiro contacto do grupo com esta tecnologia. Além disso, este é
+também o primeiro relatório que o grupo produz neste formato, ou seja,
+utilizando apenas o \textbf{jupyter} para a produção do código e do
+próprio texto do mesmo, pelo que tentámos familiarizar-nos apenas com a
+ferramenta, especificamente, na produção do ficheiro necessário, que
+representa o relatório na sua totalidade.
+
+    \hypertarget{referuxeancias}{%
+\subsection{Referências}\label{referuxeancias}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AACBpI2YqgkN5iuVEas5P8wVa/WorkSheets/TP0?dl=0\&subfolder_nav_tracking=1}{Worksheets
+  do TP0 fornecidas pelo professor}
+\item
+  \href{https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/}{Cryptography
+  - Symmetric encryption}
+\item
+  \href{https://cryptography.io/en/latest/hazmat/primitives/mac/}{Cryptography
+  - Message Authentication Codes}
+\item
+  \href{https://cryptography.io/en/latest/hazmat/primitives/key-derivation-functions/}{Cryptography
+  - Key Derivation Functions}
+\item
+  \href{http://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/finite_field_prime_modn.html}{SageMath
+  - Finite Prime Fields}
+\item
+  \href{http://doc.sagemath.org/html/en/reference/plotting/sage/plot/plot.html}{SageMath
+  - 2D Plotting}
+\item
+  \href{http://doc.sagemath.org/html/en/reference/finite_rings/sage/rings/finite_rings/finite_field_base.html}{SageMath
+  - Base Classes for Finite Fields}
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

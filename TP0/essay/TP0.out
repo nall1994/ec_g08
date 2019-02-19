@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.2}{Aplica\347\343o Python}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Imports}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Defini\347\343o da classe de multiprocessamento}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Defini\347\343o do Emissor e do Recetor}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Inicia\347\343o do processo}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Aplica\347\343o SageMath}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Cria\347\343o dos corpos finitos primos}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Defini\347\343o iniciais}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Plot da fun\347\343o aplicada a cada um dos corpos finitos}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.4}{Fun\347\365es da proposi\347\343o e auxiliares}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.5}{Cria\347\343o da lista de expoentes aleat\363rios}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.6}{Prova da proposi\347\343o por amostragem}{section.3}% 13
+\BOOKMARK [1][-]{section.4}{Conclus\343o}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Refer\352ncias}{section.4}% 15
