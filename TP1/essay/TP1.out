@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.2}{C\363digo comum}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Imports}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Defini\347\343o das fun\347\365es do processo criptogr\341fico}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Defini\347\343o da classe de multiprocessamento}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Defini\347\343o do algoritmo utilizado}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Sess\343o S\355ncrona com Diffie-Hellman}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Gera\347\343o dos par\342metros Diffie-Hellman}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Gera\347\343o das chaves permanentes dos agentes}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Defini\347\343o do Emissor e do Recetor}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Sess\343o S\355ncrona com Elliptic Curve Diffie-Hellman}{}% 11
+\BOOKMARK [2][-]{subsection.4.1}{Gera\347\343o das chaves permanentes dos agentes}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.2}{Defini\347\343o do Emissor e do Recetor}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Conclus\343o}{}% 14
+\BOOKMARK [1][-]{section.6}{Refer\352ncias}{}% 15

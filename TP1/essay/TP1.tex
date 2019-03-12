@@ -1,0 +1,1202 @@
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage[portuguese]{babel}
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    \usepackage{listings}
+    \lstset{
+        basicstyle=\small\ttfamily,
+        columns=flexible,
+        breaklines=true
+    }
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{MIEI/MI - Estruturas Criptográficas\\
+            \large Trabalho Prático 1}
+    \author{
+        João Alves \\
+        a77070@alunos.uminho.pt
+        \and
+        Nuno Leite \\
+        a70132@alunos.uminho.pt
+    }
+    \date{
+        Universidade do Minho\\
+        \today
+    }
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+
+    \hypertarget{introduuxe7uxe3o}{%
+\section{Introdução}\label{introduuxe7uxe3o}}
+
+    A resolução deste trabalho prático tem como objetivo implementar um
+abiente seguro, constituído por um emissor e um recetor, através de
+sessões cifradas e seguras. A solução implmentada, foi estruturada da
+seguinte forma:
+
+\begin{itemize}
+\tightlist
+\item
+  Construção de uma sessão de comunicação síncrona entre um emissor e um
+  recetor.
+\item
+  Utilização do protocolo de \textbf{Diffie\_Hellman} com verificação de
+  chave e autenticação dos agentes, na sessão anteriormente referida.
+\item
+  Utilização do \textbf{DSA} para a autenticação dos agentes.
+\item
+  Utilização do \textbf{TAES} como cifra simétrica, com autenticação do
+  criptograma em cada superbloco.
+\item
+  Implementar novamente o cenário anterior mas, desta feita vez,
+  utilizando o \textbf{ECDH} (Elliptic Curve Diffie-Hellman) em vez do
+  \textbf{DH} e o \textbf{ECDSA} (Elliptic Curve Digital Signature
+  Algorithm) em vez do \textbf{DSA}.
+\end{itemize}
+
+Este relatório está escrito de forma a que o texto escrito entre o
+código desenvolvido seja suficientemente explicativo do que está a ser
+implementado, o que, na nossa opinião, permite uma leitura e compreensão
+facilitada do mesmo.
+
+    \hypertarget{cuxf3digo-comum}{%
+\section{Código comum}\label{cuxf3digo-comum}}
+
+    Esta secção tem como objetivo definir \emph{snippets} de código que
+serão utilizados tanto na definição da sessão síncrona com \textbf{DH}
+como na sessão síncrona com \textbf{ECDH}, tais como os \emph{imports}
+de módulos necessários, as funções auxiliares necessárias e a classe de
+multiprocessamento.
+
+    \hypertarget{imports}{%
+\subsection{Imports}\label{imports}}
+
+    De seguida, encontram-se os módulos \textbf{Python} importados e
+necessários para desenvolver a sessão síncrona entre os agentes,
+utilizando, em primeira instância, o protocolo \textbf{DH} e o algoritmo
+de assinaturas \textbf{DSA} e, numa segunda instância, o protocolo
+\textbf{ECDH} e o algoritmo de assinaturas \textbf{ECDSA}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{os}\PY{o}{,}\PY{n+nn}{io}\PY{o}{,}\PY{n+nn}{sys}
+        \PY{k+kn}{from} \PY{n+nn}{multiprocessing} \PY{k}{import} \PY{n}{Process}\PY{p}{,}\PY{n}{Pipe}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{backends} \PY{k}{import} \PY{n}{default\PYZus{}backend}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives} \PY{k}{import} \PY{n}{hashes}\PY{p}{,} \PY{n}{hmac}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{exceptions} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{asymmetric} \PY{k}{import} \PY{n}{dsa}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{asymmetric} \PY{k}{import} \PY{n}{dh}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{asymmetric} \PY{k}{import} \PY{n}{ec}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives} \PY{k}{import} \PY{n}{serialization}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{kdf}\PY{n+nn}{.}\PY{n+nn}{hkdf} \PY{k}{import} \PY{n}{HKDF}
+        \PY{k+kn}{from} \PY{n+nn}{cryptography}\PY{n+nn}{.}\PY{n+nn}{hazmat}\PY{n+nn}{.}\PY{n+nn}{primitives}\PY{n+nn}{.}\PY{n+nn}{ciphers} \PY{k}{import} \PY{n}{Cipher}\PY{p}{,} \PY{n}{algorithms}\PY{p}{,} \PY{n}{modes}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-das-funuxe7uxf5es-do-processo-criptogruxe1fico}{%
+\subsection{Definição das funções do processo
+criptográfico}\label{definiuxe7uxe3o-das-funuxe7uxf5es-do-processo-criptogruxe1fico}}
+
+    Esta secção tem o objetivo de definir funções que serão utilizadas nas
+sessões síncronas, tanto na que utiliza \textbf{DH} como na que utiliza
+\textbf{ECDH}. Essas funções são as seguintes:
+
+\begin{itemize}
+\item
+  \texttt{Hash(s)}, que tem como propósito calcular um \emph{digest} de
+  uma dada mensagem.
+\item
+  \texttt{next\_tweak(initial,current\_counter)}, que tem como propósito
+  calcular o próximo \emph{tweak} a utilizar no bloco que vai ser
+  cifrado/decifrado, com base no \emph{nounce} inicial e no número do
+  bloco que está a ser processadoa atualmente.
+\item
+  \texttt{bytes\_xor(a,b)}, que tem como propósito realizar o \emph{XOR}
+  \emph{byte} a \emph{byte} de duas dadas sequências de \_bytes.
+\item
+  \texttt{calculate\_nounce()}, que tem como objectivo calcular o nounce
+  a utilizar em parte de um \emph{tweak}, tendo em conta os
+  \emph{nounces} que já foram utilizados anteriormente.
+\item
+  \texttt{calculate\_parity(blocks,number\_blocks)}, que tem como
+  objetivo calcular a paridade de um conjunto de blocos, para que seja
+  gerada a sua \emph{tag} de autenticação.
+\item
+  \texttt{calculate\_auth\_tweak(initial\_tweak,number\_blocks)}, que
+  tem como objetivo calcular o \emph{tweak} utilizado para cifrar a
+  paridade dos blocos cifrados.
+\item
+  As funções
+  \texttt{cifra\_blocos(current\_counter,initial\_tweak,blocks,number\_blocks,cipher\_context)}
+  e
+  \texttt{decifra\_blocos(current\_counter,initial\_tweak,blocks,number\_blocks,decipher\_context)}
+  têm como objetivo cifrar/decifrar, respetivamente, um conjunto de
+  blocos aplicando a cada bloco a função de cifra ou de decifragem.
+\item
+  As funções \texttt{cifra(block,tweak,cipher\_context)} e
+  \texttt{decifra(block,tweak,decipher\_context} têm como objetivo
+  cifrar/decifrar um dado bloco utilizando para o efeito a função
+  $\tilde{E}(s,x) = E(s,x \oplus h(w)) \oplus h(w)$.
+\end{itemize}
+
+É relevante referir que as operações de cifra e de decifra utilizam
+exatamente a mesma fórmula e, logo, são iguais, mas estão separadas
+apenas por uma questão de mais simples compreensão do problema em
+questão, bem como da sua resolução. Além disso, neste processo
+criptográfico foi utilizado o modo \textbf{TAE} (\emph{Tweakable
+Authenticated Encryption}).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{Hash}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{:}
+            \PY{n}{digest} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{Hash}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{digest}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{s}\PY{p}{)}
+            \PY{k}{return} \PY{n}{digest}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{next\PYZus{}tweak}\PY{p}{(}\PY{n}{initial}\PY{p}{,} \PY{n}{current\PYZus{}counter}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{n}{current\PYZus{}counter}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{063b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{str} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{b\PYZus{}str} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}bytes}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{7}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{big}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{return} \PY{p}{(}\PY{n}{initial} \PY{o}{+} \PY{n}{b\PYZus{}str}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)} \PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZca{}} \PY{n}{y} \PY{k}{for} \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}nounce}\PY{p}{(}\PY{p}{)}\PY{p}{:}  
+            \PY{k}{if} \PY{o+ow}{not}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{isfile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nounces.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{os}\PY{o}{.}\PY{n}{mknod}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nounces.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{nounces\PYZus{}file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nounces.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{nounces\PYZus{}used} \PY{o}{=} \PY{n}{nounces\PYZus{}file}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{nounces\PYZus{}file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{n}{nounces\PYZus{}file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nounces.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{nounce\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{ok} \PY{o}{=} \PY{k+kc}{False}
+            \PY{k}{while} \PY{o+ow}{not}\PY{p}{(}\PY{n}{ok}\PY{p}{)}\PY{p}{:}
+                \PY{n}{anyMatch} \PY{o}{=} \PY{k+kc}{False}
+                \PY{n}{nounce} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+                \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{nounces\PYZus{}used}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{n+nb}{str}\PY{p}{(}\PY{n}{nounce}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{anyMatch} \PY{o}{=} \PY{k+kc}{True}
+                        \PY{k}{break}
+                \PY{k}{if} \PY{o+ow}{not}\PY{p}{(}\PY{n}{anyMatch}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{nounces\PYZus{}file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{nounce}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n}{nounce\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{n}{nounce}
+                    \PY{k}{break}
+            \PY{n}{nounces\PYZus{}file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{nounce\PYZus{}to\PYZus{}send}
+        
+        \PY{c+c1}{\PYZsh{}def calculate\PYZus{}parity(blocks,number\PYZus{}blocks):}
+        \PY{c+c1}{\PYZsh{}    str = format(0,\PYZsq{}128b\PYZsq{}) \PYZsh{} O número 0 é elemento neutro no XOR}
+        \PY{c+c1}{\PYZsh{}    parity = int(str,2).to\PYZus{}bytes((len(str) + 7) // 8, \PYZsq{}big\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}    bytes\PYZus{}processed = 0}
+        \PY{c+c1}{\PYZsh{}    while(bytes\PYZus{}processed \PYZlt{} (16*number\PYZus{}blocks)):}
+        \PY{c+c1}{\PYZsh{}        max\PYZus{}bytes = bytes\PYZus{}processed + 16}
+        \PY{c+c1}{\PYZsh{}        block\PYZus{}to\PYZus{}xor = blocks[bytes\PYZus{}processed:max\PYZus{}bytes]}
+        \PY{c+c1}{\PYZsh{}        parity = bytes\PYZus{}xor(parity,block\PYZus{}to\PYZus{}xor)}
+        \PY{c+c1}{\PYZsh{}        bytes\PYZus{}processed += 16}
+        \PY{c+c1}{\PYZsh{}    return parity}
+        
+        \PY{k}{def} \PY{n+nf}{calculate\PYZus{}auth\PYZus{}tweak}\PY{p}{(}\PY{n}{initial\PYZus{}tweak}\PY{p}{,}\PY{n}{number\PYZus{}blocks}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{n}{number\PYZus{}blocks}\PY{o}{*}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{063b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{str} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{b\PYZus{}str} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}bytes}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{7}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{big}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{return} \PY{p}{(}\PY{n}{initial\PYZus{}tweak} \PY{o}{+} \PY{n}{b\PYZus{}str}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{cifra\PYZus{}blocos}\PY{p}{(}\PY{n}{current\PYZus{}counter}\PY{p}{,}\PY{n}{initial\PYZus{}tweak}\PY{p}{,}\PY{n}{blocks}\PY{p}{,}\PY{n}{number\PYZus{}blocks}\PY{p}{,}\PY{n}{cipher\PYZus{}context}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{128b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} O bit 0 é elemento neutro no XOR}
+            \PY{n}{parity} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}bytes}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{7}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{big}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{bytes\PYZus{}processed} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{cryptogram} \PY{o}{=} \PY{n+nb}{bytearray}\PY{p}{(}\PY{l+m+mi}{160}\PY{p}{)}
+            \PY{k}{while}\PY{p}{(}\PY{n}{bytes\PYZus{}processed} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{l+m+mi}{16}\PY{o}{*}\PY{n}{number\PYZus{}blocks}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{max\PYZus{}bytes} \PY{o}{=} \PY{n}{bytes\PYZus{}processed} \PY{o}{+} \PY{l+m+mi}{16}
+                \PY{n}{block\PYZus{}to\PYZus{}process} \PY{o}{=} \PY{n}{blocks}\PY{p}{[}\PY{n}{bytes\PYZus{}processed}\PY{p}{:}\PY{n}{max\PYZus{}bytes}\PY{p}{]}
+                \PY{n}{parity} \PY{o}{=} \PY{n}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{parity}\PY{p}{,}\PY{n}{block\PYZus{}to\PYZus{}process}\PY{p}{)}
+                \PY{n}{tweak} \PY{o}{=} \PY{n}{next\PYZus{}tweak}\PY{p}{(}\PY{n}{initial\PYZus{}tweak}\PY{p}{,}\PY{n}{current\PYZus{}counter}\PY{p}{)}
+                \PY{n}{block\PYZus{}crypt} \PY{o}{=} \PY{n}{cifra}\PY{p}{(}\PY{n}{block\PYZus{}to\PYZus{}process}\PY{p}{,}\PY{n}{tweak}\PY{p}{,}\PY{n}{cipher\PYZus{}context}\PY{p}{)}
+                \PY{n}{cryptogram}\PY{p}{[}\PY{n}{bytes\PYZus{}processed}\PY{p}{:}\PY{n}{max\PYZus{}bytes}\PY{p}{]} \PY{o}{=} \PY{n}{block\PYZus{}crypt}
+                \PY{n}{bytes\PYZus{}processed} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{16}
+                \PY{n}{current\PYZus{}counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crypt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{cryptogram}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{parity} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{current\PYZus{}counter}\PY{p}{\PYZcb{}}
+                
+        
+        \PY{k}{def} \PY{n+nf}{cifra}\PY{p}{(}\PY{n}{block}\PY{p}{,}\PY{n}{tweak}\PY{p}{,}\PY{n}{cipher\PYZus{}context}\PY{p}{)}\PY{p}{:}
+            \PY{n}{hw} \PY{o}{=} \PY{n}{Hash}\PY{p}{(}\PY{n}{tweak}\PY{p}{)}
+            \PY{n}{x\PYZus{}xor\PYZus{}hw} \PY{o}{=} \PY{n}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{block}\PY{p}{,}\PY{n}{hw}\PY{p}{)}
+            \PY{n}{e\PYZus{}s\PYZus{}x\PYZus{}hw} \PY{o}{=} \PY{n}{cipher\PYZus{}context}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{x\PYZus{}xor\PYZus{}hw}\PY{p}{)}
+            \PY{n}{cryptogram} \PY{o}{=} \PY{n}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{e\PYZus{}s\PYZus{}x\PYZus{}hw}\PY{p}{,} \PY{n}{hw}\PY{p}{)}
+            \PY{k}{return} \PY{n}{cryptogram}
+        
+        \PY{k}{def} \PY{n+nf}{decifra\PYZus{}blocos}\PY{p}{(}\PY{n}{current\PYZus{}counter}\PY{p}{,}\PY{n}{initial\PYZus{}tweak}\PY{p}{,}\PY{n}{blocks}\PY{p}{,}\PY{n}{number\PYZus{}blocks}\PY{p}{,}\PY{n}{decipher\PYZus{}context}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{128b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} O bit 0 é elemento neutro no XOR}
+            \PY{n}{parity} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}bytes}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{7}\PY{p}{)} \PY{o}{/}\PY{o}{/} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{big}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{bytes\PYZus{}processed} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{n}{text} \PY{o}{=} \PY{n+nb}{bytearray}\PY{p}{(}\PY{l+m+mi}{160}\PY{p}{)}
+            \PY{k}{while}\PY{p}{(}\PY{n}{bytes\PYZus{}processed} \PY{o}{\PYZlt{}} \PY{p}{(}\PY{l+m+mi}{16}\PY{o}{*}\PY{n}{number\PYZus{}blocks}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{max\PYZus{}bytes} \PY{o}{=} \PY{n}{bytes\PYZus{}processed} \PY{o}{+} \PY{l+m+mi}{16}
+                \PY{n}{block\PYZus{}to\PYZus{}process} \PY{o}{=} \PY{n}{blocks}\PY{p}{[}\PY{n}{bytes\PYZus{}processed}\PY{p}{:}\PY{n}{max\PYZus{}bytes}\PY{p}{]}
+                \PY{n}{tweak} \PY{o}{=} \PY{n}{next\PYZus{}tweak}\PY{p}{(}\PY{n}{initial\PYZus{}tweak}\PY{p}{,}\PY{n}{current\PYZus{}counter}\PY{p}{)}
+                \PY{n}{block\PYZus{}text} \PY{o}{=} \PY{n}{decifra}\PY{p}{(}\PY{n}{block\PYZus{}to\PYZus{}process}\PY{p}{,}\PY{n}{tweak}\PY{p}{,} \PY{n}{decipher\PYZus{}context}\PY{p}{)}
+                \PY{n}{parity} \PY{o}{=} \PY{n}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{parity}\PY{p}{,}\PY{n}{block\PYZus{}text}\PY{p}{)}
+                \PY{n}{text}\PY{p}{[}\PY{n}{bytes\PYZus{}processed}\PY{p}{:}\PY{n}{max\PYZus{}bytes}\PY{p}{]} \PY{o}{=} \PY{n}{block\PYZus{}text}
+                \PY{n}{bytes\PYZus{}processed} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{16}
+                \PY{n}{current\PYZus{}counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n+nb}{bytes}\PY{p}{(}\PY{n}{text}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{parity}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{current\PYZus{}counter}\PY{p}{\PYZcb{}}
+        
+        \PY{k}{def} \PY{n+nf}{decifra}\PY{p}{(}\PY{n}{block}\PY{p}{,}\PY{n}{tweak}\PY{p}{,}\PY{n}{decipher\PYZus{}context}\PY{p}{)}\PY{p}{:}
+            \PY{n}{hw} \PY{o}{=} \PY{n}{Hash}\PY{p}{(}\PY{n}{tweak}\PY{p}{)}
+            \PY{n}{x\PYZus{}xor\PYZus{}hw} \PY{o}{=} \PY{n}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{block}\PY{p}{,}\PY{n}{hw}\PY{p}{)}
+            \PY{n}{e\PYZus{}s\PYZus{}x\PYZus{}hw} \PY{o}{=} \PY{n}{decipher\PYZus{}context}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{x\PYZus{}xor\PYZus{}hw}\PY{p}{)}
+            \PY{n}{cryptogram} \PY{o}{=} \PY{n}{bytes\PYZus{}xor}\PY{p}{(}\PY{n}{e\PYZus{}s\PYZus{}x\PYZus{}hw}\PY{p}{,} \PY{n}{hw}\PY{p}{)}
+            \PY{k}{return} \PY{n}{cryptogram}
+            
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-da-classe-de-multiprocessamento}{%
+\subsection{Definição da classe de
+multiprocessamento}\label{definiuxe7uxe3o-da-classe-de-multiprocessamento}}
+
+    No seguinte código, é definida a classe de multiprocessamento, que
+permite uma comunicação bidireccional com o \emph{Emitter} e o
+\emph{Receiver}, sendo estes dois processos criados e implementados pela
+\textbf{API}
+\href{https://docs.python.org/2/library/multiprocessing.html}{\textbf{multiprocessing}}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{class} \PY{n+nc}{BiConnection}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{left}\PY{p}{,}\PY{n}{right}\PY{p}{)}\PY{p}{:}
+                \PY{n}{left\PYZus{}side}\PY{p}{,}\PY{n}{right\PYZus{}side} \PY{o}{=} \PY{n}{Pipe}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{timeout} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left\PYZus{}process} \PY{o}{=} \PY{n}{Process}\PY{p}{(}\PY{n}{target}\PY{o}{=}\PY{n}{left}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{left\PYZus{}side}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right\PYZus{}process} \PY{o}{=} \PY{n}{Process}\PY{p}{(}\PY{n}{target}\PY{o}{=}\PY{n}{right}\PY{p}{,}\PY{n}{args}\PY{o}{=}\PY{p}{(}\PY{n}{right\PYZus{}side}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left} \PY{o}{=} \PY{k}{lambda} \PY{p}{:} \PY{n}{left}\PY{p}{(}\PY{n}{left\PYZus{}side}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right} \PY{o}{=} \PY{k}{lambda} \PY{p}{:} \PY{n}{right}\PY{p}{(}\PY{n}{right\PYZus{}side}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{auto}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{proc}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{proc} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left\PYZus{}process}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right\PYZus{}process}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left\PYZus{}process}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{timeout}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right\PYZus{}process}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{timeout}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{proc}\PY{o}{.}\PY{n}{start}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{proc}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-algoritmo-utilizado}{%
+\subsection{Definição do algoritmo
+utilizado}\label{definiuxe7uxe3o-do-algoritmo-utilizado}}
+
+    Esta secção tem como objetivo definir o algoritmo utilizado bem como
+algumas especificidades em ambas as sessões. O algoritmo utilizado foi
+exatamente o mesmo, apenas aspetos específicos tais como geração das
+chaves diferenciaram. O algoritmo aqui definido pretende apenas
+apresentar o seu modo de funcionamento de uma forma geral, textualmente.
+Além disso, é conveniente referir que os agentes da sessão síncrona
+\textbf{DH} utilizam chaves permanentes de 3072 bits \textbf{DSA} e os
+agentes da sessão síncrona \textbf{ECDH} utilizam chaves permanentes
+baseadas na curva \emph{NIST P-256}.Neste ponto de início do algoritmo
+assumimos também que os parâmetros \textbf{DH} já estão definidos. Assim
+sendo, o programa inicia da seguinte forma:
+
+\textbf{Protocolo de acordo de chaves DH/ECDH com verificação de chave}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Emissor gera a sua chave privada e chave pública \textbf{DH}.
+\item
+  Emissor envia para o Recetor a sua chave pública em bytes e a
+  assinatura produzida pela sua chave privada \textbf{DSA} sobre a chave
+  pública em bytes.
+\item
+  Recetor verifica a mensagem recebida com a chave pública \textbf{DSA}
+  do Emissor.
+\item
+  Recetor gera a sua chave privada e chave pública \textbf{DH}.
+\item
+  Recetor envia para o Emissor a sua chave pública em bytes e a
+  assinatura produzida pela sua chave privada \textbf{DSA} sobre a chave
+  pública em bytes.
+\item
+  Emissor verifica a mensagem recebida com a chave pública \textbf{DSA}
+  do Recetor.
+\item
+  Emissor produz a chave mestra (\(g^{xy}\)), a chave partilhada
+  (derivada da chave mestra através de um \emph{KDF})
+\item
+  Emissor calcula um \emph{Hash} da chave partilhada e envia, juntamente
+  com a assinatura, para o Recetor.
+\item
+  Recetor verifica a mensagem recebida.
+\item
+  Recetor produz a chave mestra (\(g^{yx}\)), a chave partilhada
+  (derivada da chave mestra através de um \emph{KDF})
+\item
+  Recetor calcula o \emph{Hash} da chave partilhada e verifica se
+  coincide com o \emph{digest} recebido.
+\item
+  Se a verificação de chave foi bem sucedida, continua para o processo
+  de troca de informação segura.
+\end{enumerate}
+
+\textbf{Processo de troca de informação segura}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calculam-se os bytes correspondentes à mensagem a ser enviada, bem
+  como a \emph{stream} de \emph{bytes}.
+\item
+  É calculado o tweak inicial (\emph{nounce} de 64 bits) e enviado para
+  o Recetor.
+\item
+  É criado o contexto de cifra ou de decifra.
+\item
+  Enquanto que existirem blocos para cifrar/decifrar:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Emissor cifra um superbloco de cada vez (10 blocos singulares)
+  \item
+    Emissor calcula a \emph{tag} de autenticação do superbloco
+  \item
+    Emissor envia para o recetor o criptograma e o \emph{tag} de
+    autenticação e espera por uma mensagem de confirmação do recetor
+    para prosseguir.
+  \item
+    Recetor decifra o superbloco
+  \item
+    Recetor verifica a \emph{tag} de autenticação após calcular a sua.
+  \item
+    Se a \emph{tag} estiver correta envia uma mensagem afirmativa ao
+    Emissor, caso contrário o programa termina com falha de
+    autenticação.
+  \end{enumerate}
+\item
+  Finalmente o emissor envia uma mensagem de finalização do processo
+  para o Recetor e fecha a conexão.
+\item
+  Recetor reconhece a mensagem de finalização do processo e fecha também
+  a conexão.
+\end{enumerate}
+
+    \hypertarget{sessuxe3o-suxedncrona-com-diffie-hellman}{%
+\section{\texorpdfstring{Sessão Síncrona com
+\emph{Diffie-Hellman}}{Sessão Síncrona com Diffie-Hellman}}\label{sessuxe3o-suxedncrona-com-diffie-hellman}}
+
+    \hypertarget{gerauxe7uxe3o-dos-paruxe2metros-diffie-hellman}{%
+\subsection{\texorpdfstring{Geração dos parâmetros
+\emph{Diffie-Hellman}}{Geração dos parâmetros Diffie-Hellman}}\label{gerauxe7uxe3o-dos-paruxe2metros-diffie-hellman}}
+
+    A próxima secção implementa a geração dos parâmetros necessários para a
+derivação de chaves \textbf{DH} e \textbf{DSA}, por parte de ambos os
+agentes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{parameters\PYZus{}dh} \PY{o}{=} \PY{n}{dh}\PY{o}{.}\PY{n}{generate\PYZus{}parameters}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{key\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3072}\PY{p}{,}\PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}{%
+\subsection{Geração das chaves permanentes dos
+agentes}\label{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}}
+
+    Esta secção tem como objetivo gerar as chaves permanentes dos agentes
+envolvidos na comunicação, tendo em conta que estas são conhecidas por
+ambos, e serão aplicadas na assinatura digital das mensagens.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Geração das chaves do Emissor}
+        \PY{n}{emitter\PYZus{}dsa\PYZus{}sk} \PY{o}{=} \PY{n}{dsa}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{l+m+mi}{3072}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}chave privada DSA}
+        \PY{n}{emitter\PYZus{}dsa\PYZus{}pk} \PY{o}{=} \PY{n}{emitter\PYZus{}dsa\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}chave pública DSA}
+        
+        \PY{c+c1}{\PYZsh{} Geração das chaves do Recetor}
+        \PY{n}{receiver\PYZus{}dsa\PYZus{}sk} \PY{o}{=} \PY{n}{dsa}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{l+m+mi}{3072}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{}chave privada DSA}
+        \PY{n}{receiver\PYZus{}dsa\PYZus{}pk} \PY{o}{=} \PY{n}{receiver\PYZus{}dsa\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}chave pública DSA}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-emissor-e-do-recetor}{%
+\subsection{Definição do Emissor e do
+Recetor}\label{definiuxe7uxe3o-do-emissor-e-do-recetor}}
+
+    Por fim definiu-se o comportamento de cada um dos agentes nesta sessão
+síncrona segura de troca de informação. Na definição de ambos, é
+assumido que as chaves públicas \textbf{DSA} utilizadas na autenticação
+dos agentes já são conhecidas por ambos. As chaves \textbf{DH} são
+geradas por sessão de modo a acordar uma chave temporária, para que seja
+possível cifrar e decifrar uma mensagem utilizando uma primitiva
+simétrica.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{Emitter}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Implementação Protocolo Diffie\PYZhy{}Hellman}
+            
+            \PY{n}{emitter\PYZus{}dh\PYZus{}sk} \PY{o}{=} \PY{n}{parameters\PYZus{}dh}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{p}{)}
+            \PY{n}{emitter\PYZus{}dh\PYZus{}pk} \PY{o}{=} \PY{n}{emitter\PYZus{}dh\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)}
+            \PY{n}{pub} \PY{o}{=} \PY{n}{emitter\PYZus{}dh\PYZus{}pk}\PY{o}{.}\PY{n}{public\PYZus{}bytes}\PY{p}{(}
+                \PY{n}{encoding} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{Encoding}\PY{o}{.}\PY{n}{PEM}\PY{p}{,}
+                \PY{n+nb}{format} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{PublicFormat}\PY{o}{.}\PY{n}{SubjectPublicKeyInfo}\PY{p}{)}
+            \PY{n}{signature} \PY{o}{=} \PY{n}{emitter\PYZus{}dsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{pub}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{message} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pub}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}
+            \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+            \PY{n}{receiver\PYZus{}first} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+            \PY{n}{receiver\PYZus{}dh\PYZus{}public\PYZus{}key} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{load\PYZus{}pem\PYZus{}public\PYZus{}key}\PY{p}{(}
+                \PY{n}{receiver\PYZus{}first}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{receiver\PYZus{}dsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{receiver\PYZus{}first}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{receiver\PYZus{}first}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                    \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
+                \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Assinatura de chaves inválida!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{master\PYZus{}key} \PY{o}{=} \PY{n}{emitter\PYZus{}dh\PYZus{}sk}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{receiver\PYZus{}dh\PYZus{}public\PYZus{}key}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Passar a chave de sessão acordada (master\PYZus{}key) por um kdf}
+            \PY{n}{shared\PYZus{}key} \PY{o}{=} \PY{n}{HKDF}\PY{p}{(}
+                \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,}
+                \PY{n}{salt} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                \PY{n}{info} \PY{o}{=} \PY{l+s+sa}{b}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exchange data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+            \PY{p}{)}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{master\PYZus{}key}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Verificar a chave, enviando um hash da chave derivada para confirmar}
+            \PY{c+c1}{\PYZsh{}que tanto emissor como recetor possuem a mesma chave.}
+            
+            \PY{n}{key\PYZus{}digest} \PY{o}{=} \PY{n}{Hash}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}
+            \PY{n}{signature} \PY{o}{=} \PY{n}{emitter\PYZus{}dsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{key\PYZus{}digest}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{digest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{key\PYZus{}digest}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}\PY{p}{)}
+            
+            \PY{n}{key\PYZus{}check\PYZus{}obj} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{receiver\PYZus{}dsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{key\PYZus{}check\PYZus{}obj}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sig}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n+nb}{bytes}\PY{p}{(}\PY{n}{key\PYZus{}check\PYZus{}obj}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{message}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
+                \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assinatura de chaves inválida!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+            \PY{k}{if} \PY{n}{key\PYZus{}check\PYZus{}obj}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{message}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{}Ambos agentes possuem a mesma chave. Prosseguir com o processo de cifra.}
+                \PY{n}{message\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1600}
+                \PY{n}{gen\PYZus{}bytes} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{n}{message\PYZus{}size}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}imprimir bytes a cifrar para posterior comparação}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gen\PYZus{}bytes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{n}{gen\PYZus{}bytes}\PY{p}{)}
+                
+                \PY{n}{inputs} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{BytesIO}\PY{p}{(}\PY{n}{gen\PYZus{}bytes}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}inicialização do tweak como um nounce de 64 bits (n/2)}
+                \PY{c+c1}{\PYZsh{}e envio para o agente Receiver}
+                \PY{n}{tweak\PYZus{}init} \PY{o}{=} \PY{n}{calculate\PYZus{}nounce}\PY{p}{(}\PY{p}{)}
+                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{tweak\PYZus{}init}\PY{p}{)}
+        
+                \PY{n}{buffer} \PY{o}{=} \PY{n+nb}{bytearray}\PY{p}{(}\PY{l+m+mi}{160}\PY{p}{)}
+                \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{modes}\PY{o}{.}\PY{n}{ECB}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{encryptor}\PY{p}{(}\PY{p}{)}
+                \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} nr de bloco}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{k}{while} \PY{n}{inputs}\PY{o}{.}\PY{n}{readinto}\PY{p}{(}\PY{n}{buffer}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{cipher\PYZus{}object} \PY{o}{=} \PY{n}{cifra\PYZus{}blocos}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{n}{buffer}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                        \PY{n}{cryptogram} \PY{o}{=} \PY{n}{cipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crypt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                        \PY{n}{parity} \PY{o}{=} \PY{n}{cipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                        \PY{n}{auth\PYZus{}tweak} \PY{o}{=} \PY{n}{calculate\PYZus{}auth\PYZus{}tweak}\PY{p}{(}\PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+                        \PY{n}{auth\PYZus{}tag} \PY{o}{=} \PY{n}{cifra}\PY{p}{(}\PY{n}{parity}\PY{p}{,}\PY{n}{auth\PYZus{}tweak}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                        \PY{n}{i} \PY{o}{=} \PY{n}{cipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                        \PY{n}{msg\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crypt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{auth\PYZus{}tag}\PY{p}{\PYZcb{}}
+                        \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{msg\PYZus{}to\PYZus{}send}\PY{p}{)}
+                        \PY{n}{msg} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                        \PY{k}{if}\PY{p}{(}\PY{o+ow}{not}\PY{p}{(}\PY{n}{msg} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autenticação num superbloco falhou!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{err}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Erro no emissor! }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{p}{)}
+                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finalized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}   
+                \PY{n}{inputs}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chaves não coincidiram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}    
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{Receiver}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{}Implementação protocolo Diffie\PYZhy{}Hellman}
+            \PY{n}{emitter\PYZus{}first} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+            \PY{n}{receiver\PYZus{}dh\PYZus{}sk} \PY{o}{=} \PY{n}{parameters\PYZus{}dh}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{p}{)}
+            \PY{n}{receiver\PYZus{}dh\PYZus{}pk} \PY{o}{=} \PY{n}{receiver\PYZus{}dh\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)}
+            \PY{n}{emitter\PYZus{}dh\PYZus{}public\PYZus{}key} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{load\PYZus{}pem\PYZus{}public\PYZus{}key}\PY{p}{(}\PY{n}{emitter\PYZus{}first}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{emitter\PYZus{}dsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{emitter\PYZus{}first}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{emitter\PYZus{}first}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
+                \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Assinatura de chaves inválida!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{master\PYZus{}key} \PY{o}{=} \PY{n}{receiver\PYZus{}dh\PYZus{}sk}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{emitter\PYZus{}dh\PYZus{}public\PYZus{}key}\PY{p}{)}
+            \PY{n}{pub} \PY{o}{=} \PY{n}{receiver\PYZus{}dh\PYZus{}pk}\PY{o}{.}\PY{n}{public\PYZus{}bytes}\PY{p}{(}
+                \PY{n}{encoding} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{Encoding}\PY{o}{.}\PY{n}{PEM}\PY{p}{,}
+                \PY{n+nb}{format} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{PublicFormat}\PY{o}{.}\PY{n}{SubjectPublicKeyInfo}\PY{p}{)}
+            \PY{n}{signature} \PY{o}{=} \PY{n}{receiver\PYZus{}dsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{pub}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{message} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{pub}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{signature}\PY{p}{\PYZcb{}}
+            \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{}Passar a chave de sessão acordada (master\PYZus{}key) por um kdf}
+            \PY{n}{shared\PYZus{}key} \PY{o}{=} \PY{n}{HKDF}\PY{p}{(}
+                \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,}
+                \PY{n}{salt} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                \PY{n}{info} \PY{o}{=} \PY{l+s+sa}{b}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exchange data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+            \PY{p}{)}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{master\PYZus{}key}\PY{p}{)}
+            
+            \PY{n}{key\PYZus{}check\PYZus{}obj} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+            \PY{k}{try}\PY{p}{:}
+                \PY{n}{emitter\PYZus{}dsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{key\PYZus{}check\PYZus{}obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{key\PYZus{}check\PYZus{}obj}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{digest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                    \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{except} \PY{n}{InvalidSignature} \PY{k}{as} \PY{n}{i}\PY{p}{:}
+                \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Assinatura de chaves inválida!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{digest} \PY{o}{=} \PY{n}{Hash}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}
+            \PY{k}{if} \PY{n}{digest} \PY{o}{==} \PY{n}{key\PYZus{}check\PYZus{}obj}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{digest}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                \PY{n}{message} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OK}\PY{l+s+s2}{\PYZdq{}}
+                \PY{n}{signature} \PY{o}{=} \PY{n}{receiver\PYZus{}dsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n+nb}{bytes}\PY{p}{(}\PY{n}{message}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n}{obj} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{message}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{message}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}
+                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{obj}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}prosseguir com o modo de decifra síncrono}
+            
+                \PY{n}{outputs} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{BytesIO}\PY{p}{(}\PY{p}{)}
+                \PY{n}{tweak\PYZus{}init} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+        
+                \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{modes}\PY{o}{.}\PY{n}{ECB}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{decryptor}\PY{p}{(}\PY{p}{)}
+                \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} nr de bloco}
+                \PY{k}{try}\PY{p}{:}
+                    \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                        \PY{n}{buffer} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                        \PY{k}{if}\PY{p}{(}\PY{n}{buffer} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finalized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                            \PY{n}{outputs}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{cipher}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                            \PY{k}{break}
+                        \PY{k}{else}\PY{p}{:}
+                            \PY{n}{crypt} \PY{o}{=} \PY{n}{buffer}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crypt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{tag} \PY{o}{=} \PY{n}{buffer}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                            \PY{n}{decipher\PYZus{}object} \PY{o}{=} \PY{n}{decifra\PYZus{}blocos}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{n}{crypt}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                            \PY{n}{text} \PY{o}{=} \PY{n}{decipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                            \PY{n}{i} \PY{o}{=} \PY{n}{decipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                            \PY{n}{parity} \PY{o}{=} \PY{n}{decipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                            \PY{n}{auth\PYZus{}tweak} \PY{o}{=} \PY{n}{calculate\PYZus{}auth\PYZus{}tweak}\PY{p}{(}\PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+                            \PY{n}{auth\PYZus{}tag} \PY{o}{=} \PY{n}{decifra}\PY{p}{(}\PY{n}{tag}\PY{p}{,}\PY{n}{auth\PYZus{}tweak}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                            \PY{k}{if}\PY{p}{(}\PY{n}{auth\PYZus{}tag} \PY{o}{==} \PY{n}{parity}\PY{p}{)}\PY{p}{:}
+                                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                            \PY{k}{else}\PY{p}{:}
+                                \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUTH ERROR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                                \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autenticação num superbloco falhou!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                            \PY{n}{outputs}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{decrypted:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{outputs}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{Err}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Erro no recetor! }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Err}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n}{outputs}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chaves não coincidiram}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+            
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{BiConnection}\PY{p}{(}\PY{n}{Emitter}\PY{p}{,}\PY{n}{Receiver}\PY{p}{)}\PY{o}{.}\PY{n}{auto}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+gen\_bytes
+b'\textbackslash{}xd7\textbackslash{}xb7\textbackslash{}xe6\textbackslash{}x9a(i\textbackslash{}xac\textbackslash{}x18\textbackslash{}xd9\textbackslash{}x7f-\textbackslash{}x19\textbackslash{}xcbx\&\textbackslash{}xa6\textbackslash{}t\textbackslash{}xccu\textbackslash{}xc7\textbackslash{}x8f\textbackslash{}xa4p\textbackslash{}x96
+\textbackslash{}xff\textbackslash{}r\textbackslash{}x96\textbackslash{}xdaM\textbackslash{}xce\textbackslash{}x13\textbackslash{}x91\textbackslash{}x88\textbackslash{}xb6\textbackslash{}x8e\textbackslash{}xa6\textbackslash{}xec-\textbackslash{}xbd\textbackslash{}x9c\textbackslash{}x9a\textbackslash{}x9f\textbackslash{}xb0o
+\textbackslash{}xf8SUb\textbackslash{}xc30\textbackslash{}x8f\textbackslash{}x98j"Sx\textbackslash{}xc4\textbackslash{}x9c\textbackslash{}xae\$\textbackslash{}xe6\textbackslash{}x08\textbackslash{}x9cl\textbackslash{}x17\textbackslash{}xa8\textbackslash{}xe2\textbackslash{}xb6D\textbackslash{}xd4\textbackslash{}x06
+\textbackslash{}xe0\textbackslash{}x80\textbackslash{}xda\textbackslash{}xb0\textbackslash{}x18\textbackslash{}xee\textbackslash{}xac\textbackslash{}xa6b\textbackslash{}xaa\textbackslash{}xe5\textbackslash{}xe0\textbackslash{}xa9\textbackslash{}x91\$\&s0\textbackslash{}'U\textbackslash{}xae\textbackslash{}xa1\textbackslash{}x92y
+\textbackslash{}x87\textbackslash{}x9b\textbackslash{}x1a\textbackslash{}x9a\$\textbackslash{}xaf\textbackslash{}xa2\}\textbackslash{}xb9\textbackslash{}xa9\textbackslash{}xa3k;\textbackslash{}xa9\textbackslash{}xc5\textbackslash{}x8cU\textbackslash{}xce\textbackslash{}xcd0\textbackslash{}x12\textbackslash{}xa3v
+\textbackslash{}x14\textbackslash{}xfe\textbackslash{}xabP\textbackslash{}xa0\textbackslash{}xca\textbackslash{}x9c\textbackslash{}xb4\textbackslash{}x98c\textbackslash{}xdd\textbackslash{}x80\textbackslash{}xc5\textbackslash{}xf6\textbackslash{}x1a\textbackslash{}x87o\textbackslash{}x8a\textbackslash{}xeb3V\{
+\textbackslash{}xe2|\textbackslash{}xa5\textbackslash{}xcf)\textbackslash{}x81x\textbackslash{}x1a\textbackslash{}xd79b|\textbackslash{}xe3\textbackslash{}xa7k\textbackslash{}x82\textbackslash{}x83\textbackslash{}xf9\textbackslash{}xdc(I\textbackslash{}xd44@\textbackslash{}xa6J\textbackslash{}xc1
+\textbackslash{}xf4"\textbackslash{}x8d\textbackslash{}xde\textbackslash{}xb1\textbackslash{}xd0e\textbackslash{}x98k\textbackslash{}xb4\textbackslash{}xb3\{RK\textbackslash{}xbf\textbackslash{}xa85\textbackslash{}xf3D\textbackslash{}xd2\textbackslash{}x1c!\textbackslash{}xb7\textbackslash{}xcf
+\textbackslash{}nv\textbackslash{}x00\textbackslash{}x9b\textbackslash{}r/\textbackslash{}xa0\textbackslash{}xe1\textbackslash{}x83\textbackslash{}x15\textbackslash{}xa6\textbackslash{}x99(\textbackslash{}x9bkv\textbackslash{}x02\textbackslash{}xe0\textbackslash{}x1d(\textbackslash{}xeb\textbackslash{}xfe\textbackslash{}x0f@
+\textbackslash{}x98\textbackslash{}xe6j\textbackslash{}xac\textbackslash{}x8aQ\textbackslash{}xdb\textbackslash{}xac\textbackslash{}x944\textbackslash{}xc4\textbackslash{}xaf\textbackslash{}x00t\textbackslash{}xc8U\textbackslash{}xef\textbackslash{}xb4\textbackslash{}xee\textbackslash{}x872\^{}
+\textbackslash{}x7f\textbackslash{}x8b|ZL;\textbackslash{}\textbackslash{}kD\textbackslash{}xc19\textbackslash{}xd2f\textbackslash{}xe6\textbackslash{}xeaz\textbackslash{}xfd\textbackslash{}n\textbackslash{}r\textbackslash{}x9a\textbackslash{}x17GD\textbackslash{}x8d\textbackslash{}xda\textbackslash{}xd3\textbackslash{}xabC\textbackslash{}xa7\$
+\textbackslash{}x91\textbackslash{}x94\textbackslash{}xe2\textbackslash{}x0eS\textbackslash{}xae\textbackslash{}x99V":c\textbackslash{}xa3\textbackslash{}xce5\textbackslash{}x9f\textbackslash{}xb3]\textbackslash{}x9f\textbackslash{}x0f\textbackslash{}x15\textbackslash{}x00c\textbackslash{}xab\textbackslash{}x12\textbackslash{}x14
+\textbackslash{}xa7\textbackslash{}xd1;0\textbackslash{}xd0\textbackslash{}xc2\textbackslash{}x0b\textbackslash{}xbf\textbackslash{}x8a7\textbackslash{}x94J\textbackslash{}x8e\textbackslash{}xbf\textbackslash{}xb1\textbackslash{}xbc\textbackslash{}x01\textbackslash{}x99\textbackslash{}xe6\textbackslash{}xfc\textbackslash{}xc8
+\textbackslash{}x91\textbackslash{}x9fV\textbackslash{}xbf!\textbackslash{}xaa \textbackslash{}xac\textbackslash{}xea\textbackslash{}xad\textbackslash{}x0b\textbackslash{}xca\textbackslash{}xa8\textbackslash{}xd0\textbackslash{}xafTY)\textbackslash{}xed@\textbackslash{}x1c\textbackslash{}xaf\textbackslash{}xd9
+\textbackslash{}x89\{!\textbackslash{}xc0\textbackslash{}xf3\textbackslash{}xc1W\textbackslash{}xf7\textbackslash{}x02\textbackslash{}xec\textbackslash{}xd3\textbackslash{}x81\textbackslash{}x81\textbackslash{}x03ijO\textbackslash{}xe8\textbackslash{}xb3\textbackslash{}x1d.B\textbackslash{}x84\textbackslash{}r\textbackslash{}x934b
+\textbackslash{}xe3`G\textbackslash{}xa4\textbackslash{}xee\textbackslash{}xfd\textbackslash{}xfa\textbackslash{}xa6\textbackslash{}xa3c\textbackslash{}xe7\textbackslash{}xacK-\textbackslash{}xd8\textbackslash{}xc4\textbackslash{}x0656\textbackslash{}xbc\textbackslash{}xaaM\textbackslash{}xc1\textbackslash{}x82F\textbackslash{}x15
+\textbackslash{}xf0\textbackslash{}xed\textbackslash{}x9a\textbackslash{}xbbc\textbackslash{}xbd@\textbackslash{}x86\textbackslash{}x91S\textbackslash{}xd0\textbackslash{}x94=\textbackslash{}xec\textbackslash{}xb7uRM\textbackslash{}x01\textbackslash{}xa7\textbackslash{}xccg\textbackslash{}xdf\textbackslash{}x08\textbackslash{}xe8\textbackslash{}xff
+decrypted:
+b'\textbackslash{}xd7\textbackslash{}xb7\textbackslash{}xe6\textbackslash{}x9a(i\textbackslash{}xac\textbackslash{}x18\textbackslash{}xd9\textbackslash{}x7f-\textbackslash{}x19\textbackslash{}xcbx\&\textbackslash{}xa6\textbackslash{}t\textbackslash{}xccu\textbackslash{}xc7\textbackslash{}x8f\textbackslash{}xa4p\textbackslash{}x96
+\textbackslash{}xff\textbackslash{}r\textbackslash{}x96\textbackslash{}xdaM\textbackslash{}xce\textbackslash{}x13\textbackslash{}x91\textbackslash{}x88\textbackslash{}xb6\textbackslash{}x8e\textbackslash{}xa6\textbackslash{}xec-\textbackslash{}xbd\textbackslash{}x9c\textbackslash{}x9a\textbackslash{}x9f\textbackslash{}xb0o\textbackslash{}xf8SUb
+\textbackslash{}xc30\textbackslash{}x8f\textbackslash{}x98j"Sx\textbackslash{}xc4\textbackslash{}x9c\textbackslash{}xae\$\textbackslash{}xe6\textbackslash{}x08\textbackslash{}x9cl\textbackslash{}x17\textbackslash{}xa8\textbackslash{}xe2\textbackslash{}xb6D\textbackslash{}xd4
+\textbackslash{}x06\textbackslash{}xe0\textbackslash{}x80\textbackslash{}xda\textbackslash{}xb0\textbackslash{}x18\textbackslash{}xee\textbackslash{}xac\textbackslash{}xa6b\textbackslash{}xaa\textbackslash{}xe5\textbackslash{}xe0\textbackslash{}xa9\textbackslash{}x91\$\&s0\textbackslash{}'U\textbackslash{}xae\textbackslash{}xa1\textbackslash{}x92y
+\textbackslash{}x87\textbackslash{}x9b\textbackslash{}x1a\textbackslash{}x9a\$\textbackslash{}xaf\textbackslash{}xa2\}\textbackslash{}xb9\textbackslash{}xa9\textbackslash{}xa3k;\textbackslash{}xa9\textbackslash{}xc5\textbackslash{}x8cU\textbackslash{}xce\textbackslash{}xcd0\textbackslash{}x12\textbackslash{}xa3v
+\textbackslash{}x14\textbackslash{}xfe\textbackslash{}xabP\textbackslash{}xa0\textbackslash{}xca\textbackslash{}x9c\textbackslash{}xb4\textbackslash{}x98c\textbackslash{}xdd\textbackslash{}x80\textbackslash{}xc5\textbackslash{}xf6\textbackslash{}x1a\textbackslash{}x87o\textbackslash{}x8a\textbackslash{}xeb3V\{
+\textbackslash{}xe2|\textbackslash{}xa5\textbackslash{}xcf)\textbackslash{}x81x\textbackslash{}x1a\textbackslash{}xd79b|\textbackslash{}xe3\textbackslash{}xa7k\textbackslash{}x82\textbackslash{}x83\textbackslash{}xf9\textbackslash{}xdc(I\textbackslash{}xd44@\textbackslash{}xa6J\textbackslash{}xc1
+\textbackslash{}xf4"\textbackslash{}x8d\textbackslash{}xde\textbackslash{}xb1\textbackslash{}xd0e\textbackslash{}x98k\textbackslash{}xb4\textbackslash{}xb3\{RK\textbackslash{}xbf\textbackslash{}xa85\textbackslash{}xf3D\textbackslash{}xd2\textbackslash{}x1c!\textbackslash{}xb7\textbackslash{}xcf
+\textbackslash{}nv\textbackslash{}x00\textbackslash{}x9b\textbackslash{}r/\textbackslash{}xa0\textbackslash{}xe1\textbackslash{}x83\textbackslash{}x15\textbackslash{}xa6\textbackslash{}x99(\textbackslash{}x9bkv\textbackslash{}x02\textbackslash{}xe0\textbackslash{}x1d(\textbackslash{}xeb\textbackslash{}xfe\textbackslash{}x0f@
+\textbackslash{}x98\textbackslash{}xe6j\textbackslash{}xac\textbackslash{}x8aQ\textbackslash{}xdb\textbackslash{}xac\textbackslash{}x944\textbackslash{}xc4\textbackslash{}xaf\textbackslash{}x00t\textbackslash{}xc8U\textbackslash{}xef\textbackslash{}xb4\textbackslash{}xee\textbackslash{}x872\^{}
+\textbackslash{}x7f\textbackslash{}x8b|ZL;\textbackslash{}\textbackslash{}kD\textbackslash{}xc19\textbackslash{}xd2f\textbackslash{}xe6\textbackslash{}xeaz\textbackslash{}xfd\textbackslash{}n\textbackslash{}r\textbackslash{}x9a\textbackslash{}x17GD\textbackslash{}x8d\textbackslash{}xda\textbackslash{}xd3\textbackslash{}xabC\textbackslash{}xa7\$
+\textbackslash{}x91\textbackslash{}x94\textbackslash{}xe2\textbackslash{}x0eS\textbackslash{}xae\textbackslash{}x99V":c\textbackslash{}xa3\textbackslash{}xce5\textbackslash{}x9f\textbackslash{}xb3]\textbackslash{}x9f\textbackslash{}x0f\textbackslash{}x15\textbackslash{}x00c\textbackslash{}xab\textbackslash{}x12\textbackslash{}x14
+\textbackslash{}xa7\textbackslash{}xd1;0\textbackslash{}xd0\textbackslash{}xc2\textbackslash{}x0b\textbackslash{}xbf\textbackslash{}x8a7\textbackslash{}x94J\textbackslash{}x8e\textbackslash{}xbf\textbackslash{}xb1\textbackslash{}xbc\textbackslash{}x01\textbackslash{}x99\textbackslash{}xe6\textbackslash{}xfc\textbackslash{}xc8
+\textbackslash{}x91\textbackslash{}x9fV\textbackslash{}xbf!\textbackslash{}xaa \textbackslash{}xac\textbackslash{}xea\textbackslash{}xad\textbackslash{}x0b\textbackslash{}xca\textbackslash{}xa8\textbackslash{}xd0\textbackslash{}xafTY)\textbackslash{}xed@\textbackslash{}x1c\textbackslash{}xaf\textbackslash{}xd9
+\textbackslash{}x89\{!\textbackslash{}xc0\textbackslash{}xf3\textbackslash{}xc1W\textbackslash{}xf7\textbackslash{}x02\textbackslash{}xec\textbackslash{}xd3\textbackslash{}x81\textbackslash{}x81\textbackslash{}x03ijO\textbackslash{}xe8\textbackslash{}xb3\textbackslash{}x1d.B\textbackslash{}x84\textbackslash{}r\textbackslash{}x934b
+\textbackslash{}xe3`G\textbackslash{}xa4\textbackslash{}xee\textbackslash{}xfd\textbackslash{}xfa\textbackslash{}xa6\textbackslash{}xa3c\textbackslash{}xe7\textbackslash{}xacK-\textbackslash{}xd8\textbackslash{}xc4\textbackslash{}x0656\textbackslash{}xbc\textbackslash{}xaaM\textbackslash{}xc1\textbackslash{}x82F\textbackslash{}x15
+\textbackslash{}xf0\textbackslash{}xed\textbackslash{}x9a\textbackslash{}xbbc\textbackslash{}xbd@\textbackslash{}x86\textbackslash{}x91S\textbackslash{}xd0\textbackslash{}x94=\textbackslash{}xec\textbackslash{}xb7uRM\textbackslash{}x01\textbackslash{}xa7\textbackslash{}xccg\textbackslash{}xdf\textbackslash{}x08\textbackslash{}xe8\textbackslash{}xff
+    \end{Verbatim}
+
+    A comparação entre os valores dados por \textbf{gen\_bytes} e por
+\textbf{decrypted} no output, por via da igualdade, permitem concluir
+que a mensagem que foi gerada é a mesma mensagem que foi decifrada.
+
+    \hypertarget{sessuxe3o-suxedncrona-com-elliptic-curve-diffie-hellman}{%
+\section{\texorpdfstring{Sessão Síncrona com \emph{Elliptic Curve
+Diffie-Hellman}}{Sessão Síncrona com Elliptic Curve Diffie-Hellman}}\label{sessuxe3o-suxedncrona-com-elliptic-curve-diffie-hellman}}
+
+    \hypertarget{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}{%
+\subsection{Geração das chaves permanentes dos
+agentes}\label{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}}
+
+    Esta secção tem como objetivo gerar as chaves permanentes de ambos os
+agentes, ou seja, as chaves que são utilizadas na autenticação dos
+mesmos.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Geração das chaves do emissor}
+        \PY{c+c1}{\PYZsh{}Chave privada}
+        \PY{n}{emitter\PYZus{}ecdsa\PYZus{}sk} \PY{o}{=} \PY{n}{ec}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{SECP256R1}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{emitter\PYZus{}ecdsa\PYZus{}pk} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Chave pública}
+        
+        \PY{c+c1}{\PYZsh{} Geração das chaves do recetor}
+        \PY{c+c1}{\PYZsh{}Chave privada}
+        \PY{n}{receiver\PYZus{}ecdsa\PYZus{}sk} \PY{o}{=} \PY{n}{ec}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{SECP256R1}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{receiver\PYZus{}ecdsa\PYZus{}pk} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}Chave pública}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-emissor-e-do-recetor}{%
+\subsection{Definição do Emissor e do
+Recetor}\label{definiuxe7uxe3o-do-emissor-e-do-recetor}}
+
+    Nesta secção, é definido o comportamento de cada um dos agentes na
+sessão síncrona segura de troca de informação utilizando o protocolo
+\textbf{ECDH} e o algoritmo de assinatura \textbf{ECDSA}. É assumido que
+as chaves públicas \textbf{ECDSA} de cada agente já são conhecidas por
+ambos, pelo que podem ser utilizadas na autenticação dos agentes ao
+realizar o protocolo de acordo de chaves \textbf{ECDH}. As chaves
+\textbf{ECDH} são geradas por sessão, de forma a acordar uma chave de
+sessão temporária e comum que permita a utilização de uma primitiva
+simétrica.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{Emitter}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Implementação do protocolo Elliptic Curve Diffie\PYZhy{}Hellman}
+             \PY{n}{emitter\PYZus{}ecdh\PYZus{}sk} \PY{o}{=} \PY{n}{ec}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{SECP521R1}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{emitter\PYZus{}ecdh\PYZus{}pk} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdh\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)}
+             \PY{n}{pub} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdh\PYZus{}pk}\PY{o}{.}\PY{n}{public\PYZus{}bytes}\PY{p}{(}
+                 \PY{n}{encoding} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{Encoding}\PY{o}{.}\PY{n}{PEM}\PY{p}{,}
+                 \PY{n+nb}{format} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{PublicFormat}\PY{o}{.}\PY{n}{SubjectPublicKeyInfo}
+             \PY{p}{)}
+             \PY{n}{signature} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}
+                 \PY{n}{pub}\PY{p}{,}
+                 \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{p}{)}
+             \PY{n}{message\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pub}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pub}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}
+             \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}send}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}info} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}ecdsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sig}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}pub} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{load\PYZus{}pem\PYZus{}public\PYZus{}key}\PY{p}{(}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{master\PYZus{}key} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdh\PYZus{}sk}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDH}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{receiver\PYZus{}pub}\PY{p}{)}
+             \PY{n}{shared\PYZus{}key} \PY{o}{=} \PY{n}{HKDF}\PY{p}{(}
+                 \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,}
+                 \PY{n}{salt} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                 \PY{n}{info} \PY{o}{=} \PY{l+s+sa}{b}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exchange data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+             \PY{p}{)}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{master\PYZus{}key}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Verificação da chave}
+             \PY{n}{shared\PYZus{}key\PYZus{}digest} \PY{o}{=} \PY{n}{Hash}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}
+             \PY{n}{signature} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}
+                 \PY{n}{shared\PYZus{}key\PYZus{}digest}\PY{p}{,}
+                 \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{p}{)}
+             \PY{n}{msg} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{skd}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{shared\PYZus{}key\PYZus{}digest}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{signature}\PY{p}{\PYZcb{}}
+             \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+             \PY{n}{result} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}ecdsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{if}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Chave verificada. Iniciar processo de cifra}
+                 
+                 \PY{n}{message\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{1600}
+                 \PY{n}{gen\PYZus{}bytes} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{urandom}\PY{p}{(}\PY{n}{message\PYZus{}size}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}Imprimir bytes a cifrar para posterior comparação}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bytes before cipher:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{gen\PYZus{}bytes}\PY{p}{)}
+                 
+                 \PY{n}{inputs} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{BytesIO}\PY{p}{(}\PY{n}{gen\PYZus{}bytes}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}Inicialização e envio dos primeiros 64 bits do tweak}
+                 \PY{n}{tweak\PYZus{}init} \PY{o}{=} \PY{n}{calculate\PYZus{}nounce}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{tweak\PYZus{}init}\PY{p}{)}
+                 
+                 \PY{n}{buffer} \PY{o}{=} \PY{n+nb}{bytearray}\PY{p}{(}\PY{l+m+mi}{160}\PY{p}{)}
+                 \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{modes}\PY{o}{.}\PY{n}{ECB}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{encryptor}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{}nr de bloco}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{k}{while} \PY{n}{inputs}\PY{o}{.}\PY{n}{readinto}\PY{p}{(}\PY{n}{buffer}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{cipher\PYZus{}object} \PY{o}{=} \PY{n}{cifra\PYZus{}blocos}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{n}{buffer}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                         \PY{n}{cryptogram} \PY{o}{=} \PY{n}{cipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{crypt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                         \PY{n}{parity} \PY{o}{=} \PY{n}{cipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                         \PY{n}{auth\PYZus{}tweak} \PY{o}{=} \PY{n}{calculate\PYZus{}auth\PYZus{}tweak}\PY{p}{(}\PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+                         \PY{n}{auth\PYZus{}tag} \PY{o}{=} \PY{n}{cifra}\PY{p}{(}\PY{n}{parity}\PY{p}{,}\PY{n}{auth\PYZus{}tweak}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                         \PY{n}{i} \PY{o}{=} \PY{n}{cipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                         \PY{n}{msg\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crypt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{cryptogram}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{auth\PYZus{}tag}\PY{p}{\PYZcb{}}
+                         \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{msg\PYZus{}to\PYZus{}send}\PY{p}{)}
+                         \PY{n}{msg} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                         \PY{k}{if}\PY{p}{(}\PY{o+ow}{not}\PY{p}{(}\PY{n}{msg} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autenticação num superbloco falhou!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{err}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Erro no emissor! }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finalized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}   
+                 \PY{n}{inputs}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{Receiver}\PY{p}{(}\PY{n}{connection}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Implementação do protocolo Elliptic Curve Diffie\PYZhy{}Hellman}
+             \PY{n}{emitter\PYZus{}info} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+             \PY{n}{emitter\PYZus{}pub} \PY{o}{=} \PY{n}{emitter\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{sig} \PY{o}{=} \PY{n}{emitter\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sig}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{emitter\PYZus{}ecdsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{sig}\PY{p}{,}\PY{n}{emitter\PYZus{}pub}\PY{p}{,}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}ecdh\PYZus{}sk} \PY{o}{=} \PY{n}{ec}\PY{o}{.}\PY{n}{generate\PYZus{}private\PYZus{}key}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{SECP521R1}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}ecdh\PYZus{}pk} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdh\PYZus{}sk}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{(}\PY{p}{)}
+             \PY{n}{pub} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdh\PYZus{}pk}\PY{o}{.}\PY{n}{public\PYZus{}bytes}\PY{p}{(}
+                 \PY{n}{encoding} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{Encoding}\PY{o}{.}\PY{n}{PEM}\PY{p}{,}
+                 \PY{n+nb}{format} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{PublicFormat}\PY{o}{.}\PY{n}{SubjectPublicKeyInfo}
+             \PY{p}{)}
+             \PY{n}{signature} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}
+                 \PY{n}{pub}\PY{p}{,}
+                 \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{p}{)}
+             \PY{n}{message\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pub}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pub}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}
+             \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}send}\PY{p}{)}
+             \PY{n}{key\PYZus{}check\PYZus{}info} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+             \PY{n}{emitter\PYZus{}ecdsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{key\PYZus{}check\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sig}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{key\PYZus{}check\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{skd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{emitter\PYZus{}pub} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{load\PYZus{}pem\PYZus{}public\PYZus{}key}\PY{p}{(}\PY{n}{emitter\PYZus{}pub}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{master\PYZus{}key} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdh\PYZus{}sk}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDH}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{emitter\PYZus{}pub}\PY{p}{)}
+             \PY{n}{shared\PYZus{}key} \PY{o}{=} \PY{n}{HKDF}\PY{p}{(}
+                 \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,}
+                 \PY{n}{salt} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                 \PY{n}{info} \PY{o}{=} \PY{l+s+sa}{b}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exchange data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{backend} \PY{o}{=} \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}
+             \PY{p}{)}\PY{o}{.}\PY{n}{derive}\PY{p}{(}\PY{n}{master\PYZus{}key}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Verificação da chave}
+             \PY{n}{shared\PYZus{}key\PYZus{}digest} \PY{o}{=} \PY{n}{Hash}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}
+             \PY{k}{if}\PY{p}{(}\PY{n}{shared\PYZus{}key\PYZus{}digest} \PY{o}{==} \PY{n}{key\PYZus{}check\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{skd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{message} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{signature} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}
+                     \PY{n}{message}\PY{p}{,}
+                     \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{p}{)}
+                 \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{message}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Iniciar processo de decifra}
+                 \PY{n}{tweak\PYZus{}init} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{outputs} \PY{o}{=} \PY{n}{io}\PY{o}{.}\PY{n}{BytesIO}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{n}{cipher} \PY{o}{=} \PY{n}{Cipher}\PY{p}{(}\PY{n}{algorithms}\PY{o}{.}\PY{n}{AES}\PY{p}{(}\PY{n}{shared\PYZus{}key}\PY{p}{)}\PY{p}{,}\PY{n}{modes}\PY{o}{.}\PY{n}{ECB}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{decryptor}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} nr de bloco}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                         \PY{n}{buffer} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
+                         \PY{k}{if}\PY{p}{(}\PY{n}{buffer} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finalized}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{outputs}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{cipher}\PY{o}{.}\PY{n}{finalize}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                             \PY{k}{break}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{n}{crypt} \PY{o}{=} \PY{n}{buffer}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{crypt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                             \PY{n}{tag} \PY{o}{=} \PY{n}{buffer}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                             \PY{n}{decipher\PYZus{}object} \PY{o}{=} \PY{n}{decifra\PYZus{}blocos}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{n}{crypt}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                             \PY{n}{text} \PY{o}{=} \PY{n}{decipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                             \PY{n}{i} \PY{o}{=} \PY{n}{decipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                             \PY{n}{parity} \PY{o}{=} \PY{n}{decipher\PYZus{}object}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+                             \PY{n}{auth\PYZus{}tweak} \PY{o}{=} \PY{n}{calculate\PYZus{}auth\PYZus{}tweak}\PY{p}{(}\PY{n}{tweak\PYZus{}init}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+                             \PY{n}{auth\PYZus{}tag} \PY{o}{=} \PY{n}{decifra}\PY{p}{(}\PY{n}{tag}\PY{p}{,}\PY{n}{auth\PYZus{}tweak}\PY{p}{,}\PY{n}{cipher}\PY{p}{)}
+                             \PY{k}{if}\PY{p}{(}\PY{n}{auth\PYZus{}tag} \PY{o}{==} \PY{n}{parity}\PY{p}{)}\PY{p}{:}
+                                 \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                             \PY{k}{else}\PY{p}{:}
+                                 \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{AUTH ERROR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                                 \PY{n}{sys}\PY{o}{.}\PY{n}{exit}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Autenticação num superbloco falhou!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                             \PY{n}{outputs}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{text}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{decrypted:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{outputs}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{except} \PY{n+ne}{Exception} \PY{k}{as} \PY{n}{Err}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Erro no recetor! }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Err}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{outputs}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{message} \PY{o}{=} \PY{n+nb}{bytes}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ERROR IN KEY CHECK}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{signature} \PY{o}{=} \PY{n}{receiver\PYZus{}ecdsa\PYZus{}sk}\PY{o}{.}\PY{n}{sign}\PY{p}{(}
+                     \PY{n}{message}\PY{p}{,}
+                     \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{p}{)}
+                 \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{n}{message}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{connection}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+             
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{BiConnection}\PY{p}{(}\PY{n}{Emitter}\PY{p}{,}\PY{n}{Receiver}\PY{p}{)}\PY{o}{.}\PY{n}{auto}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    bytes before cipher:
+
+    b'L\textbackslash{}x19\textbackslash{}x9c.\textbackslash{}xe3\textbackslash{}xe4\textbackslash{}xb5b\textbackslash{}x0b\textbackslash{}x1d+\textbackslash{}x1b\textbackslash{}x81\textbackslash{}x7f\textbackslash{}xf2T\textbackslash{}xb0CP\%T\textbackslash{}xda\textbackslash{}x96\textbackslash{}x0c\textbackslash{}x82\^{}\textbackslash{}xeb\textbackslash{}xdd]p\textbackslash{}xe1\textbackslash{}x94\textbackslash{}x1b\textbackslash{}xd3\textbackslash{}x86Z\textbackslash{}xfb\textbackslash{}xa6:\textbackslash{}xf6\textbackslash{}xcf\textbackslash{}x08\textbackslash{}x8cm\textbackslash{}xaa\textbackslash{}x8f\textbackslash{}xe8\textbackslash{}xfdu\textbackslash{}'\textbackslash{}xceM\textbackslash{}xc6\textbackslash{}xcc\textbackslash{}xed\textbackslash{}x1c6\textbackslash{}xe3\textbackslash{}xf4\textbackslash{}x92TIBs\textbackslash{}xa8\textbackslash{}xb8\textbackslash{}xb2|\textbackslash{}xbcm\textbackslash{}x19`\textbackslash{}x1c[\textbackslash{}xb7\textbackslash{}xcdA\textbackslash{}x88\textbackslash{}xa1M=\textbackslash{}xa8\textbackslash{}x01*\textbackslash{}xd5\textbackslash{}x1d\textbackslash{}xf3\textbackslash{}t\textbackslash{}x9b\textbackslash{}x02\textbackslash{}xdb\textbackslash{}x10\textbackslash{}xc3\textbackslash{}x14\textbackslash{}x94\textbackslash{}x19\textbackslash{}x9f\^{}\textbackslash{}xad\textbackslash{}xf6\{\textbackslash{}xa7bc\textbackslash{}x99\textbackslash{}xc2\&\textbackslash{}\textbackslash{}\textbackslash{}xd8\textbackslash{}xd5\textbackslash{}x9a\textbackslash{}xfdz`\textbackslash{}x0e\textbackslash{}xae\textbackslash{}n\^{}o\textbackslash{}x1d\textbackslash{}x8c*\&\textbackslash{}x0f\textbackslash{}x92W\textbackslash{}x94\textbackslash{}xac\textbackslash{}xabr\textbackslash{}x9f\textbackslash{}xef\textbackslash{}xf0\textbackslash{}'\textbackslash{}x1evqjky\textbackslash{}xddT(\textbackslash{}x94\textbackslash{}xe7\_\textbackslash{}xa8\textbackslash{}xfd\textbackslash{}xcd\textbackslash{}x82\textbackslash{}xd4\textbackslash{}xc6\textbackslash{}xb5\textbackslash{}xd7\textbackslash{}xe4\textbackslash{}x81\textbackslash{}xa2\textbackslash{}xe0\textbackslash{}rO\textbackslash{}x14\#I\textbackslash{}xb2\textbackslash{}x8e\textbackslash{}xc3\textbackslash{}x80\textbackslash{}xf0(l\textbackslash{}x92\textbackslash{}x15\$\textbackslash{}x82J\textbackslash{}xd4Jy\textbackslash{}xa5Y\textasciitilde{})\textbackslash{}xf0\textbackslash{}x04\textbackslash{}xf3\textbackslash{}x0e\textbackslash{}xb9\textbackslash{}x82\textbackslash{}x00\}|\textbackslash{}xc8L\textbackslash{}xf0\textbackslash{}xbf\textbackslash{}xe3!?\textbackslash{}x8b\textbackslash{}x8e\textbackslash{}xf7\textbackslash{}xc5\textbackslash{}xb4\textbackslash{}x93a\textbackslash{}xa1\textbackslash{}x02"Yc\&\textbackslash{}xd6\textbackslash{}xc6\textbackslash{}xdbx\textbackslash{}xd18A\textbackslash{}x9e\textbackslash{}xb0*\textbackslash{}x15\textbackslash{}x07\textbackslash{}xc4D\textbackslash{}x96<\textbackslash{}xaf\textbackslash{}x05\textbackslash{}x08\textbackslash{}\textbackslash{}\textbackslash{}xb2u\textasciitilde{}\textbackslash{}xb6\textbackslash{}x10\textbackslash{}xed\}\textbackslash{}xc9;\textbackslash{}x0cXi9\textbackslash{}xcf\textbackslash{}xb3\textbackslash{}x93\textbackslash{}xa4 \textbackslash{}x8a\textbackslash{}xcaX\textbackslash{}xfd9x\textbackslash{}xfa\textbackslash{}xd1\textbackslash{}x1b\textbackslash{}xcc\textbackslash{}xa1T\textbackslash{}x83\textbackslash{}x99\$\textbackslash{}xa3\textbackslash{}xecv\textbackslash{}xf9\textbackslash{}xb5d\textbackslash{}xc4\textbackslash{}x90\textbackslash{}x10\textbackslash{}xa4M"p\textbackslash{}x87\textbackslash{}x12\textbackslash{}xb9z\textbackslash{}x14m\textbackslash{}x0b!\textbackslash{}xcf\textbackslash{}x9cZBd\textbackslash{}xdc\textbackslash{}x9a\&ZZE\textbackslash{}xd8\textbackslash{}xae-PB\textbackslash{}x8a\textbackslash{}xc9\textbackslash{}x9bmJ\textbackslash{}xd72\textbackslash{}x1e\textbackslash{}xb2\$\textbackslash{}x87\textbackslash{}x0f\textbackslash{}xe1\textbackslash{}xdcU!k\textbackslash{}x13\textbackslash{}xfbL\textbackslash{}x9f\textbackslash{}x9bx\textbackslash{}x8eQ\textbackslash{}xef\textbackslash{}xb1J\textbackslash{}x18\textbackslash{}x809\textbackslash{}xdbl\textbackslash{}xe5\textbackslash{}xdf`7\textbackslash{}xb4\^{}J\textbackslash{}x1d\textbackslash{}xa0<\textbackslash{}x18\}T?\textbackslash{}xf7\textbackslash{}xfd\textbackslash{}xfa\^{}\^{}w\textbackslash{}nq\textbackslash{}x90\textbackslash{}x83Zg\textbackslash{}x15V\textbackslash{}xd8\textbackslash{}x13\textbackslash{}xad\textbackslash{}xdaj\textbackslash{}xf1\textasciitilde{}\textbackslash{}xc1\textbackslash{}xce9\textbackslash{}x99\textbackslash{}xa4\textbackslash{}xf2\textbackslash{}xd03l\textbackslash{}x0e\textbackslash{}xa2\textbackslash{}x84y\textbackslash{}xd6*j\textasciitilde{}\textbackslash{}x98D\textbackslash{}x15\textbackslash{}xca\textbackslash{}x98\textasciitilde{}\textbackslash{}xbf\textbackslash{}xfc\textbackslash{}x1b\textbackslash{}xb5\textbackslash{}x7f\textbackslash{}xd6,`\textbackslash{}xf2\textbackslash{}xadT6tH\textbackslash{}x9bf\textbackslash{}xd3|\textbackslash{}x13\textbackslash{}x8f\textbackslash{}xd3\textbackslash{}xc1\textbackslash{}xd9\textbackslash{}'\textbackslash{}x12\textbackslash{}x08u\textbackslash{}x11\$X\textbackslash{}xe7a+?\textbackslash{}xbbJ(\textbackslash{}xba\textbackslash{}xf2\textbackslash{}xe1\textbackslash{}xa7HCc\textbackslash{}xa6\textbackslash{}xfe\textbackslash{}x1c4\textbackslash{}xcc.\textbackslash{}x08\textbackslash{}xda\textbackslash{}xc4\textbackslash{}xff\&\textbackslash{}xac2\textbackslash{}xa1\textbackslash{}xcfS\textbackslash{}xf4u@k\textbackslash{}\textbackslash{}\textbackslash{}xd6n\textbackslash{}xf0\textbackslash{}x15\textbackslash{}x14\textbackslash{}xe3\_,\textbackslash{}xbd\textbackslash{}x07q\textbackslash{}x8f\textbackslash{}x8f\textbackslash{}x8d\textbackslash{}x9a\textbackslash{}x01\textbackslash{}xd1\textbackslash{}xce\textbackslash{}xdc\textbackslash{}xef;\textbackslash{}x04M\textbackslash{}x8f\textbackslash{}x86\textbackslash{}x8d\textbackslash{}xe6\textbackslash{}x94\textbackslash{}xcf\textbackslash{}xe90\textbackslash{}xc4E\textbackslash{}xd3\$\textbackslash{}xa6\textbackslash{}x89v\textbackslash{}xf0,N\textbackslash{}x1d|L\textbackslash{}x10\textbackslash{}xa0\textbackslash{}x89\textbackslash{}xe5\textbackslash{}x84@z\textbackslash{}xf8\textbackslash{}x05i\textbackslash{}xbc\textbackslash{}x94\textbackslash{}xc8Slk*\textasciitilde{}"\textbackslash{}x01\{\textbackslash{}xce`\textbackslash{}x00p\textbackslash{}xf0\textbackslash{}x97,\textbackslash{}xcb\textbackslash{}xc1qrz25\textbackslash{}x05\textbackslash{}xf5\textbackslash{}xdc\textbackslash{}xfb0V3\textbackslash{}xb5EMc\textbackslash{}x0f\%\textbackslash{}x0f\textbackslash{}x92Of\textbackslash{}xc4\textbackslash{}xa0|r\textbackslash{}x87\textbackslash{}x19\&\textbackslash{}xd5\textbackslash{}xbat\textbackslash{}x03\textbackslash{}xf3\textbackslash{}x01c\textbackslash{}x94\textbackslash{}x0b\textbackslash{}xf6\textbackslash{}x88\textbackslash{}x89@\textbackslash{}xdd\textbackslash{}x02k\textbackslash{}x1c\textbackslash{}x8a\textbackslash{}xf7\textbackslash{}x01\textbackslash{}x00\textbackslash{}x9d\textbackslash{}x0b\textbackslash{}xf6\textbackslash{}x7fE\textbackslash{}x81\textbackslash{}x08\textbackslash{}x81\textbackslash{}xf3\textbackslash{}xd3\textbackslash{}x7f\textbackslash{}x91\textbackslash{}\textbackslash{}\textbackslash{}xe8\textbackslash{}xe1F\textbackslash{}xa69\textbackslash{}xd2\textbackslash{}xf9\textbackslash{}xb1\textbackslash{}xd1pg\textbackslash{}xe6s2\textbackslash{}x9eK\textbackslash{}x92w34]\$\% \textbackslash{}xcc\textbackslash{}x96\textbackslash{}x17A8\textbackslash{}xecW\textbackslash{}r\textbackslash{}xab\textbackslash{}xd4\textbackslash{}x00\textbackslash{}xc8\textbackslash{}xf0\textbackslash{}xc6D\textbackslash{}x16\textbackslash{}xd2Z\textbackslash{}xca-\textbackslash{}xe8\%\textbackslash{}xa2\textbackslash{}x10\textbackslash{}xfc;)\textbackslash{}xabq\textbackslash{}x88\textbackslash{}xba \%\%\textbackslash{}x0c\textbackslash{}r6\textbackslash{}xe5\textbackslash{}xa4\textbackslash{}xd3\}\textbackslash{}xf9SA\textbackslash{}xdf\textbackslash{}xf00 A\textbackslash{}xe9\textbackslash{}x00\textbackslash{}xf5+\textbackslash{}x0bb@\textbackslash{}xd4\textbackslash{}xf5\textbackslash{}xdd\textbackslash{}x95.\textbackslash{}xb5\textbackslash{}xc3\textbackslash{}xfa+\textbackslash{}x91\textbackslash{}xe2\textbackslash{}xa32\textbackslash{}xf4\textbackslash{}n\textbackslash{}x17\textbackslash{}xfc\textbackslash{}x8d*\textbackslash{}xd3\textbackslash{}x08\textbackslash{}xecL\textbackslash{}x0b\textbackslash{}x1eT4\textbackslash{}xa0\textbackslash{}xb3\textbackslash{}xfa\textbackslash{}xca\textbackslash{}xfek\textbackslash{}x05J\textbackslash{}xe61\textbackslash{}x1d\textbackslash{}x81\textbackslash{}xf0\textbackslash{}xb3\textbackslash{}xa0\textbackslash{}xa8\textbackslash{}x92y\textbackslash{}n\textbackslash{}xed3\textbackslash{}xba\textbackslash{}x04Ib\^{}\textbackslash{}x94c\textbackslash{}xb8[|9\textbackslash{}xf9\textbackslash{}xf3>\textbackslash{}x06D\textbackslash{}xa6+L\textbackslash{}xcc\textbackslash{}xdcgB\textbackslash{}xd6\textbackslash{}x84(\{\textbackslash{}'\&\textbackslash{}xac\textbackslash{}xe0\textbackslash{}x07\textbackslash{}xe7\textbackslash{}xbfyq\textbackslash{}xf06\textbackslash{}xb11\textbackslash{}xd0\textbackslash{}x83f\textbackslash{}x1b.\textbackslash{}x9b\textbackslash{}xd6\textasciitilde{}\textbackslash{}xa8\^{}\textbackslash{}xab\textasciitilde{}\textbackslash{}xc0<+.\textbackslash{}xf6\textbackslash{}xd9\textbackslash{}xdcB\textbackslash{}xaf\textbackslash{}x81\textbackslash{}xf26!\textbackslash{}x87\textbackslash{}xf5\textbackslash{}x9co\textbackslash{}xae\textbackslash{}xb6`\textbackslash{}x9a\_LL1t\textbackslash{}xbb\textbackslash{}xe5\textbackslash{}xd8\textbackslash{}'\textbackslash{}xbdC\textbackslash{}x89\textbackslash{}x1b\textbackslash{}x0c\textbackslash{}x17\textbackslash{}xfe\textbackslash{}xf0\_\textbackslash{}xf8s\textbackslash{}xcaxV\textbackslash{}xe2U\textbackslash{}xa3\textbackslash{}xe4\textbackslash{}x02\textbackslash{}x15\textbackslash{}xd2\textbackslash{}xe4\textbackslash{}xee\^{}\textbackslash{}x04L\textasciitilde{}\textbackslash{}x0e\textbackslash{}xc5n\textbackslash{}x8e\textbackslash{}x9c\textbackslash{}xcc\textbackslash{}xf5@\textbackslash{}xd7\textbackslash{}xe1(\textbackslash{}xc6\textbackslash{}xd8\textbackslash{}x04\textbackslash{}x1a[X\textbackslash{}xff\textbackslash{}xcb\textbackslash{}xbc\textbackslash{}x02V\textbackslash{}x19\textbackslash{}xef\textbackslash{}xabZ\textbackslash{}x1e\textbackslash{}xb6B\textbackslash{}x1b\textbackslash{}xe3\textbackslash{}xab\textbackslash{}xa6\textbackslash{}x9d\textbackslash{}x83\textbackslash{}xf8\^{}\textbackslash{}xc9\textbackslash{}t\textbackslash{}xc8\textbackslash{}xa7\textbackslash{}xad\textbackslash{}xdf\textbackslash{}x15Y]z \textbackslash{}xa7\textbackslash{}t\_\textbackslash{}xe6\textbackslash{}xccSa\textbackslash{}xbc\textbackslash{}x9a\textbackslash{}xbb/\textbackslash{}xbd\textbackslash{}x885\textbackslash{}xc4\textbackslash{}xc5\textbackslash{}xf7.\textbackslash{}x8cJ7\textbackslash{}x11\textbackslash{}xda;\textbackslash{}xbf\textbackslash{}x1a\textbackslash{}xeb\textbackslash{}xf5\textbackslash{}x05\textbackslash{}x90.\textbackslash{}x1d\textbackslash{}x8d\textbackslash{}nA\textbackslash{}x12\textbackslash{}x90\textbackslash{}x1c\textbackslash{}xafh\textbackslash{}xec\{\textbackslash{}xe7\textbackslash{}t\textbackslash{}xc4-\textbackslash{}x1f\textbackslash{}xd31\textbackslash{}xa34 \textbackslash{}xb9\textbackslash{}xd0\textbackslash{}xe3\textbackslash{}xf5\textbackslash{}xa9a\textbackslash{}xa5\textbackslash{}xc7aF\textbackslash{}xcd\textbackslash{}x0b\textbackslash{}x82\textbackslash{}xa5\textbackslash{}x1aS\textbackslash{}x1eP\textbackslash{}xfa\textbackslash{}x03Z\textbackslash{}xe7\textbackslash{}x88\textbackslash{}xdc\textasciitilde{}\textbackslash{}xad\textbackslash{}xf9A\textbackslash{}xb08\textbackslash{}x89\textbackslash{}xbc\textbackslash{}xcd\textbackslash{}xdf\#q\textbackslash{}xba\textbackslash{}xc7\textbackslash{}xa9Q\textbackslash{}xc9\textbackslash{}x99\textbackslash{}x1b[K.\textbackslash{}x0fV\textbackslash{}x0b\textbackslash{}x86:\textbackslash{}xd2Kc\textbackslash{}xa4n\textbackslash{}x8f\textbackslash{}xe3\textbackslash{}xe400.\textbackslash{}xb4\}\textbackslash{}xeb*\textbackslash{}xc9\textbackslash{}x80aU\textbackslash{}xd4\textbackslash{}x9f\textbackslash{}x9d\textbackslash{}xf7f\textbackslash{}xef \}cUp\textbackslash{}xfa\textbackslash{}x850\textbackslash{}xec\textbackslash{}xb5x\textbackslash{}xe7U\textbackslash{}nO\textbackslash{}xb6<\textbackslash{}x05c\textbackslash{}xf3\textbackslash{}xa3\textbackslash{}x14*\textbackslash{}x02\textbackslash{}xba\textbackslash{}xff\textbackslash{}'\textbackslash{}xdf\textbackslash{}xf3\textbackslash{}xf3\textbackslash{}xdf\textbackslash{}xf1\textbackslash{}x88o\textbackslash{}xce\{b\textbackslash{}xfe\textbackslash{}x82\textbackslash{}xb7\textbackslash{}xf2\textbackslash{}x8f|n\textbackslash{}xcb\textbackslash{}xbe\textbackslash{}x90\textbackslash{}xd0a\textbackslash{}xa3v.:\textbackslash{}xea\textbackslash{}xccHC\textbackslash{}xd7\textbackslash{}x14\textbackslash{}xc79o\textbackslash{}xb0\textbackslash{}n\textbackslash{}xd9\textbackslash{}xb2\textbackslash{}xcb\textbackslash{}xb4\textbackslash{}x05\textbackslash{}xfez)\textbackslash{}x83F\textbackslash{}xe8F\textbackslash{}xeb|\textbackslash{}xc5\textbackslash{}x9d\textbackslash{}x07SY\textbackslash{}xf2\textbackslash{}x82o?\textbackslash{}xadG\textbackslash{}xe4\textbackslash{}xc1\textbackslash{}xd9\textbackslash{}xd3\textbackslash{}x83X\textbackslash{}xfaKZ\textbackslash{}xa1\textbackslash{}x05\textbackslash{}xae)\textbackslash{}xa17b\textbackslash{}xb57\textbackslash{}x98\textbackslash{}t\textbackslash{}xd5\textbackslash{}xa6\textbackslash{}xf8\textbackslash{}xfa\textbackslash{}xff\textbackslash{}xacC\textbackslash{}xd2U\textbackslash{}xd9q\textbackslash{}xb6\textbackslash{}xdeH5\textbackslash{}x1f\textbackslash{}xce\textbackslash{}x8d\textbackslash{}xbb\textbackslash{}x81!\textbackslash{}x93\textbackslash{}x02\textbackslash{}'\textbackslash{}xe3\textbackslash{}x98\textbackslash{}xefnv\textbackslash{}xba\textbackslash{}xcb\&\textbackslash{}xc8N\textbackslash{}xfd\^{}\textbackslash{}xb6\textbackslash{}xf4\textbackslash{}xd2\textbackslash{}xd6I\textbackslash{}x1c\textbackslash{}xb8\textbackslash{}xec\textbackslash{}xc2\textbackslash{}xb8\textbackslash{}x974\textbackslash{}xcdEk\textbackslash{}x86\textbackslash{}xdd\textbackslash{}xee/\textbackslash{}xc5\textbackslash{}x8bc\textbackslash{}x0b\textbackslash{}xf0\textbackslash{}xc6\textbackslash{}xf5\textbackslash{}xb6\textbackslash{}xceL:\textbackslash{}'\textbackslash{}xf9\}K\textbackslash{}xb6U\textbackslash{}xd1A\textbackslash{}xc0\textbackslash{}x07\textbackslash{}xa9\textbackslash{}x7f\textbackslash{}x8c\textbackslash{}xfd\textbackslash{}x1f\textbackslash{}xff\textbackslash{}xebG\textbackslash{}xa1\textbackslash{}xb0\textbackslash{}xf8\textbackslash{}xc2\textbackslash{}xef-\textbackslash{}x90t\textbackslash{}xde\textbackslash{}xba\textbackslash{}xaf\textbackslash{}x06\textbackslash{}x83\textbackslash{}r\textbackslash{}x85i\textbackslash{}xec\textbackslash{}\textbackslash{}\textbackslash{}xc9\textbackslash{}xa2s\textbackslash{}xdd\textbackslash{}xbcM\textbackslash{}n\textbackslash{}xc5B?\textbackslash{}xf5\textbackslash{}x80x\textbackslash{}xd3?x\textbackslash{}x85\textbackslash{}xe6\textbackslash{}xa7o\textbackslash{}x1b\textbackslash{}xa0\textbackslash{}x1e:\textbackslash{}x84\textbackslash{}xd4\textbackslash{}x9f=\textbackslash{}xa2\textbackslash{}xbai8\textbackslash{}xad\textbackslash{}x80yaM\textbackslash{}x81J)\textbackslash{}x02P\textbackslash{}xcd\textbackslash{}xf38D[\textbackslash{}xd6gC\textbackslash{}x97\textbackslash{}xe0\textbackslash{}xb4\textbackslash{}xces\textbackslash{}xc4\textbackslash{}x9d\textbackslash{}x84\textbackslash{}xb5pq\textbackslash{}x13\$\textbackslash{}xdac\textbackslash{}xd6R\textbackslash{}xe2\textbackslash{}x84\textbackslash{}xb8\textbackslash{}x917\#(\textbackslash{}xb5`I1\textbackslash{}x13\textbackslash{}xb5\textbackslash{}x96\textbackslash{}xf8D\textbackslash{}x12\textbackslash{}x8f@H\textbackslash{}xe9\}\textbackslash{}xe2\textbackslash{}x03\_?"\textbackslash{}xaf\textbackslash{}xdf,\textbackslash{}x8bL\textbackslash{}xa1\textbackslash{}x93S\textbackslash{}x9a\textbackslash{}xaf7\textbackslash{}xa1\textbackslash{}xae\textbackslash{}xa3j\textbackslash{}xab?S\textbackslash{}xa5\textbackslash{}xf6\textbackslash{}xa1uP\%\textbackslash{}xf1\textbackslash{}xe2\textbackslash{}xdc\textbackslash{}xb9Qo\textbackslash{}xcd\textbackslash{}xfb\textbackslash{}x83\textbackslash{}xf7\textbackslash{}xd2E\textbackslash{}xb8]Q\textbackslash{}xf0\textbackslash{}xdd\^{}\textbackslash{}xfe\textbackslash{}xaa\textbackslash{}x1b\textbackslash{}xc0\textbackslash{}xfd\textbackslash{}xe4\textbackslash{}xfe\textbackslash{}x18\textbackslash{}xf3\textbackslash{}xdf\textbackslash{}x0e@\textbackslash{}x03\&\textbackslash{}x04[2\textbackslash{}x1b\textbackslash{}x02\textbackslash{}x17TXhb\textbackslash{}xf9\textbackslash{}x97I\textbackslash{}xc8N\textbackslash{}xf2\}\textbackslash{}xa8M.\textbackslash{}x06\textbackslash{}x87\textbackslash{}xf3\textbackslash{}x8bb\textbackslash{}x83\textbackslash{}xbfM\textbackslash{}xadg\textbackslash{}n\textbackslash{}xb1\textbackslash{}xbeJ\textbackslash{}x15\textbackslash{}x8ea\textbackslash{}xe2B\textbackslash{}x8biju\textbackslash{}x12\textbackslash{}x1f\textbackslash{}xcelk\}\textbackslash{}xc4\textbackslash{}x03\textbackslash{}xb6U\textbackslash{}xb3d\textbackslash{}x1cc\textbackslash{}xfc\textbackslash{}xa6\textbackslash{}xcd\textbackslash{}xcfF\textbackslash{}xfd-\textbackslash{}xcb\textbackslash{}xf9!\textbackslash{}xe0R\textbackslash{}xcck\textbackslash{}x9c\textbackslash{}xdc\textbackslash{}x88\textbackslash{}xb1\textbackslash{}xdb\textbackslash{}xab\textbackslash{}xdeX\{\textbackslash{}xa9\textbackslash{}x9b\textbackslash{}xfe\textbackslash{}xe7\textbackslash{}x96\textbackslash{}xa73l\textbackslash{}xe9\textbackslash{}xde-\textbackslash{}x16\textbackslash{}xac\textbackslash{}x17\textbackslash{}xdb\textbackslash{}xff\_\textbackslash{}xf3\textbackslash{}x8f\textbackslash{}xde\textbackslash{}xde\textbackslash{}xb1\textbackslash{}xc6\textbackslash{}x96Q\textbackslash{}xad\textbackslash{}xd4XK\textbackslash{}x89\textbackslash{}xe8\textbackslash{}xb9\textbackslash{}xd9\textbackslash{}xdb\textbackslash{}x8dSGM\textbackslash{}xbfG\textbackslash{}x9c\textbackslash{}x99\textbackslash{}x17\textbackslash{}xec\textbackslash{}xb9\textbackslash{}xebC|\textbackslash{}x88\textbackslash{}xd5?\textbackslash{}x1f,z2EOu\textbackslash{}x89\textbackslash{}xcb\textbackslash{}xcd\textbackslash{}xef K\textbackslash{}x9d\textbackslash{}x9d=\textbackslash{}xb9\textbackslash{}xf9\textbackslash{}xc8`\textbackslash{}x1a\textbackslash{}xd2\textbackslash{}xbf\^{}\textbackslash{}x82\textbackslash{}xcf\textbackslash{}x02Y\textbackslash{}x88\textbackslash{}x8b|\textbackslash{}xf0\textbackslash{}x1b\textbackslash{}xaf\textbackslash{}xaf\textbackslash{}xea\textbackslash{}xed\textbackslash{}x17L\textbackslash{}xd3\textbackslash{}xeaClp\textbackslash{}x05\textbackslash{}x1d\textbackslash{}tt\textbackslash{}xa2\textbackslash{}xfb\textbackslash{}x1bQ\textbackslash{}xa2TW\textbackslash{}x92\textbackslash{}xbbJ\textbackslash{}xa6\textbackslash{}x89\textbackslash{}x15\textbackslash{}t\{\textbackslash{}xb7\textbackslash{}x88v\textbackslash{}xe3f\textbackslash{}x9e\textbackslash{}xe9\{e\textbackslash{}x86k\textbackslash{}xf0\textbackslash{}xc44v\textbackslash{}xaa\textbackslash{}x98Cm\&\textbackslash{}x04\textbackslash{}xfc\textbackslash{}xbc\textbackslash{}xc3m\textbackslash{}xd4\textbackslash{}x15\textbackslash{}x83\textbackslash{}x8b\textbackslash{}xe2Q\textbackslash{}xda\textbackslash{}xab\textbackslash{}r\textbackslash{}x1f6\$@'
+
+    decrypted:
+
+    b'L\textbackslash{}x19\textbackslash{}x9c.\textbackslash{}xe3\textbackslash{}xe4\textbackslash{}xb5b\textbackslash{}x0b\textbackslash{}x1d+\textbackslash{}x1b\textbackslash{}x81\textbackslash{}x7f\textbackslash{}xf2T\textbackslash{}xb0CP\%T\textbackslash{}xda\textbackslash{}x96\textbackslash{}x0c\textbackslash{}x82\^{}\textbackslash{}xeb\textbackslash{}xdd]p\textbackslash{}xe1\textbackslash{}x94\textbackslash{}x1b\textbackslash{}xd3\textbackslash{}x86Z\textbackslash{}xfb\textbackslash{}xa6:\textbackslash{}xf6\textbackslash{}xcf\textbackslash{}x08\textbackslash{}x8cm\textbackslash{}xaa\textbackslash{}x8f\textbackslash{}xe8\textbackslash{}xfdu\textbackslash{}'\textbackslash{}xceM\textbackslash{}xc6\textbackslash{}xcc\textbackslash{}xed\textbackslash{}x1c6\textbackslash{}xe3\textbackslash{}xf4\textbackslash{}x92TIBs\textbackslash{}xa8\textbackslash{}xb8\textbackslash{}xb2|\textbackslash{}xbcm\textbackslash{}x19`\textbackslash{}x1c[\textbackslash{}xb7\textbackslash{}xcdA\textbackslash{}x88\textbackslash{}xa1M=\textbackslash{}xa8\textbackslash{}x01*\textbackslash{}xd5\textbackslash{}x1d\textbackslash{}xf3\textbackslash{}t\textbackslash{}x9b\textbackslash{}x02\textbackslash{}xdb\textbackslash{}x10\textbackslash{}xc3\textbackslash{}x14\textbackslash{}x94\textbackslash{}x19\textbackslash{}x9f\^{}\textbackslash{}xad\textbackslash{}xf6\{\textbackslash{}xa7bc\textbackslash{}x99\textbackslash{}xc2\&\textbackslash{}\textbackslash{}\textbackslash{}xd8\textbackslash{}xd5\textbackslash{}x9a\textbackslash{}xfdz`\textbackslash{}x0e\textbackslash{}xae\textbackslash{}n\^{}o\textbackslash{}x1d\textbackslash{}x8c*\&\textbackslash{}x0f\textbackslash{}x92W\textbackslash{}x94\textbackslash{}xac\textbackslash{}xabr\textbackslash{}x9f\textbackslash{}xef\textbackslash{}xf0\textbackslash{}'\textbackslash{}x1evqjky\textbackslash{}xddT(\textbackslash{}x94\textbackslash{}xe7\_\textbackslash{}xa8\textbackslash{}xfd\textbackslash{}xcd\textbackslash{}x82\textbackslash{}xd4\textbackslash{}xc6\textbackslash{}xb5\textbackslash{}xd7\textbackslash{}xe4\textbackslash{}x81\textbackslash{}xa2\textbackslash{}xe0\textbackslash{}rO\textbackslash{}x14\#I\textbackslash{}xb2\textbackslash{}x8e\textbackslash{}xc3\textbackslash{}x80\textbackslash{}xf0(l\textbackslash{}x92\textbackslash{}x15\$\textbackslash{}x82J\textbackslash{}xd4Jy\textbackslash{}xa5Y\textasciitilde{})\textbackslash{}xf0\textbackslash{}x04\textbackslash{}xf3\textbackslash{}x0e\textbackslash{}xb9\textbackslash{}x82\textbackslash{}x00\}|\textbackslash{}xc8L\textbackslash{}xf0\textbackslash{}xbf\textbackslash{}xe3!?\textbackslash{}x8b\textbackslash{}x8e\textbackslash{}xf7\textbackslash{}xc5\textbackslash{}xb4\textbackslash{}x93a\textbackslash{}xa1\textbackslash{}x02"Yc\&\textbackslash{}xd6\textbackslash{}xc6\textbackslash{}xdbx\textbackslash{}xd18A\textbackslash{}x9e\textbackslash{}xb0*\textbackslash{}x15\textbackslash{}x07\textbackslash{}xc4D\textbackslash{}x96<\textbackslash{}xaf\textbackslash{}x05\textbackslash{}x08\textbackslash{}\textbackslash{}\textbackslash{}xb2u\textasciitilde{}\textbackslash{}xb6\textbackslash{}x10\textbackslash{}xed\}\textbackslash{}xc9;\textbackslash{}x0cXi9\textbackslash{}xcf\textbackslash{}xb3\textbackslash{}x93\textbackslash{}xa4 \textbackslash{}x8a\textbackslash{}xcaX\textbackslash{}xfd9x\textbackslash{}xfa\textbackslash{}xd1\textbackslash{}x1b\textbackslash{}xcc\textbackslash{}xa1T\textbackslash{}x83\textbackslash{}x99\$\textbackslash{}xa3\textbackslash{}xecv\textbackslash{}xf9\textbackslash{}xb5d\textbackslash{}xc4\textbackslash{}x90\textbackslash{}x10\textbackslash{}xa4M"p\textbackslash{}x87\textbackslash{}x12\textbackslash{}xb9z\textbackslash{}x14m\textbackslash{}x0b!\textbackslash{}xcf\textbackslash{}x9cZBd\textbackslash{}xdc\textbackslash{}x9a\&ZZE\textbackslash{}xd8\textbackslash{}xae-PB\textbackslash{}x8a\textbackslash{}xc9\textbackslash{}x9bmJ\textbackslash{}xd72\textbackslash{}x1e\textbackslash{}xb2\$\textbackslash{}x87\textbackslash{}x0f\textbackslash{}xe1\textbackslash{}xdcU!k\textbackslash{}x13\textbackslash{}xfbL\textbackslash{}x9f\textbackslash{}x9bx\textbackslash{}x8eQ\textbackslash{}xef\textbackslash{}xb1J\textbackslash{}x18\textbackslash{}x809\textbackslash{}xdbl\textbackslash{}xe5\textbackslash{}xdf`7\textbackslash{}xb4\^{}J\textbackslash{}x1d\textbackslash{}xa0<\textbackslash{}x18\}T?\textbackslash{}xf7\textbackslash{}xfd\textbackslash{}xfa\^{}\^{}w\textbackslash{}nq\textbackslash{}x90\textbackslash{}x83Zg\textbackslash{}x15V\textbackslash{}xd8\textbackslash{}x13\textbackslash{}xad\textbackslash{}xdaj\textbackslash{}xf1\textasciitilde{}\textbackslash{}xc1\textbackslash{}xce9\textbackslash{}x99\textbackslash{}xa4\textbackslash{}xf2\textbackslash{}xd03l\textbackslash{}x0e\textbackslash{}xa2\textbackslash{}x84y\textbackslash{}xd6*j\textasciitilde{}\textbackslash{}x98D\textbackslash{}x15\textbackslash{}xca\textbackslash{}x98\textasciitilde{}\textbackslash{}xbf\textbackslash{}xfc\textbackslash{}x1b\textbackslash{}xb5\textbackslash{}x7f\textbackslash{}xd6,`\textbackslash{}xf2\textbackslash{}xadT6tH\textbackslash{}x9bf\textbackslash{}xd3|\textbackslash{}x13\textbackslash{}x8f\textbackslash{}xd3\textbackslash{}xc1\textbackslash{}xd9\textbackslash{}'\textbackslash{}x12\textbackslash{}x08u\textbackslash{}x11\$X\textbackslash{}xe7a+?\textbackslash{}xbbJ(\textbackslash{}xba\textbackslash{}xf2\textbackslash{}xe1\textbackslash{}xa7HCc\textbackslash{}xa6\textbackslash{}xfe\textbackslash{}x1c4\textbackslash{}xcc.\textbackslash{}x08\textbackslash{}xda\textbackslash{}xc4\textbackslash{}xff\&\textbackslash{}xac2\textbackslash{}xa1\textbackslash{}xcfS\textbackslash{}xf4u@k\textbackslash{}\textbackslash{}\textbackslash{}xd6n\textbackslash{}xf0\textbackslash{}x15\textbackslash{}x14\textbackslash{}xe3\_,\textbackslash{}xbd\textbackslash{}x07q\textbackslash{}x8f\textbackslash{}x8f\textbackslash{}x8d\textbackslash{}x9a\textbackslash{}x01\textbackslash{}xd1\textbackslash{}xce\textbackslash{}xdc\textbackslash{}xef;\textbackslash{}x04M\textbackslash{}x8f\textbackslash{}x86\textbackslash{}x8d\textbackslash{}xe6\textbackslash{}x94\textbackslash{}xcf\textbackslash{}xe90\textbackslash{}xc4E\textbackslash{}xd3\$\textbackslash{}xa6\textbackslash{}x89v\textbackslash{}xf0,N\textbackslash{}x1d|L\textbackslash{}x10\textbackslash{}xa0\textbackslash{}x89\textbackslash{}xe5\textbackslash{}x84@z\textbackslash{}xf8\textbackslash{}x05i\textbackslash{}xbc\textbackslash{}x94\textbackslash{}xc8Slk*\textasciitilde{}"\textbackslash{}x01\{\textbackslash{}xce`\textbackslash{}x00p\textbackslash{}xf0\textbackslash{}x97,\textbackslash{}xcb\textbackslash{}xc1qrz25\textbackslash{}x05\textbackslash{}xf5\textbackslash{}xdc\textbackslash{}xfb0V3\textbackslash{}xb5EMc\textbackslash{}x0f\%\textbackslash{}x0f\textbackslash{}x92Of\textbackslash{}xc4\textbackslash{}xa0|r\textbackslash{}x87\textbackslash{}x19\&\textbackslash{}xd5\textbackslash{}xbat\textbackslash{}x03\textbackslash{}xf3\textbackslash{}x01c\textbackslash{}x94\textbackslash{}x0b\textbackslash{}xf6\textbackslash{}x88\textbackslash{}x89@\textbackslash{}xdd\textbackslash{}x02k\textbackslash{}x1c\textbackslash{}x8a\textbackslash{}xf7\textbackslash{}x01\textbackslash{}x00\textbackslash{}x9d\textbackslash{}x0b\textbackslash{}xf6\textbackslash{}x7fE\textbackslash{}x81\textbackslash{}x08\textbackslash{}x81\textbackslash{}xf3\textbackslash{}xd3\textbackslash{}x7f\textbackslash{}x91\textbackslash{}\textbackslash{}\textbackslash{}xe8\textbackslash{}xe1F\textbackslash{}xa69\textbackslash{}xd2\textbackslash{}xf9\textbackslash{}xb1\textbackslash{}xd1pg\textbackslash{}xe6s2\textbackslash{}x9eK\textbackslash{}x92w34]\$\% \textbackslash{}xcc\textbackslash{}x96\textbackslash{}x17A8\textbackslash{}xecW\textbackslash{}r\textbackslash{}xab\textbackslash{}xd4\textbackslash{}x00\textbackslash{}xc8\textbackslash{}xf0\textbackslash{}xc6D\textbackslash{}x16\textbackslash{}xd2Z\textbackslash{}xca-\textbackslash{}xe8\%\textbackslash{}xa2\textbackslash{}x10\textbackslash{}xfc;)\textbackslash{}xabq\textbackslash{}x88\textbackslash{}xba \%\%\textbackslash{}x0c\textbackslash{}r6\textbackslash{}xe5\textbackslash{}xa4\textbackslash{}xd3\}\textbackslash{}xf9SA\textbackslash{}xdf\textbackslash{}xf00 A\textbackslash{}xe9\textbackslash{}x00\textbackslash{}xf5+\textbackslash{}x0bb@\textbackslash{}xd4\textbackslash{}xf5\textbackslash{}xdd\textbackslash{}x95.\textbackslash{}xb5\textbackslash{}xc3\textbackslash{}xfa+\textbackslash{}x91\textbackslash{}xe2\textbackslash{}xa32\textbackslash{}xf4\textbackslash{}n\textbackslash{}x17\textbackslash{}xfc\textbackslash{}x8d*\textbackslash{}xd3\textbackslash{}x08\textbackslash{}xecL\textbackslash{}x0b\textbackslash{}x1eT4\textbackslash{}xa0\textbackslash{}xb3\textbackslash{}xfa\textbackslash{}xca\textbackslash{}xfek\textbackslash{}x05J\textbackslash{}xe61\textbackslash{}x1d\textbackslash{}x81\textbackslash{}xf0\textbackslash{}xb3\textbackslash{}xa0\textbackslash{}xa8\textbackslash{}x92y\textbackslash{}n\textbackslash{}xed3\textbackslash{}xba\textbackslash{}x04Ib\^{}\textbackslash{}x94c\textbackslash{}xb8[|9\textbackslash{}xf9\textbackslash{}xf3>\textbackslash{}x06D\textbackslash{}xa6+L\textbackslash{}xcc\textbackslash{}xdcgB\textbackslash{}xd6\textbackslash{}x84(\{\textbackslash{}'\&\textbackslash{}xac\textbackslash{}xe0\textbackslash{}x07\textbackslash{}xe7\textbackslash{}xbfyq\textbackslash{}xf06\textbackslash{}xb11\textbackslash{}xd0\textbackslash{}x83f\textbackslash{}x1b.\textbackslash{}x9b\textbackslash{}xd6\textasciitilde{}\textbackslash{}xa8\^{}\textbackslash{}xab\textasciitilde{}\textbackslash{}xc0<+.\textbackslash{}xf6\textbackslash{}xd9\textbackslash{}xdcB\textbackslash{}xaf\textbackslash{}x81\textbackslash{}xf26!\textbackslash{}x87\textbackslash{}xf5\textbackslash{}x9co\textbackslash{}xae\textbackslash{}xb6`\textbackslash{}x9a\_LL1t\textbackslash{}xbb\textbackslash{}xe5\textbackslash{}xd8\textbackslash{}'\textbackslash{}xbdC\textbackslash{}x89\textbackslash{}x1b\textbackslash{}x0c\textbackslash{}x17\textbackslash{}xfe\textbackslash{}xf0\_\textbackslash{}xf8s\textbackslash{}xcaxV\textbackslash{}xe2U\textbackslash{}xa3\textbackslash{}xe4\textbackslash{}x02\textbackslash{}x15\textbackslash{}xd2\textbackslash{}xe4\textbackslash{}xee\^{}\textbackslash{}x04L\textasciitilde{}\textbackslash{}x0e\textbackslash{}xc5n\textbackslash{}x8e\textbackslash{}x9c\textbackslash{}xcc\textbackslash{}xf5@\textbackslash{}xd7\textbackslash{}xe1(\textbackslash{}xc6\textbackslash{}xd8\textbackslash{}x04\textbackslash{}x1a[X\textbackslash{}xff\textbackslash{}xcb\textbackslash{}xbc\textbackslash{}x02V\textbackslash{}x19\textbackslash{}xef\textbackslash{}xabZ\textbackslash{}x1e\textbackslash{}xb6B\textbackslash{}x1b\textbackslash{}xe3\textbackslash{}xab\textbackslash{}xa6\textbackslash{}x9d\textbackslash{}x83\textbackslash{}xf8\^{}\textbackslash{}xc9\textbackslash{}t\textbackslash{}xc8\textbackslash{}xa7\textbackslash{}xad\textbackslash{}xdf\textbackslash{}x15Y]z \textbackslash{}xa7\textbackslash{}t\_\textbackslash{}xe6\textbackslash{}xccSa\textbackslash{}xbc\textbackslash{}x9a\textbackslash{}xbb/\textbackslash{}xbd\textbackslash{}x885\textbackslash{}xc4\textbackslash{}xc5\textbackslash{}xf7.\textbackslash{}x8cJ7\textbackslash{}x11\textbackslash{}xda;\textbackslash{}xbf\textbackslash{}x1a\textbackslash{}xeb\textbackslash{}xf5\textbackslash{}x05\textbackslash{}x90.\textbackslash{}x1d\textbackslash{}x8d\textbackslash{}nA\textbackslash{}x12\textbackslash{}x90\textbackslash{}x1c\textbackslash{}xafh\textbackslash{}xec\{\textbackslash{}xe7\textbackslash{}t\textbackslash{}xc4-\textbackslash{}x1f\textbackslash{}xd31\textbackslash{}xa34 \textbackslash{}xb9\textbackslash{}xd0\textbackslash{}xe3\textbackslash{}xf5\textbackslash{}xa9a\textbackslash{}xa5\textbackslash{}xc7aF\textbackslash{}xcd\textbackslash{}x0b\textbackslash{}x82\textbackslash{}xa5\textbackslash{}x1aS\textbackslash{}x1eP\textbackslash{}xfa\textbackslash{}x03Z\textbackslash{}xe7\textbackslash{}x88\textbackslash{}xdc\textasciitilde{}\textbackslash{}xad\textbackslash{}xf9A\textbackslash{}xb08\textbackslash{}x89\textbackslash{}xbc\textbackslash{}xcd\textbackslash{}xdf\#q\textbackslash{}xba\textbackslash{}xc7\textbackslash{}xa9Q\textbackslash{}xc9\textbackslash{}x99\textbackslash{}x1b[K.\textbackslash{}x0fV\textbackslash{}x0b\textbackslash{}x86:\textbackslash{}xd2Kc\textbackslash{}xa4n\textbackslash{}x8f\textbackslash{}xe3\textbackslash{}xe400.\textbackslash{}xb4\}\textbackslash{}xeb*\textbackslash{}xc9\textbackslash{}x80aU\textbackslash{}xd4\textbackslash{}x9f\textbackslash{}x9d\textbackslash{}xf7f\textbackslash{}xef \}cUp\textbackslash{}xfa\textbackslash{}x850\textbackslash{}xec\textbackslash{}xb5x\textbackslash{}xe7U\textbackslash{}nO\textbackslash{}xb6<\textbackslash{}x05c\textbackslash{}xf3\textbackslash{}xa3\textbackslash{}x14*\textbackslash{}x02\textbackslash{}xba\textbackslash{}xff\textbackslash{}'\textbackslash{}xdf\textbackslash{}xf3\textbackslash{}xf3\textbackslash{}xdf\textbackslash{}xf1\textbackslash{}x88o\textbackslash{}xce\{b\textbackslash{}xfe\textbackslash{}x82\textbackslash{}xb7\textbackslash{}xf2\textbackslash{}x8f|n\textbackslash{}xcb\textbackslash{}xbe\textbackslash{}x90\textbackslash{}xd0a\textbackslash{}xa3v.:\textbackslash{}xea\textbackslash{}xccHC\textbackslash{}xd7\textbackslash{}x14\textbackslash{}xc79o\textbackslash{}xb0\textbackslash{}n\textbackslash{}xd9\textbackslash{}xb2\textbackslash{}xcb\textbackslash{}xb4\textbackslash{}x05\textbackslash{}xfez)\textbackslash{}x83F\textbackslash{}xe8F\textbackslash{}xeb|\textbackslash{}xc5\textbackslash{}x9d\textbackslash{}x07SY\textbackslash{}xf2\textbackslash{}x82o?\textbackslash{}xadG\textbackslash{}xe4\textbackslash{}xc1\textbackslash{}xd9\textbackslash{}xd3\textbackslash{}x83X\textbackslash{}xfaKZ\textbackslash{}xa1\textbackslash{}x05\textbackslash{}xae)\textbackslash{}xa17b\textbackslash{}xb57\textbackslash{}x98\textbackslash{}t\textbackslash{}xd5\textbackslash{}xa6\textbackslash{}xf8\textbackslash{}xfa\textbackslash{}xff\textbackslash{}xacC\textbackslash{}xd2U\textbackslash{}xd9q\textbackslash{}xb6\textbackslash{}xdeH5\textbackslash{}x1f\textbackslash{}xce\textbackslash{}x8d\textbackslash{}xbb\textbackslash{}x81!\textbackslash{}x93\textbackslash{}x02\textbackslash{}'\textbackslash{}xe3\textbackslash{}x98\textbackslash{}xefnv\textbackslash{}xba\textbackslash{}xcb\&\textbackslash{}xc8N\textbackslash{}xfd\^{}\textbackslash{}xb6\textbackslash{}xf4\textbackslash{}xd2\textbackslash{}xd6I\textbackslash{}x1c\textbackslash{}xb8\textbackslash{}xec\textbackslash{}xc2\textbackslash{}xb8\textbackslash{}x974\textbackslash{}xcdEk\textbackslash{}x86\textbackslash{}xdd\textbackslash{}xee/\textbackslash{}xc5\textbackslash{}x8bc\textbackslash{}x0b\textbackslash{}xf0\textbackslash{}xc6\textbackslash{}xf5\textbackslash{}xb6\textbackslash{}xceL:\textbackslash{}'\textbackslash{}xf9\}K\textbackslash{}xb6U\textbackslash{}xd1A\textbackslash{}xc0\textbackslash{}x07\textbackslash{}xa9\textbackslash{}x7f\textbackslash{}x8c\textbackslash{}xfd\textbackslash{}x1f\textbackslash{}xff\textbackslash{}xebG\textbackslash{}xa1\textbackslash{}xb0\textbackslash{}xf8\textbackslash{}xc2\textbackslash{}xef-\textbackslash{}x90t\textbackslash{}xde\textbackslash{}xba\textbackslash{}xaf\textbackslash{}x06\textbackslash{}x83\textbackslash{}r\textbackslash{}x85i\textbackslash{}xec\textbackslash{}\textbackslash{}\textbackslash{}xc9\textbackslash{}xa2s\textbackslash{}xdd\textbackslash{}xbcM\textbackslash{}n\textbackslash{}xc5B?\textbackslash{}xf5\textbackslash{}x80x\textbackslash{}xd3?x\textbackslash{}x85\textbackslash{}xe6\textbackslash{}xa7o\textbackslash{}x1b\textbackslash{}xa0\textbackslash{}x1e:\textbackslash{}x84\textbackslash{}xd4\textbackslash{}x9f=\textbackslash{}xa2\textbackslash{}xbai8\textbackslash{}xad\textbackslash{}x80yaM\textbackslash{}x81J)\textbackslash{}x02P\textbackslash{}xcd\textbackslash{}xf38D[\textbackslash{}xd6gC\textbackslash{}x97\textbackslash{}xe0\textbackslash{}xb4\textbackslash{}xces\textbackslash{}xc4\textbackslash{}x9d\textbackslash{}x84\textbackslash{}xb5pq\textbackslash{}x13\$\textbackslash{}xdac\textbackslash{}xd6R\textbackslash{}xe2\textbackslash{}x84\textbackslash{}xb8\textbackslash{}x917\#(\textbackslash{}xb5`I1\textbackslash{}x13\textbackslash{}xb5\textbackslash{}x96\textbackslash{}xf8D\textbackslash{}x12\textbackslash{}x8f@H\textbackslash{}xe9\}\textbackslash{}xe2\textbackslash{}x03\_?"\textbackslash{}xaf\textbackslash{}xdf,\textbackslash{}x8bL\textbackslash{}xa1\textbackslash{}x93S\textbackslash{}x9a\textbackslash{}xaf7\textbackslash{}xa1\textbackslash{}xae\textbackslash{}xa3j\textbackslash{}xab?S\textbackslash{}xa5\textbackslash{}xf6\textbackslash{}xa1uP\%\textbackslash{}xf1\textbackslash{}xe2\textbackslash{}xdc\textbackslash{}xb9Qo\textbackslash{}xcd\textbackslash{}xfb\textbackslash{}x83\textbackslash{}xf7\textbackslash{}xd2E\textbackslash{}xb8]Q\textbackslash{}xf0\textbackslash{}xdd\^{}\textbackslash{}xfe\textbackslash{}xaa\textbackslash{}x1b\textbackslash{}xc0\textbackslash{}xfd\textbackslash{}xe4\textbackslash{}xfe\textbackslash{}x18\textbackslash{}xf3\textbackslash{}xdf\textbackslash{}x0e@\textbackslash{}x03\&\textbackslash{}x04[2\textbackslash{}x1b\textbackslash{}x02\textbackslash{}x17TXhb\textbackslash{}xf9\textbackslash{}x97I\textbackslash{}xc8N\textbackslash{}xf2\}\textbackslash{}xa8M.\textbackslash{}x06\textbackslash{}x87\textbackslash{}xf3\textbackslash{}x8bb\textbackslash{}x83\textbackslash{}xbfM\textbackslash{}xadg\textbackslash{}n\textbackslash{}xb1\textbackslash{}xbeJ\textbackslash{}x15\textbackslash{}x8ea\textbackslash{}xe2B\textbackslash{}x8biju\textbackslash{}x12\textbackslash{}x1f\textbackslash{}xcelk\}\textbackslash{}xc4\textbackslash{}x03\textbackslash{}xb6U\textbackslash{}xb3d\textbackslash{}x1cc\textbackslash{}xfc\textbackslash{}xa6\textbackslash{}xcd\textbackslash{}xcfF\textbackslash{}xfd-\textbackslash{}xcb\textbackslash{}xf9!\textbackslash{}xe0R\textbackslash{}xcck\textbackslash{}x9c\textbackslash{}xdc\textbackslash{}x88\textbackslash{}xb1\textbackslash{}xdb\textbackslash{}xab\textbackslash{}xdeX\{\textbackslash{}xa9\textbackslash{}x9b\textbackslash{}xfe\textbackslash{}xe7\textbackslash{}x96\textbackslash{}xa73l\textbackslash{}xe9\textbackslash{}xde-\textbackslash{}x16\textbackslash{}xac\textbackslash{}x17\textbackslash{}xdb\textbackslash{}xff\_\textbackslash{}xf3\textbackslash{}x8f\textbackslash{}xde\textbackslash{}xde\textbackslash{}xb1\textbackslash{}xc6\textbackslash{}x96Q\textbackslash{}xad\textbackslash{}xd4XK\textbackslash{}x89\textbackslash{}xe8\textbackslash{}xb9\textbackslash{}xd9\textbackslash{}xdb\textbackslash{}x8dSGM\textbackslash{}xbfG\textbackslash{}x9c\textbackslash{}x99\textbackslash{}x17\textbackslash{}xec\textbackslash{}xb9\textbackslash{}xebC|\textbackslash{}x88\textbackslash{}xd5?\textbackslash{}x1f,z2EOu\textbackslash{}x89\textbackslash{}xcb\textbackslash{}xcd\textbackslash{}xef K\textbackslash{}x9d\textbackslash{}x9d=\textbackslash{}xb9\textbackslash{}xf9\textbackslash{}xc8`\textbackslash{}x1a\textbackslash{}xd2\textbackslash{}xbf\^{}\textbackslash{}x82\textbackslash{}xcf\textbackslash{}x02Y\textbackslash{}x88\textbackslash{}x8b|\textbackslash{}xf0\textbackslash{}x1b\textbackslash{}xaf\textbackslash{}xaf\textbackslash{}xea\textbackslash{}xed\textbackslash{}x17L\textbackslash{}xd3\textbackslash{}xeaClp\textbackslash{}x05\textbackslash{}x1d\textbackslash{}tt\textbackslash{}xa2\textbackslash{}xfb\textbackslash{}x1bQ\textbackslash{}xa2TW\textbackslash{}x92\textbackslash{}xbbJ\textbackslash{}xa6\textbackslash{}x89\textbackslash{}x15\textbackslash{}t\{\textbackslash{}xb7\textbackslash{}x88v\textbackslash{}xe3f\textbackslash{}x9e\textbackslash{}xe9\{e\textbackslash{}x86k\textbackslash{}xf0\textbackslash{}xc44v\textbackslash{}xaa\textbackslash{}x98Cm\&\textbackslash{}x04\textbackslash{}xfc\textbackslash{}xbc\textbackslash{}xc3m\textbackslash{}xd4\textbackslash{}x15\textbackslash{}x83\textbackslash{}x8b\textbackslash{}xe2Q\textbackslash{}xda\textbackslash{}xab\textbackslash{}r\textbackslash{}x1f6\$@'
+
+    A comparação entre os valores dados por \textbf{bytes before cipher} e
+por \textbf{decrypted} no output, por via da igualdade, permitem
+concluir que a mensagem que foi gerada é a mesma mensagem que foi
+decifrada.
+
+    \hypertarget{conclusuxe3o}{%
+\section{Conclusão}\label{conclusuxe3o}}
+
+    Os resultados da realização deste trabalho prático são, na nossa
+opinião, muito satisfatórios visto que fomos capazes de cumprir com
+todos os objetivos propostos ao implementar duas sessões síncronas
+seguras de troca de informação entre agentes, uma utilizando o protocolo
+\textbf{DH} e o algoritmo de assinaturas \textbf{DSA} e outra utilizando
+o protocolo \textbf{ECDH} e o algoritmo de assinaturas \textbf{ECDSA}.
+Além disso, a apresentação dos resultados (código e explicação) está
+feita de tal forma que seja mais simples entender o que foi a estratégia
+do grupo para a resolução dos problemas propostos.
+
+No processo de resolução deste trabalho prático, o grupo deparou-se
+apenas com duas dificuldades que foram, eventualmente, ultrapassadas com
+mais ou menos esforço. Uma delas diz respeito à implementação do
+\textbf{TAES} devido ao facto de a primitiva ter que ser efetivamente
+implementada antes de a utilizar o que, no início, gerou um bocado de
+confusão em relação ao que devia ser feito. A segunda dificuldade esteve
+relacionada com o facto da especificação da sessão síncrona, visto que,
+esta foi a primeira vez que o grupo implementou algo do género, pelo que
+as características deste tipo de sessão tiveram que ser bem
+estabelecidades e diferenciadas em relação ao tipo de sessão que
+estávamos habituados a implementar (sessão assíncrona).
+
+    \hypertarget{referuxeancias}{%
+\section{Referências}\label{referuxeancias}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AADIuhV5bL5qqzbM_RLS-gMXa/WorkSheets/TP2?dl=0\&subfolder_nav_tracking=1}{Worksheets
+  TP2 fornecidas pelo professor}
+\item
+  \href{https://cryptography.io/en/latest/hazmat/primitives/asymmetric/ec/\#}{Cryptography
+  - Elliptic Curve cryptography}
+\item
+  \href{https://cryptography.io/en/latest/hazmat/primitives/asymmetric/dh/}{Cryptography
+  - Diffie-Hellman Key Exchange}
+\item
+  \href{https://people.eecs.berkeley.edu/~daw/papers/tweak-crypto02.pdf}{Tweakable
+  Block Ciphers - paper by Liskov, Rivest and Wagner}
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AAC5XUPllha9QXo-vVxTHqXna/Docs/NOTAS_MANUSCRITAS?dl=0\&preview=TWEAKABLE_BLOCK_CIPHERS.PDF\&subfolder_nav_tracking=1}{Tweakable
+  Block Ciphers - Notas manuscritas do professor}
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

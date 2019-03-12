@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.2.19)  12 MAR 2019 15:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.2.19)  12 MAR 2019 17:49
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.tex
-(/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.tex
+**/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.tex
+(/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.tex
 LaTeX2e <2018-12-01>
 (/usr/share/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -27,6 +27,20 @@ Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
  (/usr/share/texmf-dist/tex/latex/base/t1enc.def
 File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+)) (/usr/share/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2018/11/13 3.27 The Babel package
+ (/usr/share/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2018/11/13 3.27 Babel switching mechanism
+) (/usr/share/texmf-dist/tex/generic/babel-portuges/portuges.ldf
+Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+ (/usr/share/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2018/11/13 3.27 Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+ (/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count89
+)
+Package babel Info: Making " an active character on input line 145.
 )) (/usr/share/texmf-dist/tex/latex/psnfss/mathpazo.sty
 Package: mathpazo 2005/04/12 PSNFSS-v9.2a Palatino w/ Pazo Math (D.Puga, WaS) 
 \symupright=\mathgroup4
@@ -46,23 +60,23 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
  (/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen103
-\Gin@req@width=\dimen104
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
 ) (/usr/share/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2018/10/06 v3.3-154 Customizing captions (AR)
  (/usr/share/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2018/09/12 v1.8c caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 64.
-\captionmargin=\dimen105
-\captionmargin@=\dimen106
-\captionwidth=\dimen107
-\caption@tempdima=\dimen108
-\caption@indent=\dimen109
-\caption@parindent=\dimen110
-\caption@hangindent=\dimen111
+\captionmargin=\dimen106
+\captionmargin@=\dimen107
+\captionwidth=\dimen108
+\caption@tempdima=\dimen109
+\caption@indent=\dimen110
+\caption@parindent=\dimen111
+\caption@hangindent=\dimen112
 )
-\c@caption@flags=\count88
-\c@ContinuedFloat=\count89
+\c@caption@flags=\count90
+\c@ContinuedFloat=\count91
 ) (/usr/share/texmf-dist/tex/latex/adjustbox/adjustbox.sty
 Package: adjustbox 2019/01/04 v1.2 Adjusting TeX boxes (trim, clip, ...)
  (/usr/share/texmf-dist/tex/latex/xkeyval/xkeyval.sty
@@ -71,7 +85,7 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 \XKV@toks=\toks15
 \XKV@tempa@toks=\toks16
 )
-\XKV@depth=\count90
+\XKV@depth=\count92
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/share/texmf-dist/tex/latex/adjustbox/adjcalc.sty
 Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back-ends (calc, etex, pgfmath)
@@ -81,31 +95,31 @@ Package: trimclip 2018/04/08 v1.1 Trim and clip general TeX material
 Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
 \collectedbox=\box27
 )
-\tc@llx=\dimen112
-\tc@lly=\dimen113
-\tc@urx=\dimen114
-\tc@ury=\dimen115
+\tc@llx=\dimen113
+\tc@lly=\dimen114
+\tc@urx=\dimen115
+\tc@ury=\dimen116
 Package trimclip Info: Using driver 'tc-pdftex.def'.
  (/usr/share/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 File: tc-pdftex.def 2019/01/04 v2.2 Clipping driver for pdftex
 ))
-\adjbox@Width=\dimen116
-\adjbox@Height=\dimen117
-\adjbox@Depth=\dimen118
-\adjbox@Totalheight=\dimen119
-\adjbox@pwidth=\dimen120
-\adjbox@pheight=\dimen121
-\adjbox@pdepth=\dimen122
-\adjbox@ptotalheight=\dimen123
+\adjbox@Width=\dimen117
+\adjbox@Height=\dimen118
+\adjbox@Depth=\dimen119
+\adjbox@Totalheight=\dimen120
+\adjbox@pwidth=\dimen121
+\adjbox@pheight=\dimen122
+\adjbox@pdepth=\dimen123
+\adjbox@ptotalheight=\dimen124
  (/usr/share/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count91
+\c@checkoddpage=\count93
 ) (/usr/share/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box28
-\sift@deathcycles=\count92
-\@vwid@loff=\dimen124
-\@vwid@roff=\dimen125
+\sift@deathcycles=\count94
+\@vwid@loff=\dimen125
+\@vwid@roff=\dimen126
 )) (/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
  (/usr/share/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -134,17 +148,17 @@ Package ifvtex Info: VTeX not detected.
 ) (/usr/share/texmf-dist/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count93
-\Gm@cntv=\count94
-\c@Gm@tempcnt=\count95
-\Gm@bindingoffset=\dimen126
-\Gm@wd@mp=\dimen127
-\Gm@odd@mp=\dimen128
-\Gm@even@mp=\dimen129
-\Gm@layoutwidth=\dimen130
-\Gm@layoutheight=\dimen131
-\Gm@layouthoffset=\dimen132
-\Gm@layoutvoffset=\dimen133
+\Gm@cnth=\count95
+\Gm@cntv=\count96
+\c@Gm@tempcnt=\count97
+\Gm@bindingoffset=\dimen127
+\Gm@wd@mp=\dimen128
+\Gm@odd@mp=\dimen129
+\Gm@even@mp=\dimen130
+\Gm@layoutwidth=\dimen131
+\Gm@layoutheight=\dimen132
+\Gm@layouthoffset=\dimen133
+\Gm@layoutvoffset=\dimen134
 \Gm@dimlist=\toks18
 ) (/usr/share/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2018/12/01 v2.17b AMS math features
@@ -156,44 +170,44 @@ Package: amstext 2000/06/29 v2.01 AMS text
  (/usr/share/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks19
-\ex@=\dimen134
+\ex@=\dimen135
 )) (/usr/share/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen135
+\pmbraise@=\dimen136
 ) (/usr/share/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count96
+\inf@bad=\count98
 LaTeX Info: Redefining \frac on input line 223.
-\uproot@=\count97
-\leftroot@=\count98
+\uproot@=\count99
+\leftroot@=\count100
 LaTeX Info: Redefining \overline on input line 385.
-\classnum@=\count99
-\DOTSCASE@=\count100
+\classnum@=\count101
+\DOTSCASE@=\count102
 LaTeX Info: Redefining \ldots on input line 482.
 LaTeX Info: Redefining \dots on input line 485.
 LaTeX Info: Redefining \cdots on input line 606.
 \Mathstrutbox@=\box29
 \strutbox@=\box30
-\big@size=\dimen136
+\big@size=\dimen137
 LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
-\macc@depth=\count101
-\c@MaxMatrixCols=\count102
+\macc@depth=\count103
+\c@MaxMatrixCols=\count104
 \dotsspace@=\muskip10
-\c@parentequation=\count103
-\dspbrk@lvl=\count104
+\c@parentequation=\count105
+\dspbrk@lvl=\count106
 \tag@help=\toks20
-\row@=\count105
-\column@=\count106
-\maxfields@=\count107
+\row@=\count107
+\column@=\count108
+\maxfields@=\count109
 \andhelp@=\toks21
-\eqnshift@=\dimen137
-\alignsep@=\dimen138
-\tagshift@=\dimen139
-\tagwidth@=\dimen140
-\totwidth@=\dimen141
-\lineht@=\dimen142
+\eqnshift@=\dimen138
+\alignsep@=\dimen139
+\tagshift@=\dimen140
+\tagwidth@=\dimen141
+\totwidth@=\dimen142
+\lineht@=\dimen143
 \@envbody=\toks22
 \multlinegap=\skip44
 \multlinetaggap=\skip45
@@ -371,7 +385,7 @@ Package: ucs 2013/05/11 v2.2 UCS: Unicode input support
  (/usr/share/texmf-dist/tex/latex/ucs/data/uni-global.def
 File: uni-global.def 2013/05/13 UCS: Unicode global data
 )
-\uc@secondtry=\count108
+\uc@secondtry=\count110
 \uc@combtoks=\toks24
 \uc@combtoksb=\toks25
 \uc@temptokena=\toks26
@@ -384,11 +398,11 @@ File: utf8x.def 2004/10/17 UCS: Input encoding UTF-8
 )) (/usr/share/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2019/01/15
  Style option: `fancyvrb' v3.2a <2019/01/15> (tvz)
-\FV@CodeLineNo=\count109
+\FV@CodeLineNo=\count111
 \FV@InFile=\read1
 \FV@TabBox=\box32
-\c@FancyVerbLine=\count110
-\FV@StepNumber=\count111
+\c@FancyVerbLine=\count112
+\FV@StepNumber=\count113
 \FV@OutFile=\write3
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/grffile.sty
 Package: grffile 2017/06/30 v1.18 Extended file name support for graphics (HO)
@@ -455,13 +469,13 @@ Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
-\@linkdim=\dimen143
-\Hy@linkcounter=\count112
-\Hy@pagecounter=\count113
+\@linkdim=\dimen144
+\Hy@linkcounter=\count114
+\Hy@pagecounter=\count115
  (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count114
+\Hy@SavedSpaceFactor=\count116
  (/usr/share/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
@@ -472,16 +486,16 @@ Package hyperref Info: Plain pages OFF on input line 4534.
 Package hyperref Info: Backreferencing OFF on input line 4539.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4772.
-\c@Hy@tempcnt=\count115
+\c@Hy@tempcnt=\count117
  (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 5125.
-\XeTeXLinkMargin=\dimen144
-\Fld@menulength=\count116
-\Field@Width=\dimen145
-\Fld@charsize=\dimen146
+\XeTeXLinkMargin=\dimen145
+\Fld@menulength=\count118
+\Field@Width=\dimen146
+\Fld@charsize=\dimen147
 Package hyperref Info: Hyper figures OFF on input line 6380.
 Package hyperref Info: Link nesting OFF on input line 6385.
 Package hyperref Info: Hyper index ON on input line 6388.
@@ -491,15 +505,15 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6405.
 Package hyperref Info: PDF/A mode OFF on input line 6410.
 LaTeX Info: Redefining \ref on input line 6450.
 LaTeX Info: Redefining \pageref on input line 6454.
-\Hy@abspage=\count117
-\c@Item=\count118
-\c@Hfootnote=\count119
+\Hy@abspage=\count119
+\c@Item=\count120
+\c@Hfootnote=\count121
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
-\Fld@listcount=\count120
-\c@bookmark@seq@number=\count121
+\Fld@listcount=\count122
+\c@bookmark@seq@number=\count123
  (/usr/share/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 282.
@@ -511,100 +525,128 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
 \LTright=\skip48
 \LTpre=\skip49
 \LTpost=\skip50
-\LTchunksize=\count122
-\LTcapwidth=\dimen147
+\LTchunksize=\count124
+\LTcapwidth=\dimen148
 \LT@head=\box33
 \LT@firsthead=\box34
 \LT@foot=\box35
 \LT@lastfoot=\box36
-\LT@cols=\count123
-\LT@rows=\count124
-\c@LT@tables=\count125
-\c@LT@chunks=\count126
+\LT@cols=\count125
+\LT@rows=\count126
+\c@LT@tables=\count127
+\c@LT@chunks=\count128
 \LT@p@ftn=\toks29
 ) (/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
-\heavyrulewidth=\dimen148
-\lightrulewidth=\dimen149
-\cmidrulewidth=\dimen150
-\belowrulesep=\dimen151
-\belowbottomsep=\dimen152
-\aboverulesep=\dimen153
-\abovetopsep=\dimen154
-\cmidrulesep=\dimen155
-\cmidrulekern=\dimen156
-\defaultaddspace=\dimen157
-\@cmidla=\count127
-\@cmidlb=\count128
-\@aboverulesep=\dimen158
-\@belowrulesep=\dimen159
-\@thisruleclass=\count129
-\@lastruleclass=\count130
-\@thisrulewidth=\dimen160
+\heavyrulewidth=\dimen149
+\lightrulewidth=\dimen150
+\cmidrulewidth=\dimen151
+\belowrulesep=\dimen152
+\belowbottomsep=\dimen153
+\aboverulesep=\dimen154
+\abovetopsep=\dimen155
+\cmidrulesep=\dimen156
+\cmidrulekern=\dimen157
+\defaultaddspace=\dimen158
+\@cmidla=\count129
+\@cmidlb=\count130
+\@aboverulesep=\dimen159
+\@belowrulesep=\dimen160
+\@thisruleclass=\count131
+\@lastruleclass=\count132
+\@thisrulewidth=\dimen161
 ) (/usr/share/texmf-dist/tex/latex/enumitem/enumitem.sty
 Package: enumitem 2019/02/04 v3.8 Customized lists
 \labelindent=\skip51
-\enit@outerparindent=\dimen161
+\enit@outerparindent=\dimen162
 \enit@toks=\toks30
 \enit@inbox=\box37
-\enit@count@id=\count131
-\enitdp@description=\count132
+\enit@count@id=\count133
+\enitdp@description=\count134
 ) (/usr/share/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box38
 \UL@hyphenbox=\box39
 \UL@skip=\skip52
 \UL@hook=\toks31
-\UL@height=\dimen162
-\UL@pe=\count133
-\UL@pixel=\dimen163
+\UL@height=\dimen163
+\UL@pe=\count135
+\UL@pixel=\dimen164
 \ULC@box=\box40
 Package: ulem 2012/05/18
-\ULdepth=\dimen164
+\ULdepth=\dimen165
 ) (/usr/share/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
 \symrsfs=\mathgroup7
-)
-Package hyperref Info: Option `breaklinks' set `true' on input line 287.
-Package hyperref Info: Option `colorlinks' set `true' on input line 287.
- (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.aux)
-\openout1 = `TP0.aux'.
+) (/usr/share/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count136
+\lst@gtempboxa=\box41
+\lst@token=\toks32
+\lst@length=\count137
+\lst@currlwidth=\dimen166
+\lst@column=\count138
+\lst@pos=\count139
+\lst@lostspace=\dimen167
+\lst@width=\dimen168
+\lst@newlines=\count140
+\lst@lineno=\count141
+\lst@maxwidth=\dimen169
+ (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2018/09/02 1.7 (Carsten Heinz)
+\c@lstnumber=\count142
+\lst@skipnumbers=\count143
+\lst@framebox=\box42
+) (/usr/share/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2018/09/02 1.7 listings configuration
+))
+Package: listings 2018/09/02 1.7 (Carsten Heinz)
+Package hyperref Info: Option `breaklinks' set `true' on input line 296.
+Package hyperref Info: Option `colorlinks' set `true' on input line 296.
+ (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 294.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 294.
+LaTeX Warning: Label `gerauxe7uxe3o-das-chaves-permanentes-dos-agentes' multiply defined.
+
+
+LaTeX Warning: Label `definiuxe7uxe3o-do-emissor-e-do-recetor' multiply defined.
+
+)
+\openout1 = `TP1.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 303.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 303.
  (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 294.
-LaTeX Font Info:    ... okay on input line 294.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 294.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 303.
+LaTeX Font Info:    ... okay on input line 303.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 303.
  (/usr/share/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 ) (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count134
-\scratchdimen=\dimen165
-\scratchbox=\box41
-\nofMPsegments=\count135
-\nofMParguments=\count136
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count137
-\MPscratchDim=\dimen166
-\MPnumerator=\count138
-\makeMPintoPDFobject=\count139
-\everyMPtoPDFconversion=\toks33
+\scratchcounter=\count144
+\scratchdimen=\dimen170
+\scratchbox=\box43
+\nofMPsegments=\count145
+\nofMParguments=\count146
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count147
+\MPscratchDim=\dimen171
+\MPnumerator=\count148
+\makeMPintoPDFobject=\count149
+\everyMPtoPDFconversion=\toks34
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
  (/usr/share/texmf-dist/tex/latex/oberdiek/grfext.sty
@@ -619,6 +661,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: longtable package is loaded.
  (/usr/share/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2018/08/26 v1.4-95 longtable captions (AR)
@@ -662,160 +705,287 @@ Package caption Info: End \AtBeginDocument code.
 (/usr/share/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
-\AtBeginShipoutBox=\box42
-Package hyperref Info: Link coloring ON on input line 294.
+\AtBeginShipoutBox=\box44
+Package hyperref Info: Link coloring ON on input line 303.
  (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count140
+\c@section@level=\count150
 )
-LaTeX Info: Redefining \ref on input line 294.
-LaTeX Info: Redefining \pageref on input line 294.
-LaTeX Info: Redefining \nameref on input line 294.
- (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.out) (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.out)
+LaTeX Info: Redefining \ref on input line 303.
+LaTeX Info: Redefining \pageref on input line 303.
+LaTeX Info: Redefining \nameref on input line 303.
+ (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.out) (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.out)
 \@outlinefile=\write4
-\openout4 = `TP0.out'.
+\openout4 = `TP1.out'.
 
+\c@lstlisting=\count151
  (/usr/share/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 298.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 307.
  (/usr/share/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 298.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 307.
  (/usr/share/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 298.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 307.
  (/usr/share/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 298.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 307.
  (/usr/share/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 298.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 307.
  (/usr/share/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 298.
+(Font)              scaled to size 12.50409pt on input line 307.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 298.
+(Font)              scaled to size 9.37807pt on input line 307.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 298.
+(Font)              scaled to size 7.29405pt on input line 307.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 298.
+(Font)              scaled to size 12.50409pt on input line 307.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 298.
+(Font)              scaled to size 9.37807pt on input line 307.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 298.
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 298.
+(Font)              scaled to size 7.29405pt on input line 307.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 307.
  (/usr/share/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 298.
- (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 301.
-LaTeX Font Info:    Try loading font information for TS1+ppl on input line 307.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 310.
+LaTeX Font Info:    Try loading font information for TS1+ppl on input line 320.
  (/usr/share/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 310.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 327.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 327.
-LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 327.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 327.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 327.
-LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 327.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 323.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 334.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 352.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 360.
+ (/usr/share/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 340.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 361.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 389.
+Overfull \hbox (59.3041pt too wide) in paragraph at lines 407--414
+[]\T1/ppl/m/n/10.95 As fun-��es \T1/cmtt/m/n/10.95 cifra_blocos(current_counter,initial_tweak,blocks,number_blocks,cipher_context)
+ []
+
+
+Overfull \hbox (34.5903pt too wide) in paragraph at lines 407--414
+\T1/ppl/m/n/10.95 e \T1/cmtt/m/n/10.95 decifra_blocos(current_counter,initial_tweak,blocks,number_blocks,decipher_context)
+ []
+
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 417.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 417.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 417.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 11.40997pt on input line 417.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 417.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 417.
+
+Overfull \hbox (12.12636pt too wide) in paragraph at lines 414--418
+[]\T1/ppl/m/n/10.95 As fun-��es \T1/cmtt/m/n/10.95 cifra(block,tweak,cipher_context) \T1/ppl/m/n/10.95 e \T1/cmtt/m/n/10.95 decifra(block,tweak,decipher_context
+ []
+
+
+Underfull \hbox (badness 1231) in paragraph at lines 414--418
+\T1/ppl/m/n/10.95 t�m como ob-je-tivo ci-frar/-de-ci-frar um dado bloco uti-li-zando para o efeito a fun-��o
+ []
+
+[2]
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 434.
  (/usr/share/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [2] [3] [4]
-<output_9_0.png, id=97, 453.8556pt x 338.2236pt>
-File: output_9_0.png Graphic file (type png)
-<use output_9_0.png>
-Package pdftex.def Info: output_9_0.png  used on input line 575.
-(pdftex.def)             Requested size: 453.85449pt x 338.22278pt.
- [5]
-Underfull \hbox (badness 10000) in paragraph at lines 577--578
-
+) [3] [4] [5]
+LaTeX Font Info:    Font shape `T1/ppl/bx/it' in size <14.4> not available
+(Font)              Font shape `T1/ppl/b/it' tried instead on input line 666.
+LaTeX Font Info:    Font shape `T1/ppl/bx/it' in size <12> not available
+(Font)              Font shape `T1/ppl/b/it' tried instead on input line 670.
+ [6] [7] [8] [9] [10]pdfTeX warning (ext4): destination with the same identifier (name{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.933 ...xe3o-das-chaves-permanentes-dos-agentes}}
+                                                  pdfTeX warning (ext4): destination with the same identifier (name{definiuxe7uxe3o-do-emissor-e-do-recetor}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.953 ...definiuxe7uxe3o-do-emissor-e-do-recetor}}
+                                                   [11] [12] [13] [14]
+Overfull \hbox (3714.9889pt too wide) in paragraph at lines 1138--1139
+[]\T1/ppl/m/n/10.95 b'L\x19\x9c.\xe3\xe4\xb5b\x0b\x1d+\x1b\x81\x7f\xf2T\xb0CP%T\xda\x96\x0c\x82^^B\xeb\xdd]p\xe1\x94\x1b\xd3\x86Z\xfb\xa6:\xf6\xcf\x08\x8cm\xaa\x8f\xe8\xfdu\'\xceM\xc6\xcc\xed\x1c6\xe3\xf4\x92TIBs\xa8\xb8\xb2|\xbcm\x19`\x1c[\xb7\xcdA\x88\xa1M=\xa8\x01*\xd5\x1d\xf3\t\x9b\x02\xdb\x10\xc3\x14\x94\x19\x9f^^B\xad\xf6{\xa7bc\x99\xc2&\\\xd8\xd5\x9a\xfdz`\x0e\xae\n^^Bo\x1d\x8c*&\x0f\x92W\x94\xac\xabr\x9f\xef\xf0\'\x1evqjky\xddT(\x94\xe7_\xa8\xfd\xcd\x82\xd4\xc6\xb5\xd7\xe4\x81\xa2\xe0\rO\x14#I\xb2\x8e\xc3\x80\xf0(l\x92\x15$\x82J\xd4Jy\xa5Y~)\xf0\x04\xf3\x0e\xb9\x82\x00}|\xc8L\xf0\xbf\xe3!?\x8b\x8e\xf7\xc5\xb4\x93a\xa1\x02"Yc&\xd6\xc6\xdbx\xd18A\x9e\xb0*\x15\x07\xc4D\x96<\xaf\x05\x08\\\xb2u~\xb6\x10\xed}\xc9;\x0cXi9\xcf\xb3\x93\xa4
  []
 
-<output_10_0.png, id=107, 424.2249pt x 279.6849pt>
-File: output_10_0.png Graphic file (type png)
-<use output_10_0.png>
-Package pdftex.def Info: output_10_0.png  used on input line 588.
-(pdftex.def)             Requested size: 424.22385pt x 279.68422pt.
-[6 </home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/output_9_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 590--591
 
+Overfull \hbox (335.41197pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \x8a\xcaX\xfd9x\xfa\xd1\x1b\xcc\xa1T\x83\x99$\xa3\xecv\xf9\xb5d\xc4\x90\x10\xa4M"p\x87\x12\xb9z\x14m\x0b!\xcf\x9cZBd\xdc\x9a&ZZE\xd8\xae-
  []
 
-<output_11_0.png, id=113, 424.2249pt x 279.6849pt>
-File: output_11_0.png Graphic file (type png)
-<use output_11_0.png>
-Package pdftex.def Info: output_11_0.png  used on input line 601.
-(pdftex.def)             Requested size: 424.22385pt x 279.68422pt.
-[7 </home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/output_10_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 603--604
 
+Overfull \hbox (4558.56438pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 PB\x8a\xc9\x9bmJ\xd72\x1e\xb2$\x87\x0f\xe1\xdcU!k\x13\xfbL\x9f\x9bx\x8eQ\xef\xb1J\x18\x809\xdbl\xe5\xdf`7\xb4^^BJ\x1d\xa0<\x18}T?\xf7\xfd\xfa^^B^^Bw\nq\x90\x83Zg\x15V\xd8\x13\xad\xdaj\xf1~\xc1\xce9\x99\xa4\xf2\xd03l\x0e\xa2\x84y\xd6*j~\x98D\x15\xca\x98~\xbf\xfc\x1b\xb5\x7f\xd6,`\xf2\xadT6tH\x9bf\xd3|\x13\x8f\xd3\xc1\xd9\'\x12\x08u\x11$X\xe7a+?\xbbJ(\xba\xf2\xe1\xa7HCc\xa6\xfe\x1c4\xcc.\x08\xda\xc4\xff&\xac2\xa1\xcfS\xf4u@k\\\xd6n\xf0\x15\x14\xe3_,\xbd\x07q\x8f\x8f\x8d\x9a\x01\xd1\xce\xdc\xef;\x04M\x8f\x86\x8d\xe6\x94\xcf\xe90\xc4E\xd3$\xa6\x89v\xf0,N\x1d|L\x10\xa0\x89\xe5\x84@z\xf8\x05i\xbc\x94\xc8Slk*~"\x01{\xce`\x00p\xf0\x97,\xcb\xc1qrz25\x05\xf5\xdc\xfb0V3\xb5EMc\x0f%\x0f\x92Of\xc4\xa0|r\x87\x19&\xd5\xbat\x03\xf3\x01c\x94\x0b\xf6\x88\x89@\xdd\x02k\x1c\x8a\xf7\x01\x00\x9d\x0b\xf6\x7fE\x81\x08\x81\xf3\xd3\x7f\x91\\\xe8\xe1F\xa69\xd2\xf9\xb1\xd1pg\xe6s2\x9eK\x92w34]$%
  []
 
-<output_12_0.png, id=120, 424.2249pt x 279.6849pt>
-File: output_12_0.png Graphic file (type png)
-<use output_12_0.png>
-Package pdftex.def Info: output_12_0.png  used on input line 614.
-(pdftex.def)             Requested size: 424.22385pt x 279.68422pt.
-[8 </home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/output_11_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 616--617
 
+Underfull \hbox (badness 10000) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \xcc\x96\x17A8\xecW\r\xab\xd4\x00\xc8\xf0\xc6D\x16\xd2Z\xca-
  []
 
-[9 </home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/output_12_0.png>] [10] [11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 820.
- [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 820.
- (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 820.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 820.
-Package rerunfilecheck Info: File `TP0.out' has not changed.
-(rerunfilecheck)             Checksum: 09D35CD143D78B31A449D073357B4F9E;1136.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 820.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \xe8%\xa2\x10\xfc;)\xabq\x88\xba %%\x0c\r6\xe5\xa4\xd3}\xf9SA\xdf\xf00
+ []
+
+
+Overfull \hbox (3054.95744pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 A\xe9\x00\xf5+\x0bb@\xd4\xf5\xdd\x95.\xb5\xc3\xfa+\x91\xe2\xa32\xf4\n\x17\xfc\x8d*\xd3\x08\xecL\x0b\x1eT4\xa0\xb3\xfa\xca\xfek\x05J\xe61\x1d\x81\xf0\xb3\xa0\xa8\x92y\n\xed3\xba\x04Ib^^B\x94c\xb8[|9\xf9\xf3>\x06D\xa6+L\xcc\xdcgB\xd6\x84({\'&\xac\xe0\x07\xe7\xbfyq\xf06\xb11\xd0\x83f\x1b.\x9b\xd6~\xa8^^B\xab~\xc0<+.\xf6\xd9\xdcB\xaf\x81\xf26!\x87\xf5\x9co\xae\xb6`\x9a_LL1t\xbb\xe5\xd8\'\xbdC\x89\x1b\x0c\x17\xfe\xf0_\xf8s\xcaxV\xe2U\xa3\xe4\x02\x15\xd2\xe4\xee^^B\x04L~\x0e\xc5n\x8e\x9c\xcc\xf5@\xd7\xe1(\xc6\xd8\x04\x1a[X\xff\xcb\xbc\x02V\x19\xef\xabZ\x1e\xb6B\x1b\xe3\xab\xa6\x9d\x83\xf8^^B\xc9\t\xc8\xa7\xad\xdf\x15Y]z
+ []
+
+
+Overfull \hbox (300.41565pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \xa7\t_\xe6\xccSa\xbc\x9a\xbb/\xbd\x885\xc4\xc5\xf7.\x8cJ7\x11\xda;\xbf\x1a\xeb\xf5\x05\x90.\x1d\x8d\nA\x12\x90\x1c\xafh\xec{\xe7\t\xc4-
+ []
+
+
+Overfull \hbox (881.81134pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \x1f\xd31\xa34 \xb9\xd0\xe3\xf5\xa9a\xa5\xc7aF\xcd\x0b\x82\xa5\x1aS\x1eP\xfa\x03Z\xe7\x88\xdc~\xad\xf9A\xb08\x89\xbc\xcd\xdf#q\xba\xc7\xa9Q\xc9\x99\x1b[K.\x0fV\x0b\x86:\xd2Kc\xa4n\x8f\xe3\xe400.\xb4}\xeb*\xc9\x80aU\xd4\x9f\x9d\xf7f\xef
+ []
+
+
+Overfull \hbox (2886.46994pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 }cUp\xfa\x850\xec\xb5x\xe7U\nO\xb6<\x05c\xf3\xa3\x14*\x02\xba\xff\'\xdf\xf3\xf3\xdf\xf1\x88o\xce{b\xfe\x82\xb7\xf2\x8f|n\xcb\xbe\x90\xd0a\xa3v.:\xea\xccHC\xd7\x14\xc79o\xb0\n\xd9\xb2\xcb\xb4\x05\xfez)\x83F\xe8F\xeb|\xc5\x9d\x07SY\xf2\x82o?\xadG\xe4\xc1\xd9\xd3\x83X\xfaKZ\xa1\x05\xae)\xa17b\xb57\x98\t\xd5\xa6\xf8\xfa\xff\xacC\xd2U\xd9q\xb6\xdeH5\x1f\xce\x8d\xbb\x81!\x93\x02\'\xe3\x98\xefnv\xba\xcb&\xc8N\xfd^^B\xb6\xf4\xd2\xd6I\x1c\xb8\xec\xc2\xb8\x974\xcdEk\x86\xdd\xee/\xc5\x8bc\x0b\xf0\xc6\xf5\xb6\xceL:\'\xf9}K\xb6U\xd1A\xc0\x07\xa9\x7f\x8c\xfd\x1f\xff\xebG\xa1\xb0\xf8\xc2\xef-
+ []
+
+
+Overfull \hbox (3138.5057pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \x90t\xde\xba\xaf\x06\x83\r\x85i\xec\\\xc9\xa2s\xdd\xbcM\n\xc5B?\xf5\x80x\xd3?x\x85\xe6\xa7o\x1b\xa0\x1e:\x84\xd4\x9f=\xa2\xbai8\xad\x80yaM\x81J)\x02P\xcd\xf38D[\xd6gC\x97\xe0\xb4\xces\xc4\x9d\x84\xb5pq\x13$\xdac\xd6R\xe2\x84\xb8\x917#(\xb5`I1\x13\xb5\x96\xf8D\x12\x8f@H\xe9}\xe2\x03_?"\xaf\xdf,\x8bL\xa1\x93S\x9a\xaf7\xa1\xae\xa3j\xab?S\xa5\xf6\xa1uP%\xf1\xe2\xdc\xb9Qo\xcd\xfb\x83\xf7\xd2E\xb8]Q\xf0\xdd^^B\xfe\xaa\x1b\xc0\xfd\xe4\xfe\x18\xf3\xdf\x0e@\x03&\x04[2\x1b\x02\x17TXhb\xf9\x97I\xc8N\xf2}\xa8M.\x06\x87\xf3\x8bb\x83\xbfM\xadg\n\xb1\xbeJ\x15\x8ea\xe2B\x8biju\x12\x1f\xcelk}\xc4\x03\xb6U\xb3d\x1cc\xfc\xa6\xcd\xcfF\xfd-
+ []
+
+
+Overfull \hbox (11.08656pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \xcb\xf9!\xe0R\xcck\x9c\xdc\x88\xb1\xdb\xab\xdeX{\xa9\x9b\xfe\xe7\x96\xa73l\xe9\xde-
+ []
+
+
+Overfull \hbox (435.99738pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 \x16\xac\x17\xdb\xff_\xf3\x8f\xde\xde\xb1\xc6\x96Q\xad\xd4XK\x89\xe8\xb9\xd9\xdb\x8dSGM\xbfG\x9c\x99\x17\xec\xb9\xebC|\x88\xd5?\x1f,z2EOu\x89\xcb\xcd\xef
+ []
+
+
+Overfull \hbox (1032.13069pt too wide) in paragraph at lines 1138--1139
+\T1/ppl/m/n/10.95 K\x9d\x9d=\xb9\xf9\xc8`\x1a\xd2\xbf^^B\x82\xcf\x02Y\x88\x8b|\xf0\x1b\xaf\xaf\xea\xed\x17L\xd3\xeaClp\x05\x1d\tt\xa2\xfb\x1bQ\xa2TW\x92\xbbJ\xa6\x89\x15\t{\xb7\x88v\xe3f\x9e\xe9{e\x86k\xf0\xc44v\xaa\x98Cm&\x04\xfc\xbc\xc3m\xd4\x15\x83\x8b\xe2Q\xda\xab\r\x1f6$@' 
+ []
+
+
+Overfull \hbox (3714.9889pt too wide) in paragraph at lines 1142--1143
+[]\T1/ppl/m/n/10.95 b'L\x19\x9c.\xe3\xe4\xb5b\x0b\x1d+\x1b\x81\x7f\xf2T\xb0CP%T\xda\x96\x0c\x82^^B\xeb\xdd]p\xe1\x94\x1b\xd3\x86Z\xfb\xa6:\xf6\xcf\x08\x8cm\xaa\x8f\xe8\xfdu\'\xceM\xc6\xcc\xed\x1c6\xe3\xf4\x92TIBs\xa8\xb8\xb2|\xbcm\x19`\x1c[\xb7\xcdA\x88\xa1M=\xa8\x01*\xd5\x1d\xf3\t\x9b\x02\xdb\x10\xc3\x14\x94\x19\x9f^^B\xad\xf6{\xa7bc\x99\xc2&\\\xd8\xd5\x9a\xfdz`\x0e\xae\n^^Bo\x1d\x8c*&\x0f\x92W\x94\xac\xabr\x9f\xef\xf0\'\x1evqjky\xddT(\x94\xe7_\xa8\xfd\xcd\x82\xd4\xc6\xb5\xd7\xe4\x81\xa2\xe0\rO\x14#I\xb2\x8e\xc3\x80\xf0(l\x92\x15$\x82J\xd4Jy\xa5Y~)\xf0\x04\xf3\x0e\xb9\x82\x00}|\xc8L\xf0\xbf\xe3!?\x8b\x8e\xf7\xc5\xb4\x93a\xa1\x02"Yc&\xd6\xc6\xdbx\xd18A\x9e\xb0*\x15\x07\xc4D\x96<\xaf\x05\x08\\\xb2u~\xb6\x10\xed}\xc9;\x0cXi9\xcf\xb3\x93\xa4
+ []
+
+
+Overfull \hbox (335.41197pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \x8a\xcaX\xfd9x\xfa\xd1\x1b\xcc\xa1T\x83\x99$\xa3\xecv\xf9\xb5d\xc4\x90\x10\xa4M"p\x87\x12\xb9z\x14m\x0b!\xcf\x9cZBd\xdc\x9a&ZZE\xd8\xae-
+ []
+
+
+Overfull \hbox (4558.56438pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 PB\x8a\xc9\x9bmJ\xd72\x1e\xb2$\x87\x0f\xe1\xdcU!k\x13\xfbL\x9f\x9bx\x8eQ\xef\xb1J\x18\x809\xdbl\xe5\xdf`7\xb4^^BJ\x1d\xa0<\x18}T?\xf7\xfd\xfa^^B^^Bw\nq\x90\x83Zg\x15V\xd8\x13\xad\xdaj\xf1~\xc1\xce9\x99\xa4\xf2\xd03l\x0e\xa2\x84y\xd6*j~\x98D\x15\xca\x98~\xbf\xfc\x1b\xb5\x7f\xd6,`\xf2\xadT6tH\x9bf\xd3|\x13\x8f\xd3\xc1\xd9\'\x12\x08u\x11$X\xe7a+?\xbbJ(\xba\xf2\xe1\xa7HCc\xa6\xfe\x1c4\xcc.\x08\xda\xc4\xff&\xac2\xa1\xcfS\xf4u@k\\\xd6n\xf0\x15\x14\xe3_,\xbd\x07q\x8f\x8f\x8d\x9a\x01\xd1\xce\xdc\xef;\x04M\x8f\x86\x8d\xe6\x94\xcf\xe90\xc4E\xd3$\xa6\x89v\xf0,N\x1d|L\x10\xa0\x89\xe5\x84@z\xf8\x05i\xbc\x94\xc8Slk*~"\x01{\xce`\x00p\xf0\x97,\xcb\xc1qrz25\x05\xf5\xdc\xfb0V3\xb5EMc\x0f%\x0f\x92Of\xc4\xa0|r\x87\x19&\xd5\xbat\x03\xf3\x01c\x94\x0b\xf6\x88\x89@\xdd\x02k\x1c\x8a\xf7\x01\x00\x9d\x0b\xf6\x7fE\x81\x08\x81\xf3\xd3\x7f\x91\\\xe8\xe1F\xa69\xd2\xf9\xb1\xd1pg\xe6s2\x9eK\x92w34]$%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \xcc\x96\x17A8\xecW\r\xab\xd4\x00\xc8\xf0\xc6D\x16\xd2Z\xca-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \xe8%\xa2\x10\xfc;)\xabq\x88\xba %%\x0c\r6\xe5\xa4\xd3}\xf9SA\xdf\xf00
+ []
+
+
+Overfull \hbox (3054.95744pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 A\xe9\x00\xf5+\x0bb@\xd4\xf5\xdd\x95.\xb5\xc3\xfa+\x91\xe2\xa32\xf4\n\x17\xfc\x8d*\xd3\x08\xecL\x0b\x1eT4\xa0\xb3\xfa\xca\xfek\x05J\xe61\x1d\x81\xf0\xb3\xa0\xa8\x92y\n\xed3\xba\x04Ib^^B\x94c\xb8[|9\xf9\xf3>\x06D\xa6+L\xcc\xdcgB\xd6\x84({\'&\xac\xe0\x07\xe7\xbfyq\xf06\xb11\xd0\x83f\x1b.\x9b\xd6~\xa8^^B\xab~\xc0<+.\xf6\xd9\xdcB\xaf\x81\xf26!\x87\xf5\x9co\xae\xb6`\x9a_LL1t\xbb\xe5\xd8\'\xbdC\x89\x1b\x0c\x17\xfe\xf0_\xf8s\xcaxV\xe2U\xa3\xe4\x02\x15\xd2\xe4\xee^^B\x04L~\x0e\xc5n\x8e\x9c\xcc\xf5@\xd7\xe1(\xc6\xd8\x04\x1a[X\xff\xcb\xbc\x02V\x19\xef\xabZ\x1e\xb6B\x1b\xe3\xab\xa6\x9d\x83\xf8^^B\xc9\t\xc8\xa7\xad\xdf\x15Y]z
+ []
+
+
+Overfull \hbox (300.41565pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \xa7\t_\xe6\xccSa\xbc\x9a\xbb/\xbd\x885\xc4\xc5\xf7.\x8cJ7\x11\xda;\xbf\x1a\xeb\xf5\x05\x90.\x1d\x8d\nA\x12\x90\x1c\xafh\xec{\xe7\t\xc4-
+ []
+
+
+Overfull \hbox (881.81134pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \x1f\xd31\xa34 \xb9\xd0\xe3\xf5\xa9a\xa5\xc7aF\xcd\x0b\x82\xa5\x1aS\x1eP\xfa\x03Z\xe7\x88\xdc~\xad\xf9A\xb08\x89\xbc\xcd\xdf#q\xba\xc7\xa9Q\xc9\x99\x1b[K.\x0fV\x0b\x86:\xd2Kc\xa4n\x8f\xe3\xe400.\xb4}\xeb*\xc9\x80aU\xd4\x9f\x9d\xf7f\xef
+ []
+
+
+Overfull \hbox (2886.46994pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 }cUp\xfa\x850\xec\xb5x\xe7U\nO\xb6<\x05c\xf3\xa3\x14*\x02\xba\xff\'\xdf\xf3\xf3\xdf\xf1\x88o\xce{b\xfe\x82\xb7\xf2\x8f|n\xcb\xbe\x90\xd0a\xa3v.:\xea\xccHC\xd7\x14\xc79o\xb0\n\xd9\xb2\xcb\xb4\x05\xfez)\x83F\xe8F\xeb|\xc5\x9d\x07SY\xf2\x82o?\xadG\xe4\xc1\xd9\xd3\x83X\xfaKZ\xa1\x05\xae)\xa17b\xb57\x98\t\xd5\xa6\xf8\xfa\xff\xacC\xd2U\xd9q\xb6\xdeH5\x1f\xce\x8d\xbb\x81!\x93\x02\'\xe3\x98\xefnv\xba\xcb&\xc8N\xfd^^B\xb6\xf4\xd2\xd6I\x1c\xb8\xec\xc2\xb8\x974\xcdEk\x86\xdd\xee/\xc5\x8bc\x0b\xf0\xc6\xf5\xb6\xceL:\'\xf9}K\xb6U\xd1A\xc0\x07\xa9\x7f\x8c\xfd\x1f\xff\xebG\xa1\xb0\xf8\xc2\xef-
+ []
+
+
+Overfull \hbox (3138.5057pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \x90t\xde\xba\xaf\x06\x83\r\x85i\xec\\\xc9\xa2s\xdd\xbcM\n\xc5B?\xf5\x80x\xd3?x\x85\xe6\xa7o\x1b\xa0\x1e:\x84\xd4\x9f=\xa2\xbai8\xad\x80yaM\x81J)\x02P\xcd\xf38D[\xd6gC\x97\xe0\xb4\xces\xc4\x9d\x84\xb5pq\x13$\xdac\xd6R\xe2\x84\xb8\x917#(\xb5`I1\x13\xb5\x96\xf8D\x12\x8f@H\xe9}\xe2\x03_?"\xaf\xdf,\x8bL\xa1\x93S\x9a\xaf7\xa1\xae\xa3j\xab?S\xa5\xf6\xa1uP%\xf1\xe2\xdc\xb9Qo\xcd\xfb\x83\xf7\xd2E\xb8]Q\xf0\xdd^^B\xfe\xaa\x1b\xc0\xfd\xe4\xfe\x18\xf3\xdf\x0e@\x03&\x04[2\x1b\x02\x17TXhb\xf9\x97I\xc8N\xf2}\xa8M.\x06\x87\xf3\x8bb\x83\xbfM\xadg\n\xb1\xbeJ\x15\x8ea\xe2B\x8biju\x12\x1f\xcelk}\xc4\x03\xb6U\xb3d\x1cc\xfc\xa6\xcd\xcfF\xfd-
+ []
+
+
+Overfull \hbox (11.08656pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \xcb\xf9!\xe0R\xcck\x9c\xdc\x88\xb1\xdb\xab\xdeX{\xa9\x9b\xfe\xe7\x96\xa73l\xe9\xde-
+ []
+
+
+Overfull \hbox (435.99738pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 \x16\xac\x17\xdb\xff_\xf3\x8f\xde\xde\xb1\xc6\x96Q\xad\xd4XK\x89\xe8\xb9\xd9\xdb\x8dSGM\xbfG\x9c\x99\x17\xec\xb9\xebC|\x88\xd5?\x1f,z2EOu\x89\xcb\xcd\xef
+ []
+
+
+Overfull \hbox (1032.13069pt too wide) in paragraph at lines 1142--1143
+\T1/ppl/m/n/10.95 K\x9d\x9d=\xb9\xf9\xc8`\x1a\xd2\xbf^^B\x82\xcf\x02Y\x88\x8b|\xf0\x1b\xaf\xaf\xea\xed\x17L\xd3\xeaClp\x05\x1d\tt\xa2\xfb\x1bQ\xa2TW\x92\xbbJ\xa6\x89\x15\t{\xb7\x88v\xe3f\x9e\xe9{e\x86k\xf0\xc44v\xaa\x98Cm&\x04\xfc\xbc\xc3m\xd4\x15\x83\x8b\xe2Q\xda\xab\r\x1f6$@' 
+ []
+
+[15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1202.
+ [16]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1202.
+ (/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1202.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1202.
+Package rerunfilecheck Info: File `TP1.out' has not changed.
+(rerunfilecheck)             Checksum: 24F250994B3127306E3776CADC7252D8;1183.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1202.
  ) 
 Here is how much of TeX's memory you used:
- 11894 strings out of 492616
- 175669 string characters out of 6135177
- 281233 words of memory out of 5000000
- 15515 multiletter control sequences out of 15000+600000
- 36183 words of font info for 94 fonts, out of 8000000 for 9000
+ 13750 strings out of 492616
+ 201224 string characters out of 6135177
+ 316749 words of memory out of 5000000
+ 17314 multiletter control sequences out of 15000+600000
+ 39361 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,6n,39p,452b,594s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfit1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP0/essay/TP0.pdf (12 pages, 277201 bytes).
+ 36i,6n,41p,20088b,596s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfit1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on /home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.pdf (16 pages, 199598 bytes).
 PDF statistics:
- 208 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
- 50 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 242 PDF objects out of 1000 (max. 8388607)
+ 213 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
