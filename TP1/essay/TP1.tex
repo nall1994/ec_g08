@@ -310,8 +310,8 @@
 \section{Introdução}\label{introduuxe7uxe3o}}
 
     A resolução deste trabalho prático tem como objetivo implementar um
-abiente seguro, constituído por um emissor e um recetor, através de
-sessões cifradas e seguras. A solução implmentada, foi estruturada da
+ambiente seguro, constituído por um emissor e um recetor, através de
+sessões cifradas e seguras. A solução implementada, foi estruturada da
 seguinte forma:
 
 \begin{itemize}
@@ -328,7 +328,7 @@ seguinte forma:
   Utilização do \textbf{TAES} como cifra simétrica, com autenticação do
   criptograma em cada superbloco.
 \item
-  Implementar novamente o cenário anterior mas, desta feita vez,
+  Implementação do cenário anterior mas, desta feita,
   utilizando o \textbf{ECDH} (Elliptic Curve Diffie-Hellman) em vez do
   \textbf{DH} e o \textbf{ECDSA} (Elliptic Curve Digital Signature
   Algorithm) em vez do \textbf{DSA}.
@@ -336,7 +336,7 @@ seguinte forma:
 
 Este relatório está escrito de forma a que o texto escrito entre o
 código desenvolvido seja suficientemente explicativo do que está a ser
-implementado, o que, na nossa opinião, permite uma leitura e compreensão
+implementado o que, na nossa opinião, permite uma leitura e compreensão
 facilitada do mesmo.
 
     \hypertarget{cuxf3digo-comum}{%
@@ -395,10 +395,6 @@ sessões síncronas, tanto na que utiliza \textbf{DH} como na que utiliza
   \texttt{calculate\_nounce()}, que tem como objectivo calcular o nounce
   a utilizar em parte de um \emph{tweak}, tendo em conta os
   \emph{nounces} que já foram utilizados anteriormente.
-\item
-  \texttt{calculate\_parity(blocks,number\_blocks)}, que tem como
-  objetivo calcular a paridade de um conjunto de blocos, para que seja
-  gerada a sua \emph{tag} de autenticação.
 \item
   \texttt{calculate\_auth\_tweak(initial\_tweak,number\_blocks)}, que
   tem como objetivo calcular o \emph{tweak} utilizado para cifrar a
@@ -461,17 +457,6 @@ Authenticated Encryption}).
                     \PY{k}{break}
             \PY{n}{nounces\PYZus{}file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
             \PY{k}{return} \PY{n}{nounce\PYZus{}to\PYZus{}send}
-        
-        \PY{c+c1}{\PYZsh{}def calculate\PYZus{}parity(blocks,number\PYZus{}blocks):}
-        \PY{c+c1}{\PYZsh{}    str = format(0,\PYZsq{}128b\PYZsq{}) \PYZsh{} O número 0 é elemento neutro no XOR}
-        \PY{c+c1}{\PYZsh{}    parity = int(str,2).to\PYZus{}bytes((len(str) + 7) // 8, \PYZsq{}big\PYZsq{})}
-        \PY{c+c1}{\PYZsh{}    bytes\PYZus{}processed = 0}
-        \PY{c+c1}{\PYZsh{}    while(bytes\PYZus{}processed \PYZlt{} (16*number\PYZus{}blocks)):}
-        \PY{c+c1}{\PYZsh{}        max\PYZus{}bytes = bytes\PYZus{}processed + 16}
-        \PY{c+c1}{\PYZsh{}        block\PYZus{}to\PYZus{}xor = blocks[bytes\PYZus{}processed:max\PYZus{}bytes]}
-        \PY{c+c1}{\PYZsh{}        parity = bytes\PYZus{}xor(parity,block\PYZus{}to\PYZus{}xor)}
-        \PY{c+c1}{\PYZsh{}        bytes\PYZus{}processed += 16}
-        \PY{c+c1}{\PYZsh{}    return parity}
         
         \PY{k}{def} \PY{n+nf}{calculate\PYZus{}auth\PYZus{}tweak}\PY{p}{(}\PY{n}{initial\PYZus{}tweak}\PY{p}{,}\PY{n}{number\PYZus{}blocks}\PY{p}{)}\PY{p}{:}
             \PY{n+nb}{str} \PY{o}{=} \PY{n+nb}{format}\PY{p}{(}\PY{n}{number\PYZus{}blocks}\PY{o}{*}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{063b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
