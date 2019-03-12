@@ -658,7 +658,9 @@ derivação de chaves \textbf{DH} e \textbf{DSA}, por parte de ambos os
 agentes.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{parameters\PYZus{}dh} \PY{o}{=} \PY{n}{dh}\PY{o}{.}\PY{n}{generate\PYZus{}parameters}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{key\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3072}\PY{p}{,}\PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{parameters\PYZus{}dh} \PY{o}{=} \PY{n}{dh}\PY{o}{.}\PY{n}{generate\PYZus{}parameters}\PY{p}{(}\PY{n}{generator}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,}
+                                                \PY{n}{key\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{3072}\PY{p}{,}
+                                                \PY{n}{backend}\PY{o}{=}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
 
     \hypertarget{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}{%
@@ -962,8 +964,10 @@ simétrica.
              \PY{n}{message\PYZus{}to\PYZus{}send} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pub}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{pub}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{signature}\PY{p}{\PYZcb{}}
              \PY{n}{connection}\PY{o}{.}\PY{n}{send}\PY{p}{(}\PY{n}{message\PYZus{}to\PYZus{}send}\PY{p}{)}
              \PY{n}{receiver\PYZus{}info} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{recv}\PY{p}{(}\PY{p}{)}
-             \PY{n}{receiver\PYZus{}ecdsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sig}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
-             \PY{n}{receiver\PYZus{}pub} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{load\PYZus{}pem\PYZus{}public\PYZus{}key}\PY{p}{(}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}ecdsa\PYZus{}pk}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sig}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{ec}\PY{o}{.}\PY{n}{ECDSA}\PY{p}{(}\PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{receiver\PYZus{}pub} \PY{o}{=} \PY{n}{serialization}\PY{o}{.}\PY{n}{load\PYZus{}pem\PYZus{}public\PYZus{}key}\PY{p}{(}\PY{n}{receiver\PYZus{}info}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pub}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+                \PY{n}{default\PYZus{}backend}\PY{p}{(}\PY{p}{)}\PY{p}{)}
              \PY{n}{master\PYZus{}key} \PY{o}{=} \PY{n}{emitter\PYZus{}ecdh\PYZus{}sk}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{ec}\PY{o}{.}\PY{n}{ECDH}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{receiver\PYZus{}pub}\PY{p}{)}
              \PY{n}{shared\PYZus{}key} \PY{o}{=} \PY{n}{HKDF}\PY{p}{(}
                  \PY{n}{algorithm} \PY{o}{=} \PY{n}{hashes}\PY{o}{.}\PY{n}{SHA256}\PY{p}{(}\PY{p}{)}\PY{p}{,}

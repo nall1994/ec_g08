@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1552416526 "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.tex" "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.pdf" "TP1" 1552416527
-  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.aux" 1552416527 4833 1b754b9524a9937291048fb0e49191fc ""
-  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.tex" 1552416523 139458 40ab475639597e4a0c42e843f9461abe ""
+["pdflatex"] 1552417377 "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.tex" "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.pdf" "TP1" 1552417380
+  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.aux" 1552417379 4833 1b754b9524a9937291048fb0e49191fc ""
+  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.tex" 1552417376 139590 e2b013dc58c61adbb387b45cd46e44cf ""
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1550406775 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1550406775 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1550406775 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -152,15 +152,15 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1550406775 33301 a3134070eacafb10b1f371612ce2650d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1550612925 3106252 d5255ed7fd6ec6ea7699581e9a54cb46 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1550612907 7919196 9e3206bbad0f43e04993ebd321eeb9aa ""
-  "TP1.aux" 1552416527 4833 1b754b9524a9937291048fb0e49191fc ""
-  "TP1.out" 1552416527 1183 24f250994b3127306e3776cadc7252d8 ""
-  "TP1.tex" 1552416523 139458 40ab475639597e4a0c42e843f9461abe ""
+  "TP1.aux" 1552417379 4833 1b754b9524a9937291048fb0e49191fc ""
+  "TP1.out" 1552417380 1183 24f250994b3127306e3776cadc7252d8 ""
+  "TP1.tex" 1552417376 139590 e2b013dc58c61adbb387b45cd46e44cf ""
   (generated)
-  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.pdf"
-  "/home/nunol/Desktop/Universidade/2ºsemestre/EC/ec_g08/TP1/essay/TP1.pdf"
-  "TP1.pdf"
   "/home/nunol/Desktop/Universidade/2ºsemestre/EC/ec_g08/TP1/essay/TP1.log"
+  "TP1.log"
+  "/home/nunol/Desktop/Universidade/2ºsemestre/EC/ec_g08/TP1/essay/TP1.pdf"
   "TP1.out"
+  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.pdf"
+  "TP1.pdf"
   "TP1.aux"
   "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP1/essay/TP1.log"
-  "TP1.log"
