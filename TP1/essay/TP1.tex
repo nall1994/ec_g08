@@ -311,7 +311,7 @@
 
     A resolução deste trabalho prático tem como objetivo implementar um
 ambiente seguro, constituído por um emissor e um recetor, através de
-sessões cifradas e seguras. A solução implementada, foi estruturada da
+sessões cifradas e seguras. A solução implementada foi estruturada da
 seguinte forma:
 
 \begin{itemize}
@@ -328,24 +328,24 @@ seguinte forma:
   Utilização do \textbf{TAES} como cifra simétrica, com autenticação do
   criptograma em cada superbloco.
 \item
-  Implementação do cenário anterior mas, desta feita,
+  Implementação do cenário anterior, mas desta vez
   utilizando o \textbf{ECDH} (Elliptic Curve Diffie-Hellman) em vez do
   \textbf{DH} e o \textbf{ECDSA} (Elliptic Curve Digital Signature
   Algorithm) em vez do \textbf{DSA}.
 \end{itemize}
 
-Este relatório está escrito de forma a que o texto escrito entre o
-código desenvolvido seja suficientemente explicativo do que está a ser
+Este relatório está escrito juntamente com o
+código desenvolvido, de forma a que seja suficientemente explicativo do que está a ser
 implementado o que, na nossa opinião, permite uma leitura e compreensão
-facilitada do mesmo.
+melhorada.
 
     \hypertarget{cuxf3digo-comum}{%
 \section{Código comum}\label{cuxf3digo-comum}}
 
     Esta secção tem como objetivo definir \emph{snippets} de código que
-serão utilizados tanto na definição da sessão síncrona com \textbf{DH}
-como na sessão síncrona com \textbf{ECDH}, tais como os \emph{imports}
-de módulos necessários, as funções auxiliares necessárias e a classe de
+serão utilizados, tanto na definição da sessão síncrona com \textbf{DH},
+como na sessão síncrona com \textbf{ECDH}. Entre os quais, os \emph{imports}
+de módulos necessários, as funções auxiliares utilizadas e a classe de
 multiprocessamento.
 
     \hypertarget{imports}{%
@@ -375,7 +375,7 @@ de assinaturas \textbf{DSA} e, numa segunda instância, o protocolo
 \subsection{Definição das funções do processo
 criptográfico}\label{definiuxe7uxe3o-das-funuxe7uxf5es-do-processo-criptogruxe1fico}}
 
-    Esta secção tem o objetivo de definir funções que serão utilizadas nas
+    Aqui, encontram-se definidas as funções que serão utilizadas nas
 sessões síncronas, tanto na que utiliza \textbf{DH} como na que utiliza
 \textbf{ECDH}. Essas funções são as seguintes:
 
@@ -384,20 +384,19 @@ sessões síncronas, tanto na que utiliza \textbf{DH} como na que utiliza
   \texttt{Hash(s)}, que tem como propósito calcular um \emph{digest} de
   uma dada mensagem.
 \item
-  \texttt{next\_tweak(initial,current\_counter)}, que tem como propósito
-  calcular o próximo \emph{tweak} a utilizar no bloco que vai ser
+  \texttt{next\_tweak(initial,current\_counter)}, que calcula o próximo \emph{tweak} a utilizar no bloco que vai ser
   cifrado/decifrado, com base no \emph{nounce} inicial e no número do
-  bloco que está a ser processadoa atualmente.
+  bloco que está a ser processado.
 \item
-  \texttt{bytes\_xor(a,b)}, que tem como propósito realizar o \emph{XOR}
+  \texttt{bytes\_xor(a,b)}, que executa o \emph{XOR}
   \emph{byte} a \emph{byte} de duas dadas sequências de \_bytes.
 \item
-  \texttt{calculate\_nounce()}, que tem como objectivo calcular o nounce
+  \texttt{calculate\_nounce()}, que calcula o nounce
   a utilizar em parte de um \emph{tweak}, tendo em conta os
   \emph{nounces} que já foram utilizados anteriormente.
 \item
   \texttt{calculate\_auth\_tweak(initial\_tweak,number\_blocks)}, que
-  tem como objetivo calcular o \emph{tweak} utilizado para cifrar a
+  calcula o \emph{tweak} utilizado para cifrar a
   paridade dos blocos cifrados.
 \item
   As funções
@@ -405,17 +404,17 @@ sessões síncronas, tanto na que utiliza \textbf{DH} como na que utiliza
   e
   \texttt{decifra\_blocos(current\_counter,initial\_tweak,blocks,number\_blocks,decipher\_context)}
   têm como objetivo cifrar/decifrar, respetivamente, um conjunto de
-  blocos aplicando a cada bloco a função de cifra ou de decifragem.
+  blocos, aplicando a cada bloco a função de cifra ou de decifragem.
 \item
-  As funções \texttt{cifra(block,tweak,cipher\_context)} e
-  \texttt{decifra(block,tweak,decipher\_context} têm como objetivo
-  cifrar/decifrar um dado bloco utilizando para o efeito a função
+  Finalmente, as funções \texttt{cifra(block,tweak,cipher\_context)} e
+  \texttt{decifra(block,tweak,decipher\_context}, cujo o propósito consiste em
+  cifrar/decifrar um dado bloco, utilizando para o efeito a função
   $\tilde{E}(s,x) = E(s,x \oplus h(w)) \oplus h(w)$.
 \end{itemize}
 
-É relevante referir que as operações de cifra e de decifra utilizam
-exatamente a mesma fórmula e, logo, são iguais, mas estão separadas
-apenas por uma questão de mais simples compreensão do problema em
+É relevante ainda referir que as operações de cifra e de decifra utilizam
+exatamente a mesma fórmula, sendo por isso iguais, mas estão separadas
+apenas por uma questão de simplicidade na compreensão do problema em
 questão, bem como da sua resolução. Além disso, neste processo
 criptográfico foi utilizado o modo \textbf{TAE} (\emph{Tweakable
 Authenticated Encryption}).
@@ -548,17 +547,17 @@ permite uma comunicação bidireccional com o \emph{Emitter} e o
 \subsection{Definição do algoritmo
 utilizado}\label{definiuxe7uxe3o-do-algoritmo-utilizado}}
 
-    Esta secção tem como objetivo definir o algoritmo utilizado bem como
+    Esta secção tem como objetivo definir o algoritmo utilizado, bem como
 algumas especificidades em ambas as sessões. O algoritmo utilizado foi
-exatamente o mesmo, apenas aspetos específicos tais como geração das
-chaves diferenciaram. O algoritmo aqui definido pretende apenas
-apresentar o seu modo de funcionamento de uma forma geral, textualmente.
-Além disso, é conveniente referir que os agentes da sessão síncrona
+exatamente o mesmo, apenas aspetos específicos tais como, a geração das
+chaves, se diferenciaram.
+
+    Além disso, é conveniente referir que os agentes da sessão síncrona
 \textbf{DH} utilizam chaves permanentes de 3072 bits \textbf{DSA} e os
 agentes da sessão síncrona \textbf{ECDH} utilizam chaves permanentes
-baseadas na curva \emph{NIST P-256}.Neste ponto de início do algoritmo
+baseadas na curva \emph{NIST P-256}. Nesta fase de iniciação do processo,
 assumimos também que os parâmetros \textbf{DH} já estão definidos. Assim
-sendo, o programa inicia da seguinte forma:
+sendo, o programa desenvolve-se da seguinte forma:
 
 \textbf{Protocolo de acordo de chaves DH/ECDH com verificação de chave}
 
@@ -654,7 +653,7 @@ sendo, o programa inicia da seguinte forma:
 \subsection{\texorpdfstring{Geração dos parâmetros
 \emph{Diffie-Hellman}}{Geração dos parâmetros Diffie-Hellman}}\label{gerauxe7uxe3o-dos-paruxe2metros-diffie-hellman}}
 
-    A próxima secção implementa a geração dos parâmetros necessários para a
+    Aqui, implementou-se a geração dos parâmetros necessários para a
 derivação de chaves \textbf{DH} e \textbf{DSA}, por parte de ambos os
 agentes.
 
@@ -666,9 +665,9 @@ agentes.
 \subsection{Geração das chaves permanentes dos
 agentes}\label{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}}
 
-    Esta secção tem como objetivo gerar as chaves permanentes dos agentes
+    De sequida, gerarou-se as chaves permanentes dos agentes
 envolvidos na comunicação, tendo em conta que estas são conhecidas por
-ambos, e serão aplicadas na assinatura digital das mensagens.
+ambos, e serão utilizadas na assinatura digital das mensagens.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Geração das chaves do Emissor}
@@ -684,7 +683,7 @@ ambos, e serão aplicadas na assinatura digital das mensagens.
 \subsection{Definição do Emissor e do
 Recetor}\label{definiuxe7uxe3o-do-emissor-e-do-recetor}}
 
-    Por fim definiu-se o comportamento de cada um dos agentes nesta sessão
+    Por último, definiu-se o comportamento de cada um dos agentes nesta sessão
 síncrona segura de troca de informação. Na definição de ambos, é
 assumido que as chaves públicas \textbf{DSA} utilizadas na autenticação
 dos agentes já são conhecidas por ambos. As chaves \textbf{DH} são
@@ -917,7 +916,7 @@ Diffie-Hellman}}{Sessão Síncrona com Elliptic Curve Diffie-Hellman}}\label{ses
 \subsection{Geração das chaves permanentes dos
 agentes}\label{gerauxe7uxe3o-das-chaves-permanentes-dos-agentes}}
 
-    Esta secção tem como objetivo gerar as chaves permanentes de ambos os
+    Nesta secção, são geraradas as chaves permanentes de ambos os
 agentes, ou seja, as chaves que são utilizadas na autenticação dos
 mesmos.
 
@@ -937,12 +936,12 @@ mesmos.
 \subsection{Definição do Emissor e do
 Recetor}\label{definiuxe7uxe3o-do-emissor-e-do-recetor}}
 
-    Nesta secção, é definido o comportamento de cada um dos agentes na
+    De seguida, definiu-se o comportamento de cada um dos agentes na
 sessão síncrona segura de troca de informação utilizando o protocolo
-\textbf{ECDH} e o algoritmo de assinatura \textbf{ECDSA}. É assumido que
-as chaves públicas \textbf{ECDSA} de cada agente já são conhecidas por
-ambos, pelo que podem ser utilizadas na autenticação dos agentes ao
-realizar o protocolo de acordo de chaves \textbf{ECDH}. As chaves
+\textbf{ECDH} e o algoritmo de assinatura \textbf{ECDSA}. Assim como anteriormente,
+assume-se que as chaves públicas \textbf{ECDSA} de cada agente já são conhecidas por
+ambos, pelo que podem ser utilizadas na autenticação dos mesmos, ao
+realizar o protocolo de acordo de chaves \textbf{ECDH}. Estas
 \textbf{ECDH} são geradas por sessão, de forma a acordar uma chave de
 sessão temporária e comum que permita a utilização de uma primitiva
 simétrica.
@@ -1136,25 +1135,24 @@ decifrada.
 
     Os resultados da realização deste trabalho prático são, na nossa
 opinião, muito satisfatórios visto que fomos capazes de cumprir com
-todos os objetivos propostos ao implementar duas sessões síncronas
-seguras de troca de informação entre agentes, uma utilizando o protocolo
-\textbf{DH} e o algoritmo de assinaturas \textbf{DSA} e outra utilizando
+todos os objetivos propostos, ao implementar duas sessões síncronas
+seguras de troca de informação entre dois agentes. Uma delas utilizando o protocolo
+\textbf{DH} e o algoritmo de assinaturas \textbf{DSA}, e outra utilizando
 o protocolo \textbf{ECDH} e o algoritmo de assinaturas \textbf{ECDSA}.
-Além disso, a apresentação dos resultados (código e explicação) está
-feita de tal forma que seja mais simples entender o que foi a estratégia
-do grupo para a resolução dos problemas propostos.
+Além disso, a apresentação dos resultados (código e documentação) foi conseguida, de maneira a simplificar a compreensão da estratégia
+desenhada.
 
 No processo de resolução deste trabalho prático, o grupo deparou-se
 apenas com duas dificuldades que foram, eventualmente, ultrapassadas com
-mais ou menos esforço. Uma delas diz respeito à implementação do
-\textbf{TAES} devido ao facto de a primitiva ter que ser efetivamente
-implementada antes de a utilizar o que, no início, gerou um bocado de
-confusão em relação ao que devia ser feito. A segunda dificuldade esteve
-relacionada com o facto da especificação da sessão síncrona, visto que,
-esta foi a primeira vez que o grupo implementou algo do género, pelo que
-as características deste tipo de sessão tiveram que ser bem
-estabelecidades e diferenciadas em relação ao tipo de sessão que
-estávamos habituados a implementar (sessão assíncrona).
+mais ou menos esforço. Uma diz respeito à implementação do
+\textbf{TAES}, devido ao facto de a primitiva ter que ser efetivamente
+implementada, antes de poder ser utilizada, o que inicialmente gerou algumas
+dúvidas em relação ao que era pedido. A segunda dificuldade esteve
+relacionada com o facto da especificação da sessão síncrona, visto que
+esta foi a primeira vez que o grupo implementou uma, pelo que
+as suas características tiveram que ser bem
+estabelecidades e diferenciadas, em relação ao tipo de sessão implementados anteriormente
+ (sessão assíncrona).
 
     \hypertarget{referuxeancias}{%
 \section{Referências}\label{referuxeancias}}
