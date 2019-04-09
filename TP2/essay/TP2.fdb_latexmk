@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1554835019 "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex" "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.pdf" "TP2" 1554835019
-  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.aux" 1554835019 8 a94a2480d3289e625eea47cd1b285758 ""
-  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex" 1554835004 55096 75c2e3d0a6d564f022b038370d1aaa16 ""
+["pdflatex"] 1554846681 "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex" "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.pdf" "TP2" 1554846681
+  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.aux" 1554846681 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex" 1554846675 55073 fea3a31b8c663474901f7f0fe60bb974 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1550406775 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1550406775 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1550406775 2900 1537cc8184ad1792082cd229ecc269f4 ""
@@ -164,11 +164,11 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1550612907 7919196 9e3206bbad0f43e04993ebd321eeb9aa ""
   "TP2.aux" 0 -1 0 ""
   "TP2.out" 0 -1 0 ""
-  "TP2.tex" 1554835004 55096 75c2e3d0a6d564f022b038370d1aaa16 ""
+  "TP2.tex" 1554846675 55073 fea3a31b8c663474901f7f0fe60bb974 ""
   (generated)
   "TP2.log"
+  "TP2.aux"
   "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.log"
   "TP2.pdf"
   "/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.pdf"
   "TP2.out"
-  "TP2.aux"
