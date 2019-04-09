@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.2.19)  9 APR 2019 19:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.2.19)  9 APR 2019 19:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2344,7 +2344,56 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/it' in size <12> not available
 (Font)              Font shape `T1/ppl/b/it' tried instead on input line 624.
 [5] [6] [7]
 
+LaTeX Warning: Command \^ invalid in math mode on input line 836.
+
+/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex:836: Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.836 ... corpo base \textbf{K} como $K = GF(2\^{}
+                                                  n) $.
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex:836: Missing { inserted.
+<to be read again> 
+                   \egroup 
+l.836 ... corpo base \textbf{K} como $K = GF(2\^{}
+                                                  n) $.
+A left brace was mandatory here, so I've put one in.
+You might want to delete and/or insert some corrections
+so that I will find a matching right brace soon.
+(If you're confused by all this, try typing `I}' now.)
+
+/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex:836: You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.836 ... corpo base \textbf{K} como $K = GF(2\^{}
+                                                  n) $.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+/home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.tex:836: Missing } inserted.
+<inserted text> 
+                }
+l.836 ...po base \textbf{K} como $K = GF(2\^{}n) $
+                                                  .
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+Missing character: There is no � in font zplmr7v!
+
 LaTeX Warning: Command \textless invalid in math mode on input line 848.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 858.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 861.
 
 [8] [9] [10]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1015.
@@ -2376,7 +2425,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  36i,6n,38p,906b,775s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/mathpazo/fplmri.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfit1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplbi8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.pdf (11 pages, 198420 bytes).
+Output written on /home/frodo/UM/4º_Ano/2º_Semestre/EC/ec_g08/TP2/essay/TP2.pdf (11 pages, 198134 bytes).
 PDF statistics:
  173 PDF objects out of 1000 (max. 8388607)
  146 compressed objects within 2 object streams

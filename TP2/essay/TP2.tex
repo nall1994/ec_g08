@@ -673,7 +673,7 @@ A inicialização de uma instância deste tipo segue o seguinte algoritmo:
   \leqslant s < n$.
   
 \item
-  Calcular a chave pública k como \$ k = s * G \$ , onde s é a chave
+  Calcular a chave pública k como $ k = s * G $ , onde s é a chave
   privada.
 \end{itemize}
 
@@ -689,20 +689,20 @@ A assinatura de uma mensagem segue o seguinte algoritmo:
 \item
   Calcular um inteiro k aleatório tal que $1 \leqslant k < n$.
 \item
-  Calcular um ponto r\_point como \$ r\_point = k * G \$, onde G é o
+  Calcular um ponto r\_point como $ r\_point = k * G $, onde G é o
   ponto gerador da curva.
 \item
   Calcular um inteiro $r$ como $r = r\_point\_x \mod n $, onde
   r\_point\_x é a coordenada x do ponto calculado no passo 3.
 \item
-  Se \$ r == 0 \$ voltar ao passo 2. Caso contrário, prosseguir.
+  Se $ r == 0 $ voltar ao passo 2. Caso contrário, prosseguir.
 \item
   Calcular a inversa do aleatório k como $ k\_inverse = 1/k \mod n $.
 \item
   Calcular a assinatura como $ sig = k\_inverse * (hash + (r *
   private\_key)) \mod n $.
 \item
-  Se \$ sig == 0\$ retornar ao passo 2. Caso contrário, a assinatura da
+  Se $ sig == 0$ retornar ao passo 2. Caso contrário, a assinatura da
   mensagem é o par \texttt{(r,sig)}.
 \end{enumerate}
 
@@ -833,7 +833,7 @@ A inicialização de uma instância deste tipo segue o seguinte algoritmo:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Calcular o corpo base \textbf{K} como \$K = GF(2\^{}n) \$.
+  Calcular o corpo base \textbf{K} como $K = GF(2\^{}n) $.
 \item
   Gerar b aleatório a partir de \textbf{K}.
 \item
@@ -855,13 +855,13 @@ A inicialização de uma instância deste tipo segue o seguinte algoritmo:
   \begin{itemize}
   \tightlist
   \item
-    Se \$ \#P \textless{} N \$ voltar ao passo 7. Caso contrário,
+    Se $ \#P \textless{} N $ voltar ao passo 7. Caso contrário,
     prosseguir.
   \item
-    Se \$ \#P \textgreater{} N \$, calcular \$ h = \#P/N \$ e temos que
-    \$ G = hP \$. Encontrámos assim os parâmetros N, b e G.
+    Se $ \#P \textgreater{} N $, calcular $ h = \#P/N $ e temos que
+    $ G = hP $. Encontrámos assim os parâmetros N, b e G.
   \item
-    Caso contrário (\$ \#P == N \$), e \$ G = P \$. Encontrámos assim os
+    Caso contrário ($ \#P == N $), e $ G = P $. Encontrámos assim os
     parâmetros N, b e G.
   \end{itemize}
 \end{enumerate}
@@ -887,8 +887,8 @@ algoritmo:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Gerar a chave partilhada \textbf{shared\_key} como \$ shared\_key = sk
-  * peer\_public\_key \$ , onde \textbf{sk} será a chave partilhada de
+  Gerar a chave partilhada \textbf{shared\_key} como $ shared\_key = sk
+  * peer\_public\_key $ , onde \textbf{sk} será a chave partilhada de
   quem invocou a função e \textbf{pk} será a chave pública do agente com
   o qual ele quer combinar uma chave partilhada.
 \item
