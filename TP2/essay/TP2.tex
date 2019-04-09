@@ -1,0 +1,1015 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage[portuguese]{babel}
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    \usepackage{indentfirst}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{MIEI/MI - Estruturas Criptográficas\\
+            \large Trabalho Prático 1}
+    \author{
+        João Alves \\
+        a77070@alunos.uminho.pt
+        \and
+        Nuno Leite \\
+        a70132@alunos.uminho.pt
+    }
+    \date{
+        Universidade do Minho\\
+        \today
+    }
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    \section{Introdução}\label{introduuxe7uxe3o}
+
+    A resolução deste trabalho prático tem como propósito introduzir o
+\textbf{SageMath}, corpos finitos primos, curvas elípticas sobre esses
+corpos e esquemas criptográficos baseados nos mesmos. Os principais
+objetivos passam por:
+
+\begin{itemize}
+\tightlist
+\item
+  Implementar um esquema \emph{RSA} como uma classe \textbf{Python}.
+\item
+  Implementar um esquema \emph{ECDSA} como uma classe \textbf{Python}.
+\item
+  Implementar um esquema \emph{ECDH} como uma classe \textbf{Python}.
+\end{itemize}
+
+Além disso, devem ser aplicadas as seguintes particularidades aos
+esquemas desenvolvidos:
+
+\begin{itemize}
+\tightlist
+\item
+  O esquema \emph{RSA} deve fornecer métodos para cifrar, decifrar,
+  assinar e verificar uma mensagem.
+\item
+  O esquema \emph{ECDSA} deve utilizar uma das curvas primas definidas
+  no \textbf{FIPS186-4}.
+\item
+  O esquema \emph{ECDH} deve utilizar curvas elíticas binárias.
+\end{itemize}
+
+O relatório está dividido em três partes. Cada uma descreve os objetivos
+a cumprir e está estruturada de forma a que o texto entre os
+\emph{snippets} de código seja suficientemente explicativo, sobre a
+implementação e desenho da solução.
+
+    \section{Imports e funções
+comuns}\label{imports-e-funuxe7uxf5es-comuns}
+
+    Esta secção tem como objetivo importar as bibliotecas que serão
+necessárias na definição dos esquemas implementados neste trabalho, bem
+como a implementação de qualquer função que seja comum a várias secções.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{hashlib}
+        \PY{k+kn}{from} \PY{n+nn}{sage.crypto.util} \PY{k+kn}{import} \PY{n}{ascii\PYZus{}to\PYZus{}bin}\PY{p}{,} \PY{n}{bin\PYZus{}to\PYZus{}ascii}
+        
+        \PY{k}{def} \PY{n+nf}{hash\PYZus{}message}\PY{p}{(}\PY{n}{message}\PY{p}{)}\PY{p}{:}
+            \PY{n}{digest} \PY{o}{=} \PY{n}{hashlib}\PY{o}{.}\PY{n}{sha256}\PY{p}{(}\PY{n}{message}\PY{p}{)}\PY{o}{.}\PY{n}{hexdigest}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{digest}
+        
+        \PY{k}{def} \PY{n+nf}{convert\PYZus{}to\PYZus{}ZZ}\PY{p}{(}\PY{n}{message}\PY{p}{)}\PY{p}{:}
+            \PY{n}{raw} \PY{o}{=} \PY{n}{ascii\PYZus{}to\PYZus{}bin}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+            \PY{k}{return} \PY{n}{ZZ}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{raw}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{bpf}\PY{p}{(}\PY{n}{factors}\PY{p}{)}\PY{p}{:}
+            \PY{n}{f} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{pair} \PY{o+ow}{in} \PY{n}{factors}\PY{p}{:}
+                \PY{n}{p} \PY{o}{=} \PY{n}{pair}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{f}\PY{p}{:}
+                    \PY{n}{f} \PY{o}{=} \PY{n}{p}
+            \PY{k}{return} \PY{n}{f}
+            
+\end{Verbatim}
+
+    \section{Esquema RSA}\label{esquema-rsa}
+
+    O objetivo desta secção passa por definir a classe \textbf{Python} que
+implementa o algoritmo \textbf{RSA}. Esta permitirá inicializar uma
+intância, fornecendo-lhe o parâmetro de segurança (tamanho de chave).
+Após criada a instância, a mesma permitirá:
+
+\begin{itemize}
+\tightlist
+\item
+  Cifrar uma mensagem.
+\item
+  Decifrar uma mensagem previamente cifrada.
+\item
+  Assinar digitalmente uma mensagem.
+\item
+  Verificar uma assinatura digital de uma mensagem, previamente
+  produzida.
+\end{itemize}
+
+    \subsection{Definição do esquema
+RSA}\label{definiuxe7uxe3o-do-esquema-rsa}
+
+    O esquema \textbf{RSA} definido deve sempre receber como parâmetro de
+inicialização o parâmetro de segurança (tamanho em bits do módulo
+\textbf{RSA}). As 5 funções presentes na definição deste esquema têm a
+seguinte funcionalidade:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\_\_init(self,l)\_\_} tem como objetivo inicializar a
+  instância \textbf{RSA} e guardar o módulo \textbf{q}, a chave pública
+  e a chave privada, sendo que todas as variáveis utilizadas na geração
+  das anteriores são descartadas após a inicialização.
+\item
+  \texttt{encrypt(self,plaintext)} tem como objetivo cifrar a mensagem
+  \textbf{plaintext} recebida.
+\item
+  \texttt{decrypt(self,ciphertext)} tem como objetivo decifrar a
+  mensagem \textbf{ciphertext} recebida.
+\item
+  \texttt{sign(self,message)} tem como objetivo assinar digitalmente a
+  mensagem \textbf{message} recebida.
+\item
+  \texttt{verify(self,message,signature)} tem como objetivo verificar
+  que a assinatura \textbf{signature} está correta tendo em conta a
+  mensagem \textbf{message}.
+\end{itemize}
+
+A inicialização da instância \textbf{RSA} segue o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Gerar $p$ e $r$ tal que $p \textgreater 2r \geqslant 2^{l/2}$ .
+\item
+  $ q = pr $.
+\item
+  $ \varphi (q) = (p-1) (r-1) $ .
+\item
+  Gerar $k$ (chave pública) tal que $ gcd(k,\varphi(q)) = 1 $ .
+\item
+  Gerar $s$ (chave privada) tal que $ s = 1/k \mod \varphi(q) $.
+\end{itemize}
+
+A cifragem de uma mensagem segue o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Conversão da mensagem recebida para um inteiro \textbf{ZZ} utilizando
+  a função \texttt{convert\_to\_ZZ(message)} acima definida.
+\item
+  Calcular o criptograma em forma de inteiro, como $ ciphertext =
+  p^{k} \mod q $, onde $p$ é a mensagem a cifrar em inteiro e $k$ é a
+  chave pública.
+\item
+  Transformar o criptograma em forma de inteiro numa mensagem em texto e
+  retorná-lo.
+\end{itemize}
+
+A decifragem de um criptograma segue o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Conversão do criptograma recebido para um inteiro \textbf{ZZ}
+  utilizando a função \texttt{convert\_to\_ZZ(message)} acima definida.
+\item
+  Calcular o texto limpo em forma de inteiro, como $ plaintext = c^{s}
+  \mod q $, onde $c$ é o criptograma em inteiro e $s$ é a chave privada.
+\item
+  Transformar o texto limpo em forma de inteiro na mensagem em texto e
+  retorná-la
+\end{itemize}
+
+A assinatura de uma mensagem segue o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Calcular um \emph{hash} da mensagem recebida.
+\item
+  Transformar o \emph{hash} calculado em inteiro.
+\item
+  Calcular assinatura desse \emph{hash} como $ sig = h^{s} \mod q $,
+  onde $h$ é o \emph{hash} da mensagem e s $é$ a chave privada.
+\end{itemize}
+
+A verificação de uma assinatura segue o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Calcular \emph{mk} como $ mk = sig^{k} \mod q $, onde $sig$ é a
+  assinatura e $k$ é a chave pública.
+\item
+  Transformar \emph{mk} que está em inteiro, em texto (caractéres
+  \emph{ASCII}).
+\item
+  Calcular o hash da mensagem.
+\item
+  Se o hash calculado for igual ao hash extraído da assinatura, então a
+  assinatura é válida, caso contrário é inválida.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{class} \PY{n+nc}{RSA}\PY{p}{:}
+            
+            \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+                \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                    \PY{n}{r} \PY{o}{=} \PY{n}{random\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{True}\PY{p}{,}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{l}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{p} \PY{o}{=} \PY{n}{random\PYZus{}prime}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n+nb+bp}{True}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{l}\PY{p}{)}
+                    \PY{k}{if} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{r} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{l}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o+ow}{and} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{r}\PY{p}{:}
+                        \PY{k}{break}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{q} \PY{o}{=} \PY{n}{p} \PY{o}{*} \PY{n}{r}
+                \PY{n}{phi} \PY{o}{=} \PY{p}{(}\PY{n}{p} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{r} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+                
+                \PY{n}{k} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{n}{phi}\PY{p}{)}
+                \PY{k}{while} \PY{n}{gcd}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{n}{phi}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{:}
+                     \PY{n}{k} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{n}{phi}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{public\PYZus{}key} \PY{o}{=} \PY{n}{k}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{private\PYZus{}key} \PY{o}{=} \PY{n}{inverse\PYZus{}mod}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{,}\PY{n}{phi}\PY{p}{)}
+            
+            \PY{k}{def} \PY{n+nf}{encrypt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{plaintext}\PY{p}{)}\PY{p}{:}
+                \PY{n}{plaintext} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}ZZ}\PY{p}{(}\PY{n}{plaintext}\PY{p}{)}
+                \PY{n}{ciphertext\PYZus{}zz} \PY{o}{=} \PY{n}{power\PYZus{}mod}\PY{p}{(}\PY{n}{plaintext}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{q}\PY{p}{)}
+                \PY{n}{ciphertext\PYZus{}zz\PYZus{}raw} \PY{o}{=} \PY{n}{ciphertext\PYZus{}zz}\PY{o}{.}\PY{n}{binary}\PY{p}{(}\PY{p}{)}
+                
+                \PY{n}{bits\PYZus{}missing} \PY{o}{=} \PY{l+m+mi}{8} \PY{o}{\PYZhy{}} \PY{n}{Mod}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ciphertext\PYZus{}zz\PYZus{}raw}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+                \PY{n}{raw} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{n}{bits\PYZus{}missing}\PY{p}{)} \PY{o}{+} \PY{n}{ciphertext\PYZus{}zz\PYZus{}raw}
+                \PY{n}{ciphertext} \PY{o}{=} \PY{n}{bin\PYZus{}to\PYZus{}ascii}\PY{p}{(}\PY{n}{raw}\PY{p}{)}
+                
+                \PY{k}{return} \PY{n}{ciphertext}      
+            
+            \PY{k}{def} \PY{n+nf}{decrypt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{ciphertext}\PY{p}{)}\PY{p}{:}
+                \PY{n}{ciphertext} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}ZZ}\PY{p}{(}\PY{n}{ciphertext}\PY{p}{)}
+                \PY{n}{plaintext} \PY{o}{=} \PY{n}{power\PYZus{}mod}\PY{p}{(}\PY{n}{ciphertext}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{private\PYZus{}key}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{q}\PY{p}{)}
+                \PY{n}{raw\PYZus{}b} \PY{o}{=} \PY{n}{plaintext}\PY{o}{.}\PY{n}{binary}\PY{p}{(}\PY{p}{)}
+                
+                \PY{n}{bits\PYZus{}missing} \PY{o}{=} \PY{l+m+mi}{8} \PY{o}{\PYZhy{}} \PY{n}{Mod}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{raw\PYZus{}b}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+                \PY{n}{raw} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{n}{bits\PYZus{}missing}\PY{p}{)} \PY{o}{+} \PY{n}{raw\PYZus{}b}
+        
+                \PY{k}{return} \PY{n}{bin\PYZus{}to\PYZus{}ascii}\PY{p}{(}\PY{n}{raw}\PY{p}{)}        
+            
+            \PY{k}{def} \PY{n+nf}{sign}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{message}\PY{p}{)}\PY{p}{:}
+                \PY{n}{msg\PYZus{}hash} \PY{o}{=} \PY{n}{hash\PYZus{}message}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+                \PY{n}{message} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}ZZ}\PY{p}{(}\PY{n}{msg\PYZus{}hash}\PY{p}{)}
+                \PY{k}{return} \PY{n}{power\PYZus{}mod}\PY{p}{(}\PY{n}{message}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{private\PYZus{}key}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{q}\PY{p}{)}        
+            
+            \PY{k}{def} \PY{n+nf}{verify}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{message}\PY{p}{,}\PY{n}{signature}\PY{p}{)}\PY{p}{:}
+                \PY{n}{mk} \PY{o}{=} \PY{n}{power\PYZus{}mod}\PY{p}{(}\PY{n}{signature}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{public\PYZus{}key}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{q}\PY{p}{)}
+                \PY{n}{mk\PYZus{}raw} \PY{o}{=} \PY{n}{mk}\PY{o}{.}\PY{n}{binary}\PY{p}{(}\PY{p}{)}
+                
+                \PY{n}{bits\PYZus{}missing} \PY{o}{=} \PY{l+m+mi}{8} \PY{o}{\PYZhy{}} \PY{n}{Mod}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{mk\PYZus{}raw}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}
+                \PY{n}{mk\PYZus{}raw} \PY{o}{=} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o}{*} \PY{n}{bits\PYZus{}missing}\PY{p}{)} \PY{o}{+} \PY{n}{mk\PYZus{}raw}
+                
+                \PY{n}{message} \PY{o}{=} \PY{n}{hash\PYZus{}message}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+                \PY{n}{mk\PYZus{}raw} \PY{o}{=} \PY{n}{bin\PYZus{}to\PYZus{}ascii}\PY{p}{(}\PY{n}{mk\PYZus{}raw}\PY{p}{)}
+                \PY{k}{return} \PY{n}{mk\PYZus{}raw} \PY{o}{==} \PY{n}{message}
+\end{Verbatim}
+
+    \subsection{Teste ao Esquema RSA}\label{teste-ao-esquema-rsa}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Iniciar uma instância RSA com parâmetro de segurança de 2048 bits.}
+        \PY{n}{rsa} \PY{o}{=} \PY{n}{RSA}\PY{p}{(}\PY{l+m+mi}{2048}\PY{p}{)}
+        \PY{n}{msg} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Estruturas Criptográficas \PYZhy{} Trabalho 2 \PYZhy{} Iniciação SageMath \PYZhy{} Esquema RSA}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{message:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}cifrar a mensagem com a instância previamente criada}
+        \PY{n}{ciphertext} \PY{o}{=} \PY{n}{rsa}\PY{o}{.}\PY{n}{encrypt}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+        
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ ciphertext:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{n}{ciphertext}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Decifrar o criptograma previamente produzido}
+        \PY{n}{plaintext} \PY{o}{=} \PY{n}{rsa}\PY{o}{.}\PY{n}{decrypt}\PY{p}{(}\PY{n}{ciphertext}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{decrypted:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{n}{plaintext}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Assinar e verificar a assinatura}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{signature result:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sig} \PY{o}{=} \PY{n}{rsa}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+        \PY{k}{if}\PY{p}{(}\PY{n}{rsa}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{msg}\PY{p}{,}\PY{n}{sig}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:} \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not OK!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+message:
+Estruturas Criptográficas - Trabalho 2 - Iniciação SageMath - Esquema RSA
+
+ ciphertext:
+͋����z�n\$fo�Y�![�<R�M�������a��mc=�"���;@8�Kڔ�@\textbackslash{}7ʈ��
+�w�i��uL�B�87�Ge,]?�²���*q
+JW򿈼S\_ ��\}�<?\_����\_�ˮ����D�Y��e�
+�Mĭ�\&�Q¹C��'a�p�Wl��(����l�P��;W�Ş儰wp�A��S��m!�R��`��g�[]V5��\$ӠفA� G)w�ܪ�R�`���E]\{FHTACu�f�\{��y\textasciitilde{}'�k�/��[.����1��'�k25(���h.Paa\textbackslash{}���)-�����h��Qw������":)ib=xf��㝪��k3���y�=d��F)S�JH���F̜\{����b\&!�Y�p��>�tk�9�T \}p��Fî�;�˩�o�Rt�7L����C;w\$��\$j�c�N\$R�P<.z؃�\{��5�y�w�)�	4F�,��\textbackslash{})dQ@ƲLA�\{��)M�;ꓯR��\#ex�?�qÊvU\#��k<8h�
+
+
+decrypted:
+Estruturas Criptográficas - Trabalho 2 - Iniciação SageMath - Esquema RSA
+
+
+signature result:
+OK
+
+    \end{Verbatim}
+
+    \section{Esquema ECDSA}\label{esquema-ecdsa}
+
+    Nesta secção, definiu-se uma classe \textbf{Python} que implementa o
+algoritmo \textbf{ECDSA}. A inicialização desta classe terá como
+objetivo criar os parâmetros, a partir da curva NIST \textbf{P256},
+gerando também a curva elítica associada, bem como o seu ponto gerador,
+uma chave pública e uma chave privada. Após a criação da instância, a
+mesma permitirá:
+
+\begin{itemize}
+\tightlist
+\item
+  Assinar uma mensagem.
+\item
+  Verificar a assinatura de uma mensagem.
+\end{itemize}
+
+    \subsection{\texorpdfstring{Definição da curva
+\emph{NIST}}{Definição da curva NIST}}\label{definiuxe7uxe3o-da-curva-nist}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{NIST} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+        \PY{n}{NIST}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{P\PYZhy{}256}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{115792089210356248762697446949407573530086143415290314195533631308867097853951}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{115792089210356248762697446949407573529996955224135760342422259061068512044369}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c49d360886e704936a6678e1139d26b7819f7e90}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{7efba1662985be9403cb055c75d4f7e0ce8d84a9c5114abcaf3177680104fa0d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+    \subsection{Definição do esquema
+ECDSA}\label{definiuxe7uxe3o-do-esquema-ecdsa}
+
+    As 3 funções presentes neste esquema são as seguintes:
+
+\begin{itemize}
+\tightlist
+\item
+  A função \texttt{\_\_init(self)\_\_} tem como objetivo inicializar os
+  parâmetros necessários para que seja, posteriormente, possível assinar
+  e verificar mensagens.
+\item
+  A função \texttt{sign(self,message)} tem como objetivo assinar
+  digitalmente a mensagem \textbf{message}.
+\item
+  A função \texttt{verify(self,message,signature)} tem como objetivo
+  verificar a assinatura \textbf{signature} tendo em conta a mensagem
+  \textbf{message}.
+\end{itemize}
+
+A inicialização de uma instância deste tipo segue o seguinte algoritmo:
+
+\begin{itemize}
+\tightlist
+\item
+  Extrair os parâmetros presentes na curva \emph{NIST} definida no
+  dicionário NIST com a chave \texttt{P-256}.
+\item
+  Criar a curva elítica associada.
+\item
+  Criar o ponto gerador da curva a partir de \texttt{Gx} e \texttt{Gy}
+  extraídos.
+\item
+  Calcular aleatoriamente uma chave privada \textbf{s} tal que $1
+  \leqslant s < n$.
+  
+\item
+  Calcular a chave pública k como \$ k = s * G \$ , onde s é a chave
+  privada.
+\end{itemize}
+
+A assinatura de uma mensagem segue o seguinte algoritmo:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcular o \emph{hash} da mensagem e converter esse \emph{hash} num
+  inteiro do tipo \textbf{ZZ} utilizando a função
+  \texttt{convert\_to\_ZZ(message)}.
+\item
+  Calcular um inteiro k aleatório tal que $1 \leqslant k < n$.
+\item
+  Calcular um ponto r\_point como \$ r\_point = k * G \$, onde G é o
+  ponto gerador da curva.
+\item
+  Calcular um inteiro $r$ como $r = r\_point\_x \mod n $, onde
+  r\_point\_x é a coordenada x do ponto calculado no passo 3.
+\item
+  Se \$ r == 0 \$ voltar ao passo 2. Caso contrário, prosseguir.
+\item
+  Calcular a inversa do aleatório k como $ k\_inverse = 1/k \mod n $.
+\item
+  Calcular a assinatura como $ sig = k\_inverse * (hash + (r *
+  private\_key)) \mod n $.
+\item
+  Se \$ sig == 0\$ retornar ao passo 2. Caso contrário, a assinatura da
+  mensagem é o par \texttt{(r,sig)}.
+\end{enumerate}
+
+A verificação da assinatura de uma mensagem segue o seguinte algoritmo:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Se $ 1 \leqslant r < n $ e $ 1 < sig < n $, prosseguir. Caso contrário, assinatura inválida.
+\item
+  Calcular o \emph{hash} da mensagem e converter esse \emph{hash} em
+  inteiro \textbf{ZZ}.
+\item
+  Calcular w como $ w = 1/sig \mod n $.
+\item
+  Calcular u1 como $ u1 = hash * w \mod n $.
+\item
+  Calcular u2 como $ u2 = r * w \mod n $.
+\item
+  Calcular cp como $ cp = u1 * G + u2 * public\_key $.
+\item
+  Se $ (cp\_x \mod n) == (r \mod n) $, onde cp\_x é a coordenada x do
+  ponto cp, a assinatura é válida. Caso contrário, a assinatura é
+  inválida.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{class} \PY{n+nc}{ECDSA}\PY{p}{:}
+            
+            \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n}{curve} \PY{o}{=} \PY{n}{NIST}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{P\PYZhy{}256}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{p} \PY{o}{=} \PY{n}{curve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n} \PY{o}{=} \PY{n}{curve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                \PY{n}{b} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{curve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}
+                \PY{n}{Gx} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{curve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}
+                \PY{n}{Gy} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{curve}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{E} \PY{o}{=} \PY{n}{EllipticCurve}\PY{p}{(}\PY{n}{GF}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{n}{b}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{E}\PY{p}{(}\PY{p}{(}\PY{n}{Gx}\PY{p}{,}\PY{n}{Gy}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{private\PYZus{}key} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{public\PYZus{}key} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{private\PYZus{}key} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G}
+            
+            
+            \PY{k}{def} \PY{n+nf}{sign}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{message}\PY{p}{)}\PY{p}{:}
+                \PY{n}{digest} \PY{o}{=} \PY{n}{hash\PYZus{}message}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+                \PY{n}{digest} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}ZZ}\PY{p}{(}\PY{n}{digest}\PY{p}{)}
+                \PY{n}{back\PYZus{}to\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{False}
+                \PY{k}{while} \PY{o+ow}{not} \PY{n}{back\PYZus{}to\PYZus{}1}\PY{p}{:}
+                    \PY{n}{ok} \PY{o}{=} \PY{n+nb+bp}{False}
+                    \PY{n}{k} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}
+                    \PY{n}{r\PYZus{}point} \PY{o}{=} \PY{n}{k} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G}
+                    \PY{n}{r} \PY{o}{=} \PY{n}{Mod}\PY{p}{(}\PY{n}{r\PYZus{}point}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{r} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{back\PYZus{}to\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{False}
+                    \PY{k}{else} \PY{p}{:}
+                        \PY{k}{while} \PY{o+ow}{not} \PY{n}{ok}\PY{p}{:}
+                            \PY{n}{k\PYZus{}inverse} \PY{o}{=} \PY{n}{inverse\PYZus{}mod}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}
+                            \PY{n}{temp\PYZus{}calc} \PY{o}{=} \PY{n}{k\PYZus{}inverse} \PY{o}{*} \PY{p}{(}\PY{n}{digest} \PY{o}{+} \PY{p}{(}\PY{n}{r}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{private\PYZus{}key}\PY{p}{)}\PY{p}{)}
+                            \PY{n}{s} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{temp\PYZus{}calc}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+                            \PY{k}{if} \PY{n}{s} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                                \PY{n}{ok} \PY{o}{=} \PY{n+nb+bp}{True}
+                            \PY{k}{else}\PY{p}{:}
+                                \PY{n}{ok} \PY{o}{=} \PY{n+nb+bp}{True}
+                                \PY{n}{back\PYZus{}to\PYZus{}1} \PY{o}{=} \PY{n+nb+bp}{True}
+                
+                \PY{k}{return} \PY{n}{r}\PY{p}{,}\PY{n}{s}
+            
+            \PY{k}{def} \PY{n+nf}{verify}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{message}\PY{p}{,}\PY{n}{signature}\PY{p}{)}\PY{p}{:}
+                \PY{n}{sig\PYZus{}r} \PY{o}{=} \PY{n}{signature}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{sig\PYZus{}s} \PY{o}{=} \PY{n}{signature}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                \PY{k}{if} \PY{p}{(}\PY{n}{sig\PYZus{}r} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{sig\PYZus{}r} \PY{o}{\PYZgt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{sig\PYZus{}s} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1} \PY{o+ow}{or} \PY{n}{sig\PYZus{}s} \PY{o}{\PYZgt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{return} \PY{n+nb+bp}{False}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{digest} \PY{o}{=} \PY{n}{hash\PYZus{}message}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+                    \PY{n}{digest} \PY{o}{=} \PY{n}{convert\PYZus{}to\PYZus{}ZZ}\PY{p}{(}\PY{n}{digest}\PY{p}{)}
+                    \PY{n}{w} \PY{o}{=} \PY{n}{inverse\PYZus{}mod}\PY{p}{(}\PY{n}{sig\PYZus{}s}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}
+                    \PY{n}{u1} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{digest}\PY{o}{*}\PY{n}{w}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{u2} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{sig\PYZus{}r}\PY{o}{*}\PY{n}{w}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{cp} \PY{o}{=} \PY{n}{u1}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G} \PY{o}{+} \PY{n}{u2}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{public\PYZus{}key}
+                    \PY{k}{if} \PY{n}{Mod}\PY{p}{(}\PY{n}{cp}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)} \PY{o}{==} \PY{n}{Mod}\PY{p}{(}\PY{n}{sig\PYZus{}r}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{return} \PY{n+nb+bp}{True}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{k}{return} \PY{n+nb+bp}{False}
+\end{Verbatim}
+
+    \subsection{Teste ao esquema ECDSA}\label{teste-ao-esquema-ecdsa}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{e} \PY{o}{=} \PY{n}{ECDSA}\PY{p}{(}\PY{p}{)}
+        \PY{n}{msg} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Estruturas Criptográficas \PYZhy{} Trabalho 2 \PYZhy{} Iniciação SageMath \PYZhy{} Esquema ECDSA}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{r}\PY{p}{,}\PY{n}{s} \PY{o}{=} \PY{n}{e}\PY{o}{.}\PY{n}{sign}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+        \PY{k}{if} \PY{n}{e}\PY{o}{.}\PY{n}{verify}\PY{p}{(}\PY{n}{msg}\PY{p}{,}\PY{p}{(}\PY{n}{r}\PY{p}{,}\PY{n}{s}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{else}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not OK}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OK
+
+    \end{Verbatim}
+
+    \section{Esquema ECDH}\label{esquema-ecdh}
+
+    \subsection{Definição do esquema
+ECDH}\label{definiuxe7uxe3o-do-esquema-ecdh}
+
+    As 3 funções presentes neste esquema são as seguintes:
+
+\begin{itemize}
+\tightlist
+\item
+  A função \texttt{init(self,n)} tem como objetivo definir os parâmetros
+  da curva, a partir da dimensão do corpo \textbf{K} recebida como
+  parâmetro.
+\item
+  A função \texttt{generate\_key\_pair(self)} tem como objetivo gerar um
+  par de chaves (pública e privada) na instância definida.
+\item
+  A função \texttt{exchange(self,sk,peer\_public\_key)} tem como
+  objetivo calcular a chave comum a dois agentes, recebendo para o
+  efeito a chave privada de um e a chave pública do outro.
+\end{itemize}
+
+A inicialização de uma instância deste tipo segue o seguinte algoritmo:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Calcular o corpo base \textbf{K} como \$K = GF(2\^{}n) \$.
+\item
+  Gerar b aleatório a partir de \textbf{K}.
+\item
+  Criar a curva elítica sobre o corpo \textbf{K}, definida pelas raízes
+  em \(K^2\) pelo polinómio $ \phi = y^{2} + xy + x^{3} + x^{2} +
+  b$.
+\item
+  Calcular a ordem da curva elítica criada.
+\item
+  Encontrar o maior factor primo \textbf{N} da ordem calculada.
+\item
+  Se $ N \textless{} 2^{n-1} $, voltar ao passo 2. Caso
+  contrário, prosseguir.
+\item
+  Calcular um ponto aleatório \textbf{P} em \textbf{E}.
+\item
+  Calcular a ordem de \textbf{P} (\#P):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Se \$ \#P \textless{} N \$ voltar ao passo 7. Caso contrário,
+    prosseguir.
+  \item
+    Se \$ \#P \textgreater{} N \$, calcular \$ h = \#P/N \$ e temos que
+    \$ G = hP \$. Encontrámos assim os parâmetros N, b e G.
+  \item
+    Caso contrário (\$ \#P == N \$), e \$ G = P \$. Encontrámos assim os
+    parâmetros N, b e G.
+  \end{itemize}
+\end{enumerate}
+
+A geração do par de chaves segue o seguinte algoritmo:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  É gerada uma chave privada \textbf{sk} tal que $ 1 \leqslant sk
+  < N $ .
+\item
+  É calculada a chave pública \textbf{pk} como $ pk = sk * G $.
+\item
+  é retornado o par \texttt{(sk,pk)}.
+\end{enumerate}
+
+A geração da chave partilhada por ambos os agentes segue o seguinte
+algoritmo:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Gerar a chave partilhada \textbf{shared\_key} como \$ shared\_key = sk
+  * peer\_public\_key \$ , onde \textbf{sk} será a chave partilhada de
+  quem invocou a função e \textbf{pk} será a chave pública do agente com
+  o qual ele quer combinar uma chave partilhada.
+\item
+  Retornar a chave partilhada.
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{class} \PY{n+nc}{ECDH}\PY{p}{:}
+            
+            \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                \PY{n}{K}\PY{o}{.}\PY{o}{\PYZlt{}}\PY{n}{t}\PY{o}{\PYZgt{}} \PY{o}{=} \PY{n}{GF}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{\PYZca{}}\PY{n}{n}\PY{p}{)}
+                \PY{n}{ok} \PY{o}{=} \PY{n+nb+bp}{False}
+                \PY{k}{while} \PY{o+ow}{not} \PY{n}{ok}\PY{p}{:}
+                    \PY{n}{b} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{E} \PY{o}{=} \PY{n}{EllipticCurve}\PY{p}{(}\PY{n}{K}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{b}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{e\PYZus{}order} \PY{o}{=} \PY{n}{E}\PY{o}{.}\PY{n}{order}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{F} \PY{o}{=} \PY{n}{factor}\PY{p}{(}\PY{n}{e\PYZus{}order}\PY{p}{)}
+                    \PY{n}{N} \PY{o}{=} \PY{n}{bpf}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{F}\PY{p}{)}\PY{p}{)}
+                    \PY{k}{if} \PY{n}{N} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{o}{\PYZca{}}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                        \PY{k}{pass}
+                    \PY{k}{else}\PY{p}{:}
+                        \PY{k}{while} \PY{n+nb+bp}{True}\PY{p}{:}
+                            \PY{n}{P} \PY{o}{=} \PY{n}{E}\PY{o}{.}\PY{n}{random\PYZus{}point}\PY{p}{(}\PY{p}{)}
+                            \PY{n}{P\PYZus{}order} \PY{o}{=} \PY{n}{P}\PY{o}{.}\PY{n}{order}\PY{p}{(}\PY{p}{)}
+                            \PY{k}{if} \PY{n}{P\PYZus{}order} \PY{o}{\PYZlt{}} \PY{n}{N}\PY{p}{:}
+                                \PY{k}{pass}
+                            \PY{k}{elif} \PY{n}{P\PYZus{}order} \PY{o}{\PYZgt{}} \PY{n}{N}\PY{p}{:}
+                                \PY{n}{h} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{P\PYZus{}order}\PY{o}{/}\PY{n}{N}\PY{p}{)}
+                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G} \PY{o}{=} \PY{n}{h}\PY{o}{*}\PY{n}{P}
+                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{N} \PY{o}{=} \PY{n}{N}
+                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{=} \PY{n}{b}
+                                \PY{n}{ok} \PY{o}{=} \PY{n+nb+bp}{True}
+                                \PY{k}{break}
+                            \PY{k}{else}\PY{p}{:}
+                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{N} \PY{o}{=} \PY{n}{N}
+                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{b} \PY{o}{=} \PY{n}{b}
+                                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G} \PY{o}{=} \PY{n}{P}
+                                \PY{n}{ok} \PY{o}{=} \PY{n+nb+bp}{True}
+                                \PY{k}{break}
+                
+            \PY{k}{def} \PY{n+nf}{generate\PYZus{}key\PYZus{}pair}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n}{private\PYZus{}key} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{N}\PY{p}{)}
+                \PY{n}{public\PYZus{}key} \PY{o}{=} \PY{n}{private\PYZus{}key} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{G}
+                \PY{k}{return} \PY{p}{(}\PY{n}{private\PYZus{}key}\PY{p}{,}\PY{n}{public\PYZus{}key}\PY{p}{)}
+                
+            \PY{k}{def} \PY{n+nf}{exchange}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{sk}\PY{p}{,}\PY{n}{peer\PYZus{}public\PYZus{}key}\PY{p}{)}\PY{p}{:}
+                \PY{n}{shared\PYZus{}key} \PY{o}{=} \PY{n}{sk} \PY{o}{*} \PY{n}{peer\PYZus{}public\PYZus{}key}
+                \PY{k}{return} \PY{n}{shared\PYZus{}key}
+\end{Verbatim}
+
+    \subsection{Teste ao esquema ECDH}\label{teste-ao-esquema-ecdh}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{ecdh} \PY{o}{=} \PY{n}{ECDH}\PY{p}{(}\PY{l+m+mi}{163}\PY{p}{)}
+        \PY{n}{alice} \PY{o}{=} \PY{n}{ecdh}\PY{o}{.}\PY{n}{generate\PYZus{}key\PYZus{}pair}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}pair (alice\PYZus{}private\PYZus{}key,alice\PYZus{}public\PYZus{}key)}
+        \PY{n}{bob} \PY{o}{=} \PY{n}{ecdh}\PY{o}{.}\PY{n}{generate\PYZus{}key\PYZus{}pair}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}pair (bob\PYZus{}private\PYZus{}key,bob\PYZus{}public\PYZus{}key)}
+        \PY{n}{alice\PYZus{}shared} \PY{o}{=} \PY{n}{ecdh}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{alice}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{bob}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n}{bob\PYZus{}shared} \PY{o}{=} \PY{n}{ecdh}\PY{o}{.}\PY{n}{exchange}\PY{p}{(}\PY{n}{bob}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{alice}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{if} \PY{n}{alice\PYZus{}shared} \PY{o}{==} \PY{n}{bob\PYZus{}shared}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}}
+        \PY{k}{else}\PY{p}{:}
+            \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not OK}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+OK
+
+    \end{Verbatim}
+
+    \section{Conclusão}\label{conclusuxe3o}
+
+    Os resultados da realização deste trabalho prático são, na nossa
+opinião, bastante satisfatórios, visto que fomos capazes de cumprir
+todos os objetivos inicialmente propostos, ou seja, à implementação de
+um esquema \textbf{RSA} com funções de cifragem, decifragem, assinatura
+e verificação, à implementação de um esquema \textbf{ECDSA} a partir de
+uma curva standard da \emph{NIST} com funções de assinatura e
+verificação e, finalmente à implementação de um esquema \textbf{ECDH}
+sobre curvas elíticas binárias, fornecendo funções que possibilitem
+gerar um par de chaves com base nos parâmetros criados e a geração da
+chave partilhada.
+
+Durante a resolução deste trabalho prático, o grupo deparou-se com uma
+principal dificuldade, que diz respeito ao grupo 3 deste trabalho
+(esquema \textbf{ECDH}) visto que, inicialmente, não conseguimos
+entender concretamente o que tínhamos que fazer. Essa dificuldade foi
+ultrapassada após uma sessão de esclarecimento de dúvidas com o
+professor.
+
+Em suma, é da nossa opinião que realizámos um trabalho muito bom,
+principalmente, tendo em conta que este foi o primeiro contacto do grupo
+na utilização do \emph{sagemath} para implementação de criptosistemas.
+
+\pagebreak
+
+    \section{Referências}\label{referuxeancias}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AADIuhV5bL5qqzbM_RLS-gMXa/WorkSheets/TP2?dl=0\&subfolder_nav_tracking=1}{Worksheets
+  TP2 do professor}
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AACsRYRoRg46CR1njyZ_nJtza/WorkSheets/TP3?dl=0\&subfolder_nav_tracking=1}{Worksheets
+  TP3 do professor}
+\item
+  \href{http://doc.sagemath.org/html/en/reference/curves/sage/schemes/elliptic_curves/ell_finite_field.html}{Elliptic
+  curves over Finite fields - SageMath Doc}
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AAC5XUPllha9QXo-vVxTHqXna/Docs/NOTAS_MANUSCRITAS?dl=0\&subfolder_nav_tracking=1}{Notas
+  Manuscritas do professor}
+\item
+  \href{http://www.inf.ufsc.br/~bosco.sobral/ensino/ine5630/material-cripto-seg/crpt_trabalho_ecdsa.pdf}{Trabalho
+  ECDSA - Márcio Aurélio Ribeiro Moreira}
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
