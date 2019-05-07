@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.2}{Algoritmo de Boneh \046 Venkatesan}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Defini\347\343o do or\341culo HNP}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Defini\347\343o da fun\347\343o de gera\347\343o do vetor alet\363rio e vetor u}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Defini\347\343o do algoritmo de Boneh \046 Venkatesan}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Teste ao algoritmo de Boneh \046 Venkatesan}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Defini\347\343o do Esquema NTRU-Encrypt}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{M\363dulos Importados e Par\342metros P\372blicos}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Defini\347\343o de Fun\347\365es Auxiliares}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Defini\347\343o do Esquema}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.4}{Teste ao esquema NTRU}{section.3}% 11
+\BOOKMARK [1][-]{section.4}{Ataques de invers\343o}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Defini\347\343o da classe NTRU e da classe LAT}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.2}{Invers\343o da chave p\372blica}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.3}{Invers\343o do criptograma}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{Conclus\343o}{}% 16
+\BOOKMARK [1][-]{section.6}{Refer\352ncias}{}% 17

@@ -1,0 +1,959 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    \usepackage[portuguese]{babel}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    \usepackage{indentfirst}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{TP3}
+    \title{MIEI/MI - Estruturas Criptográficas\\
+            \large Trabalho Prático 3}
+    \author{
+        João Alves \\
+        a77070@alunos.uminho.pt
+        \and
+        Nuno Leite \\
+        a70132@alunos.uminho.pt
+    }
+    \date{
+        Universidade do Minho\\
+        \today
+    }
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+
+    \hypertarget{introduuxe7uxe3o}{%
+\section{Introdução}\label{introduuxe7uxe3o}}
+
+    A resolução deste trabalho prático tem 3 objetivos principais:
+
+\begin{itemize}
+\tightlist
+\item
+  Criar uma classe \textbf{Python} que implemente o algoritmo de
+  \emph{Boneh \& Venkatesan} .
+\item
+  Implementação de um esquema de assinaturas digitais \emph{NTRUEncrypt}
+  .
+\item
+  Estudar gamas de valores de determinados parâmetros que tornem viável
+  um ataque de inversão de chave pública ou inversão do criptograma
+  utilizando redução de bases.
+\end{itemize}
+
+Este relatório está, desta forma, dividido em três partes, cada parte
+correspondente à resolução de um dos problemas e, além disso, está
+estruturado de forma a que o texto entre os \emph{snippets} de código
+seja suficientemente explicativo sobre a implementação e desenho da
+solução em cada um dos problemas.
+
+    \hypertarget{algoritmo-de-boneh-venkatesan}{%
+\section{Algoritmo de Boneh \&
+Venkatesan}\label{algoritmo-de-boneh-venkatesan}}
+
+    Esta secção tem como propósito definir uma classe \textbf{Python} que
+implemente o algoritmo de \emph{Boneh \& Venkatesan} , que explora o
+\emph{Hidden Number Problem} que, se bem sucedido, permite obter um
+segredo a partir de um conjunto de dados. Além disso, a secção está
+dividida em quatro partes:
+
+\begin{itemize}
+\tightlist
+\item
+  A primeira parte define o oráculo HNP, que gera um segredo,permite
+  calcular o msb e compara um segredo calculado com o gerado;
+\item
+  A segunda parte define as funções de geração do vetor aleatório
+  \textbf{x} e do vetor composto por \$ ui = msb(xi,s) \$ para \$ i=0 \$
+  até \$ i = l - 1 \$.
+\item
+  A terceira parte define apenas o algoritmo de \emph{Boneh \&
+  Venkatesan} .
+\item
+  A quarta parte, apelidada de teste, fornece os parâmetros necessários
+  à instância do algoritmo para que ele descubra o segredo \textbf{s} a
+  partir dos mesmos.
+\end{itemize}
+
+    \hypertarget{definiuxe7uxe3o-do-oruxe1culo-hnp}{%
+\subsection{Definição do oráculo
+HNP}\label{definiuxe7uxe3o-do-oruxe1culo-hnp}}
+
+    O propósito desta secção passa por definir o oráculo que gera um segredo
+e, posteriormente, retorna o vetor u, com l elementos, onde cada um é um
+inteiro representativo dos k bits mais significativos de \$ s * xi \$.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k}{class} \PY{n+nc}{HNPOracle}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} gerar o segredo.}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{secret} \PY{o}{=} \PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+                 \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{secret}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{k}{print} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{secret}
+             
+             \PY{k}{def} \PY{n+nf}{msb}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{xi}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{value} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n}{Mod}\PY{p}{(}\PY{n}{xi}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{secret}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{binary\PYZus{}value} \PY{o}{=} \PY{n}{value}\PY{o}{.}\PY{n}{digits}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{binary\PYZus{}value}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{value\PYZus{}str} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{binary\PYZus{}value}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{k}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{binary\PYZus{}value}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{value\PYZus{}str} \PY{o}{+}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{binary\PYZus{}value}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{value\PYZus{}str} \PY{o}{+}\PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{binary\PYZus{}value}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{value\PYZus{}str}
+             
+             \PY{k}{def} \PY{n+nf}{compare\PYZus{}secret}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{calculated\PYZus{}secret}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{calculated\PYZus{}secret} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{secret}\PY{p}{:}
+                     \PY{k}{return} \PY{n+nb+bp}{True}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{return} \PY{n+nb+bp}{False}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-da-funuxe7uxe3o-de-gerauxe7uxe3o-do-vetor-aletuxf3rio-e-vetor-u}{%
+\subsection{Definição da função de geração do vetor aletório e vetor
+u}\label{definiuxe7uxe3o-da-funuxe7uxe3o-de-gerauxe7uxe3o-do-vetor-aletuxf3rio-e-vetor-u}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k}{def} \PY{n+nf}{generate\PYZus{}l\PYZus{}random\PYZus{}elements}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{p}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ZZ}\PY{o}{.}\PY{n}{random\PYZus{}element}\PY{p}{(}\PY{n}{p}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{n}{x}
+         
+         \PY{k}{def} \PY{n+nf}{calculate\PYZus{}u\PYZus{}vector}\PY{p}{(}\PY{n}{x\PYZus{}vector}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{oracle}\PY{p}{)}\PY{p}{:}
+             \PY{n}{u\PYZus{}vector} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{xi} \PY{o+ow}{in} \PY{n}{x\PYZus{}vector}\PY{p}{:}
+                 \PY{n}{ui} \PY{o}{=} \PY{n}{oracle}\PY{o}{.}\PY{n}{msb}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{xi}\PY{p}{)}
+                 \PY{n}{ui} \PY{o}{=} \PY{n}{ZZ}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{ui}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{u\PYZus{}vector}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ui}\PY{p}{)}
+             \PY{k}{return} \PY{n}{u\PYZus{}vector}  
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-algoritmo-de-boneh-venkatesan}{%
+\subsection{Definição do algoritmo de Boneh \&
+Venkatesan}\label{definiuxe7uxe3o-do-algoritmo-de-boneh-venkatesan}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{k+kn}{import} \PY{n+nn}{sage.modules.free\PYZus{}module\PYZus{}integer} \PY{k+kn}{as} \PY{n+nn}{fmi}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{k}{class} \PY{n+nc}{BV}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{x}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} construir a matriz L , lambda,o target T e, finalmente, o reticulado Lret}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{param\PYZus{}lambda} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{\PYZca{}}\PY{p}{(}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{param\PYZus{}lambda} \PY{o}{*} \PY{n}{p} \PY{o}{*} \PY{n}{matrix}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{l}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L}\PY{o}{.}\PY{n}{insert\PYZus{}row}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{zero\PYZus{}vector}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{temp\PYZus{}x} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{param\PYZus{}lambda} \PY{o}{*} \PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+                 \PY{n}{temp\PYZus{}x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L}\PY{o}{.}\PY{n}{insert\PYZus{}row}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{temp\PYZus{}x}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target} \PY{o}{=} \PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{param\PYZus{}lambda} \PY{o}{*} \PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{u}\PY{p}{]}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Lret} \PY{o}{=} \PY{n}{fmi}\PY{o}{.}\PY{n}{IntegerLattice}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L}\PY{p}{)}
+                 
+             
+             \PY{k}{def} \PY{n+nf}{solve}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Calcular o CVP aproximado do reticulado Lret}
+                 \PY{n}{L} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{Lret}\PY{o}{.}\PY{n}{reduced\PYZus{}basis}\PY{p}{)}
+                 \PY{n}{t} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{list}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{zero} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{M} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{p}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n}{L1} \PY{o}{=} \PY{n}{block\PYZus{}matrix}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{p}{[}\PY{p}{[}\PY{n}{L}\PY{p}{,}\PY{n}{zero}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{t}\PY{p}{,}\PY{n}{M}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ret} \PY{o}{=} \PY{n}{fmi}\PY{o}{.}\PY{n}{IntegerLattice}\PY{p}{(}\PY{n}{L1}\PY{p}{)}\PY{o}{.}\PY{n}{reduced\PYZus{}basis}
+                 \PY{n}{error1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ret}\PY{p}{[}\PY{n}{l}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{y1} \PY{o}{=} \PY{n}{error1} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{target}
+                 \PY{k}{return} \PY{n}{y1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{n}{l}\PY{p}{]} \PY{c+c1}{\PYZsh{} última componente do vetor resultante.}
+                 
+\end{Verbatim}
+
+    \hypertarget{teste-ao-algoritmo-de-boneh-venkatesan}{%
+\subsection{Teste ao algoritmo de Boneh \&
+Venkatesan}\label{teste-ao-algoritmo-de-boneh-venkatesan}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{l} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{\PYZca{}}\PY{l+m+mi}{7}
+         \PY{n}{k} \PY{o}{=} \PY{l+m+mi}{64}
+         \PY{n}{p} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{\PYZca{}}\PY{l+m+mi}{64}
+         \PY{n}{x\PYZus{}vector} \PY{o}{=} \PY{n}{generate\PYZus{}l\PYZus{}random\PYZus{}elements}\PY{p}{(}\PY{n}{l}\PY{p}{,}\PY{n}{p}\PY{p}{)}
+         \PY{n}{oracle} \PY{o}{=} \PY{n}{HNPOracle}\PY{p}{(}\PY{n}{p}\PY{p}{)}
+         \PY{n}{u\PYZus{}vector} \PY{o}{=} \PY{n}{calculate\PYZus{}u\PYZus{}vector}\PY{p}{(}\PY{n}{x\PYZus{}vector}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{oracle}\PY{p}{)}
+         \PY{n}{bv} \PY{o}{=} \PY{n}{BV}\PY{p}{(}\PY{n}{u\PYZus{}vector}\PY{p}{,}\PY{n}{x\PYZus{}vector}\PY{p}{,}\PY{n}{k}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{l}\PY{p}{)}
+         \PY{n}{calculated\PYZus{}secret} \PY{o}{=} \PY{n}{bv}\PY{o}{.}\PY{n}{solve}\PY{p}{(}\PY{n}{x\PYZus{}vector}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{l}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{calculated\PYZus{}secret}\PY{l+s+s1}{\PYZsq{}}
+         \PY{k}{print} \PY{n}{calculated\PYZus{}secret}
+         \PY{k}{if} \PY{n}{oracle}\PY{o}{.}\PY{n}{compare\PYZus{}secret}\PY{p}{(}\PY{n}{calculated\PYZus{}secret}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Algoritmo aproximado calculou o segredo com sucesso!}\PY{l+s+s1}{\PYZsq{}}
+         \PY{k}{else}\PY{p}{:}
+             \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Algoritmo aproximado não conseguiu calcular o segredo com sucesso!}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+secret
+6981224216842594255
+calculated\_secret
+6981224216842594255
+Algoritmo aproximado calculou o segredo com sucesso!
+
+    \end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-esquema-ntru-encrypt}{%
+\section{Definição do Esquema
+NTRU-Encrypt}\label{definiuxe7uxe3o-do-esquema-ntru-encrypt}}
+
+    Nesta secção foi definido um esquema criptográfico, com base na cifra
+NTRU disponibilizada num notebook Sage, o artigo de Joseph Silverman e a
+documentação das candidaturas NTRU-Encrypt e NTRU-Prime apresentadas ao
+concurso \emph{NIST} de standards \emph{PQC}, de uma destas.
+
+A implementação aqui documentada, refere-se ao esquema criptográfico
+definido como \emph{ntru-pke}, que consiste em criptografia de chave
+pública.
+
+    \hypertarget{muxf3dulos-importados-e-paruxe2metros-puxfablicos}{%
+\subsection{Módulos Importados e Parâmetros
+Públicos}\label{muxf3dulos-importados-e-paruxe2metros-puxfablicos}}
+
+    Antes da definição dos algoritmos, é necessário definir os seguintes
+parâmetros públicos e importar os módulos necessários.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}183}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+          \PY{k+kn}{import} \PY{n+nn}{hashlib}
+          \PY{k+kn}{from} \PY{n+nn}{datetime} \PY{k+kn}{import} \PY{n}{datetime}
+          \PY{k+kn}{from} \PY{n+nn}{sage.crypto.util} \PY{k+kn}{import} \PY{n}{ascii\PYZus{}to\PYZus{}bin}\PY{p}{,} \PY{n}{bin\PYZus{}to\PYZus{}ascii}
+          
+          \PY{n}{name}        \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NTRU\PYZus{}PKE\PYZus{}443}\PY{l+s+s2}{\PYZdq{}}
+          \PY{n}{d}           \PY{o}{=} \PY{l+m+mi}{115}
+          \PY{n}{N}           \PY{o}{=} \PY{l+m+mi}{443}
+          \PY{n}{p}           \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n}{q}           \PY{o}{=} \PY{n}{next\PYZus{}prime}\PY{p}{(}\PY{n}{p}\PY{o}{*}\PY{n}{N}\PY{p}{)}       
+          \PY{n}{max\PYZus{}msg\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{33} 
+          \PY{n}{Z}\PY{o}{.}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{o}{\PYZgt{}}       \PY{o}{=} \PY{n}{ZZ}\PY{p}{[}\PY{p}{]}
+          \PY{n}{Q}\PY{o}{.}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{o}{\PYZgt{}}       \PY{o}{=} \PY{n}{PolynomialRing}\PY{p}{(}\PY{n}{GF}\PY{p}{(}\PY{n}{q}\PY{p}{)}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{quotient}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZca{}}\PY{n}{N}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    O parâmetro \texttt{q} foi definido pela primitiva
+\texttt{next\_prime(p*N)}, com base no notebook Sage, embora a
+candidatura tenha usado 2048, para o valor deste. Isto deveu-se ao facto
+do método \texttt{lift} resultar na seguinte mensagem de erro, aquando
+do uso desse valor para o parâmetro \texttt{q}.
+
+\# --------------------------------------------------------------------
+
+/usr/lib/python2.7/site-packages/sage/misc/functional.pyc in lift(x)
+    
+    972         return x.lift()
+    
+    973         except AttributeError:
+
+    --> 974         raise ArithmeticError("no lift defined.")
+ArithmeticError: no lift defined.
+    \hypertarget{definiuxe7uxe3o-de-funuxe7uxf5es-auxiliares}{%
+\subsection{Definição de Funções
+Auxiliares}\label{definiuxe7uxe3o-de-funuxe7uxf5es-auxiliares}}
+
+Feito isto, definiram-se algumas funções auxiliares, que facilitaram a
+implementação dos algoritmos descritos na próxima secção.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}184}]:} \PY{k}{def} \PY{n+nf}{pad}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{:}    
+              \PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{8}
+              \PY{k}{if} \PY{n}{msg\PYZus{}len} \PY{o}{\PYZgt{}} \PY{n}{max\PYZus{}msg\PYZus{}len}\PY{p}{:}
+                  \PY{k}{raise} \PY{n+ne}{Exception}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{msg\PYZus{}len should not exceed \PYZob{}\PYZcb{}. The value of msg\PYZus{}len was: \PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+                                  \PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{max\PYZus{}msg\PYZus{}len}\PY{p}{,} \PY{n}{msg\PYZus{}len}\PY{p}{)}\PY{p}{)}
+                  
+              \PY{n}{r} \PY{o}{=} \PY{n}{N} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{167} \PY{o}{+} \PY{l+m+mi}{6} \PY{o}{+} \PY{n}{msg\PYZus{}len}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{)}
+              \PY{n}{lr} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{p}{(}\PY{l+m+mf}{0.}\PY{o}{.}\PY{n}{r}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+              
+              \PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZob{}0:06b\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{msg\PYZus{}len}\PY{p}{)}\PY{p}{)}
+              \PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{d}\PY{p}{)} \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{msg\PYZus{}len}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}\PY{p}{;}
+                  
+              \PY{n}{m} \PY{o}{=} \PY{n}{msg} \PY{o}{+} \PY{n}{lr} \PY{o}{+} \PY{n}{vec}\PY{p}{(}\PY{l+m+mi}{167}\PY{p}{)} \PY{o}{+} \PY{n}{msg\PYZus{}len}\PY{p}{;}
+                  
+              \PY{k}{return} \PY{n}{m}
+          
+          \PY{k}{def} \PY{n+nf}{hash\PYZus{}message}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{h}\PY{p}{)}\PY{p}{:}
+              \PY{n}{m} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{m}\PY{p}{]}\PY{p}{)}
+              \PY{n}{hm} \PY{o}{=} \PY{n}{hashlib}\PY{o}{.}\PY{n}{sha512}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+              \PY{n}{lh} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{lift}\PY{p}{,}\PY{n}{h}\PY{o}{.}\PY{n}{list}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{n}{sh} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{lh}\PY{p}{)}
+              \PY{n}{hh} \PY{o}{=} \PY{n}{hashlib}\PY{o}{.}\PY{n}{sha512}\PY{p}{(}\PY{n}{sh}\PY{p}{)}
+              \PY{n}{rseed} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{hm}\PY{p}{)} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{hh}\PY{p}{)}
+              \PY{k}{return} \PY{n}{rseed}
+          
+          \PY{k}{def} \PY{n+nf}{vec}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return}  \PY{p}{[}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} arredondamento módulo \PYZsq{}q\PYZsq{}}
+          \PY{k}{def} \PY{n+nf}{qrnd}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{:}
+              \PY{n}{qq} \PY{o}{=} \PY{p}{(}\PY{n}{q}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2} \PY{p}{;} \PY{n}{ll} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{lift}\PY{p}{,}\PY{n}{f}\PY{o}{.}\PY{n}{list}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{p}{[}\PY{n}{n} \PY{k}{if} \PY{n}{n} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{qq} \PY{k}{else} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{q}  \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{ll}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} arredondamento módulo \PYZsq{}p\PYZsq{}}
+          \PY{k}{def} \PY{n+nf}{prnd}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+              \PY{n}{pp} \PY{o}{=} \PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}
+              \PY{n}{rr} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x} \PY{k}{if} \PY{n}{x} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{pp} \PY{k}{else} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{p}        
+              \PY{k}{return} \PY{p}{[}\PY{n}{rr}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{p}) if n\PYZgt{}=0 else \PYZhy{}rr((\PYZhy{}n)\PYZpc{}p) for n in l]
+          
+          \PY{k}{def} \PY{n+nf}{extract}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+              \PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{n}{m}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{:}\PY{p}{]}
+              \PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{msg\PYZus{}len}\PY{p}{)}
+              \PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{msg\PYZus{}len}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+              
+              \PY{n}{msg} \PY{o}{=} \PY{n}{m}\PY{p}{[}\PY{p}{:}\PY{n}{msg\PYZus{}len}\PY{o}{*}\PY{l+m+mi}{8}\PY{p}{]}
+                  
+              \PY{k}{return} \PY{n}{msg}\PY{p}{,} \PY{n}{msg\PYZus{}len}
+\end{Verbatim}
+
+    \hypertarget{definiuxe7uxe3o-do-esquema}{%
+\subsection{Definição do Esquema}\label{definiuxe7uxe3o-do-esquema}}
+
+    De seguida, num sistema criptográfico \textbf{NTRU}, \texttt{f} é a
+chave privada e \texttt{h} a chave pública. Estas são definidas pelo
+seguinte algoritmo e implementadas no método \texttt{keypair}.
+
+\emph{NTRU.encrypt}
+
+\textbf{Input:} Mensagem \(msg\) (representada sob a forma de uma lista
+de bits)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(m = pad(msg)\)
+\item
+  \(rseed = hash(m|h)\)
+\item
+  Instanciar um \(Sampler\) com \(rseed\)
+\item
+  r \textless- \(Sampler\)
+\item
+  \(t = r \times h\)
+\item
+  \(tseed = hash(m|h)\)
+\item
+  Instanciar um \(Sampler\) com \(tseed\)
+\item
+  \(m_{mask}\) \textless- \(Sampler\)
+\item
+  \(m' = m - m_{mask}\)
+\item
+  \(c = t + m'\)
+\end{enumerate}
+
+\textbf{Output:} Texto cifrado c
+
+Por último, definiu-se o algoritmo para decifrar o texto, implementado
+no método \texttt{decrypt}, da seguinte forma:
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\emph{NTRU.decrypt}
+
+\textbf{Input:} Texto cifrado \(c\)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(m' = f \times c (\mod p)\)
+\item
+  \(t = c- m\)
+\item
+  \(tseed = hash(t)\)
+\item
+  Instanciar um \(Sampler\) com \(tseed\)
+\item
+  \(m_{mask}\) \textless- \(Sampler\)
+\item
+  \(m = m' + m_{mask} (\mod p)\)
+\item
+  \(rseed = hash(m|h)\)
+\item
+  Instanciar um \(Sampler\) com \(rseed\)
+\item
+  \(r\) \textless- \(Sampler\)
+\item
+  \(msg,msg\_len = extract(m)\)
+\end{enumerate}
+
+\textbf{Output:} \(msg\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}185}]:} \PY{k}{class} \PY{n+nc}{NTRU}\PY{p}{:}
+              
+              \PY{k}{def} \PY{n+nf}{keypair}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{seed}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{f} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+                  \PY{k}{while} \PY{o+ow}{not} \PY{n}{f}\PY{o}{.}\PY{n}{is\PYZus{}unit}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{F} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{n}{vec}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{f} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{n}{p}\PY{o}{*}\PY{n}{F}
+                  \PY{n}{G} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{p}{[}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)} \PY{p}{;} \PY{n}{g} \PY{o}{=} \PY{n}{p}\PY{o}{*}\PY{n}{G}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f} \PY{o}{=} \PY{n}{f}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h} \PY{o}{=} \PY{n}{f}\PY{o}{\PYZca{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{g}
+              
+              \PY{k}{def} \PY{n+nf}{encrypt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{msg}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{m} \PY{o}{=} \PY{n}{pad}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+                  
+                  \PY{n}{rseed} \PY{o}{=} \PY{n}{hash\PYZus{}message}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h}\PY{p}{)}
+                  \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{rseed}\PY{p}{)}        
+                  \PY{n}{r} \PY{o}{=} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+                  
+                  \PY{n}{t} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{n}{r}\PY{p}{)} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h}
+          
+                  \PY{n}{lt} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{lift}\PY{p}{,}\PY{n}{t}\PY{o}{.}\PY{n}{list}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{st} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{lt}\PY{p}{)}
+                  \PY{n}{tseed} \PY{o}{=} \PY{n}{hashlib}\PY{o}{.}\PY{n}{sha512}\PY{p}{(}\PY{n}{st}\PY{p}{)}
+                  \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{tseed}\PY{p}{)}
+                  
+                  \PY{n}{m\PYZus{}mask} \PY{o}{=} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+                  \PY{n}{mm} \PY{o}{=} \PY{n}{prnd}\PY{p}{(}\PY{n}{qrnd}\PY{p}{(}\PY{n}{Q}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{Q}\PY{p}{(}\PY{n}{m\PYZus{}mask}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                  
+                  \PY{n}{c} \PY{o}{=} \PY{n}{t} \PY{o}{+} \PY{n}{Q}\PY{p}{(}\PY{n}{mm}\PY{p}{)}
+                  
+                  \PY{k}{return} \PY{n}{c}
+              
+              \PY{k}{def} \PY{n+nf}{decrypt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{e}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{mm} \PY{o}{=} \PY{n}{prnd}\PY{p}{(}\PY{n}{qrnd}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f} \PY{o}{*} \PY{n}{e}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{t} \PY{o}{=} \PY{n}{e} \PY{o}{\PYZhy{}} \PY{n}{Q}\PY{p}{(}\PY{n}{mm}\PY{p}{)}
+                  
+                  \PY{n}{lt} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{lift}\PY{p}{,}\PY{n}{t}\PY{o}{.}\PY{n}{list}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{st} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{lt}\PY{p}{)}
+                  \PY{n}{tseed} \PY{o}{=} \PY{n}{hashlib}\PY{o}{.}\PY{n}{sha512}\PY{p}{(}\PY{n}{st}\PY{p}{)}
+                  
+                  \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{tseed}\PY{p}{)}
+                  \PY{n}{m\PYZus{}mask} \PY{o}{=} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+                  
+                  \PY{n}{m} \PY{o}{=} \PY{n}{prnd}\PY{p}{(}\PY{n}{qrnd}\PY{p}{(}\PY{n}{Q}\PY{p}{(}\PY{n}{mm}\PY{p}{)} \PY{o}{+} \PY{n}{Q}\PY{p}{(}\PY{n}{m\PYZus{}mask}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                  
+                  \PY{n}{rseed} \PY{o}{=} \PY{n}{hash\PYZus{}message}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h}\PY{p}{)}
+                  \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{rseed}\PY{p}{)}
+                  \PY{n}{r} \PY{o}{=} \PY{p}{[}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+                  
+                  \PY{n}{msg}\PY{p}{,}\PY{n}{msg\PYZus{}len} \PY{o}{=} \PY{n}{extract}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+                  
+                  \PY{k}{return} \PY{n}{msg}
+\end{Verbatim}
+
+    \hypertarget{teste-ao-esquema-ntru}{%
+\subsection{Teste ao esquema NTRU}\label{teste-ao-esquema-ntru}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}186}]:} \PY{n}{K} \PY{o}{=} \PY{n}{NTRU}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{msg} \PY{o}{=} \PY{n}{vec}\PY{p}{(}\PY{l+m+mi}{33} \PY{o}{*} \PY{l+m+mi}{8}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{message:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{message length:}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{msg}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{8}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ bytes}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{seed} \PY{o}{=} \PY{n}{datetime}\PY{o}{.}\PY{n}{now}\PY{p}{(}\PY{p}{)}
+          \PY{n}{K}\PY{o}{.}\PY{n}{keypair}\PY{p}{(}\PY{n}{seed}\PY{p}{)}
+          \PY{n}{e} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{encrypt}\PY{p}{(}\PY{n}{msg}\PY{p}{)}
+          \PY{k}{print} \PY{n}{msg} \PY{o}{==} \PY{n}{K}\PY{o}{.}\PY{n}{decrypt}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+message:	[0, 0, 1, -1, -1, -1, 1, 0, 1, -1, -1, 1, 0, 1, 1, -1, 1, 0,
+             -1, 1, -1, -1, -1, 0, -1, 1, 0, 0, 1, 0, 1, 1, -1, 1, 1, 0,
+             0, 0, -1, -1, 0, -1, 0, -1, 1, -1, 0, 0, -1, -1, -1, -1, 1,
+             -1, -1, 0, 0, 1, 0, 1, -1, 0, 0, -1, 0, 1, 0, 1, 1, 1, 1, 1,
+             0, 0, 1, 0, -1, -1, -1, 1, 0, 1, 0, 1, 1, 1, 0, 1, -1, -1, 1,
+             0, 1, 0, 1, -1, 0, 1, 0, -1, 0, -1, -1, 0, -1, -1, 1, 1, 0, 0,
+             1, 1, 0, -1, 1, 0, 1, 1, -1, -1, 1, 0, -1, -1, 0, 1, 1, 0, 0,
+             -1, 0, 1, 0, -1, 1, 1, 1, -1, 0, 0, -1, -1, -1, -1, 1, 1, 0,
+             -1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, -1, 1, 1, 1, 0, 0, 
+             0, 0, -1, -1, 0, 0, 0, -1, -1, -1, 0, 0, 0, 0, 1, -1, 1, 1,
+             -1, 0, -1, 1, 1, 0, 0, 0, 0, -1, 1, 0, -1, 0, 0, -1, 1, -1,
+             1, 0, 1, 1, -1, 0, 1, 1, 1, -1, -1, -1, 1, -1, 0, 0, 1, -1,
+             1, 0, 1, 0, -1, 1, 1, 0, -1, 1, 0, -1, 0, 1, 0, -1, 0, 1,
+             -1, 1, -1, 0, -1, 0, 1, 0, -1, -1, -1, 1, -1, 1, 1, 0, 0,
+             1, -1, 0, 1, 1, -1, 1, 0, -1]
+message length:	33 bytes
+
+True
+
+    \end{Verbatim}
+
+    \hypertarget{ataques-de-inversuxe3o}{%
+\section{Ataques de inversão}\label{ataques-de-inversuxe3o}}
+
+    \hypertarget{definiuxe7uxe3o-da-classe-ntru-e-da-classe-lat}{%
+\subsection{Definição da classe NTRU e da classe
+LAT}\label{definiuxe7uxe3o-da-classe-ntru-e-da-classe-lat}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{k+kn}{import} \PY{n+nn}{sage.modules.free\PYZus{}module\PYZus{}integer} \PY{k+kn}{as} \PY{n+nn}{fmi}
+          
+          \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{6}
+          
+          \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{21}
+          \PY{n}{p} \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n}{q} \PY{o}{=} \PY{n}{next\PYZus{}prime}\PY{p}{(}\PY{n}{p}\PY{o}{*}\PY{n}{N}\PY{p}{)}
+          
+          \PY{n}{Z}\PY{o}{.}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{o}{\PYZgt{}}  \PY{o}{=} \PY{n}{ZZ}\PY{p}{[}\PY{p}{]}        \PY{c+c1}{\PYZsh{} polinómios de coeficientes inteiros}
+          \PY{n}{Q}\PY{o}{.}\PY{o}{\PYZlt{}}\PY{n}{x}\PY{o}{\PYZgt{}}  \PY{o}{=} \PY{n}{PolynomialRing}\PY{p}{(}\PY{n}{GF}\PY{p}{(}\PY{n}{q}\PY{p}{)}\PY{p}{,}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{quotient}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZca{}}\PY{n}{N}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{vec}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return}  \PY{p}{[}\PY{n}{choice}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} arredondamento módulo \PYZsq{}q\PYZsq{}}
+          \PY{k}{def} \PY{n+nf}{qrnd}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{:}    \PY{c+c1}{\PYZsh{} argumento em \PYZsq{}Q\PYZsq{}}
+              \PY{n}{qq} \PY{o}{=} \PY{p}{(}\PY{n}{q}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2} \PY{p}{;} \PY{n}{ll} \PY{o}{=} \PY{n+nb}{map}\PY{p}{(}\PY{n}{lift}\PY{p}{,}\PY{n}{f}\PY{o}{.}\PY{n}{list}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} \PY{p}{[}\PY{n}{n} \PY{k}{if} \PY{n}{n} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{qq} \PY{k}{else} \PY{n}{n} \PY{o}{\PYZhy{}} \PY{n}{q}  \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{ll}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} arredondamento módulo \PYZsq{}p\PYZsq{}}
+          \PY{k}{def} \PY{n+nf}{prnd}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{:}
+              \PY{n}{pp} \PY{o}{=} \PY{p}{(}\PY{n}{p}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{/}\PY{o}{/}\PY{l+m+mi}{2}
+              \PY{n}{rr} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{x} \PY{k}{if} \PY{n}{x} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{pp} \PY{k}{else} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{p}        
+              \PY{k}{return} \PY{p}{[}\PY{n}{rr}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZpc{}}\PY{k}{p}) if n\PYZgt{}=0 else \PYZhy{}rr((\PYZhy{}n)\PYZpc{}p) for n in l]
+          
+          \PY{k}{class} \PY{n+nc}{NTRU}\PY{p}{(}\PY{n+nb}{object}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} calcular um \PYZsq{}f\PYZsq{} invertível}
+                  \PY{n}{f} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                  \PY{k}{while} \PY{o+ow}{not} \PY{n}{f}\PY{o}{.}\PY{n}{is\PYZus{}unit}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{F} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{n}{vec}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{f} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{+} \PY{n}{p}\PY{o}{*}\PY{n}{F}
+                  \PY{c+c1}{\PYZsh{} gerar as chaves}
+                  \PY{n}{G} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{n}{vec}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{p}{;} \PY{n}{g} \PY{o}{=} \PY{n}{p}\PY{o}{*}\PY{n}{G}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f} \PY{o}{=} \PY{n}{f}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h} \PY{o}{=} \PY{n}{f}\PY{o}{\PYZca{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{g}
+                  
+              \PY{k}{def} \PY{n+nf}{encrypt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{r} \PY{o}{=} \PY{n}{Q}\PY{p}{(}\PY{n}{vec}\PY{p}{(}\PY{p}{)}\PY{p}{)} 
+                  \PY{k}{return} \PY{n}{r}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h} \PY{o}{+} \PY{n}{Q}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+          
+              \PY{k}{def} \PY{n+nf}{decrypt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{e}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{a} \PY{o}{=} \PY{n}{e}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{f}
+                  \PY{k}{return} \PY{n}{prnd}\PY{p}{(}\PY{n}{qrnd}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{class} \PY{n+nc}{Lat}\PY{p}{(}\PY{n}{NTRU}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                  \PY{n+nb}{super}\PY{p}{(}\PY{n}{Lat}\PY{p}{,}\PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{B1} \PY{o}{=} \PY{n}{identity\PYZus{}matrix}\PY{p}{(}\PY{n}{ZZ}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{;} \PY{n}{Bq} \PY{o}{=} \PY{n}{q}\PY{o}{*}\PY{n}{B1}\PY{p}{;} \PY{n}{B0} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{ZZ}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{n}{N}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{h} \PY{o}{=} \PY{n}{qrnd}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{h}\PY{p}{)}
+                  \PY{c+c1}{\PYZsh{} rodar um vetor}
+                  \PY{n}{H} \PY{o}{=} \PY{p}{[}\PY{n}{h}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{h} \PY{o}{=} \PY{p}{[}\PY{n}{h}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{+} \PY{n}{h}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}   \PY{c+c1}{\PYZsh{} shift right rotate}
+                      \PY{n}{H} \PY{o}{=} \PY{n}{H} \PY{o}{+} \PY{p}{[}\PY{n}{h}\PY{p}{]}
+                  \PY{n}{H} \PY{o}{=} \PY{n}{matrix}\PY{p}{(}\PY{n}{ZZ}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{N}\PY{p}{,}\PY{n}{H}\PY{p}{)}
+                  \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{L} \PY{o}{=} \PY{n}{fmi}\PY{o}{.}\PY{n}{IntegerLattice}\PY{p}{(}\PY{n}{block\PYZus{}matrix}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{Bq}\PY{p}{,}\PY{n}{B0}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{H}\PY{p}{,}\PY{n}{B1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+    \hypertarget{inversuxe3o-da-chave-puxfablica}{%
+\subsection{Inversão da chave
+pública}\label{inversuxe3o-da-chave-puxfablica}}
+
+    Segundo o artigo de \emph{Silverman}, encontrar a chave privada f a
+partir da chave pública h, é equivalente a encontrar um vetor curto no
+reticulado \textbf{L(h)} definido em cima, para parâmetros apropriados.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}178}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+          
+          \PY{n}{l} \PY{o}{=} \PY{n}{Lat}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lredmat} \PY{o}{=} \PY{n}{l}\PY{o}{.}\PY{n}{L}\PY{o}{.}\PY{n}{reduced\PYZus{}basis}\PY{o}{.}\PY{n}{LLL}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lred} \PY{o}{=} \PY{n}{fmi}\PY{o}{.}\PY{n}{IntegerLattice}\PY{p}{(}\PY{n}{lredmat}\PY{p}{)}
+          
+          \PY{n}{short\PYZus{}aproximate} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{lredmat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{}SVP aproximado}
+          \PY{k}{print} \PY{n}{Q}\PY{p}{(}\PY{n}{prnd}\PY{p}{(}\PY{n}{short\PYZus{}aproximate}\PY{p}{)}\PY{p}{)}
+          \PY{k}{print} \PY{n}{l}\PY{o}{.}\PY{n}{f}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+x\^{}20 + x\^{}16 + 66*x\^{}13 + x\^{}11 + x\^{}10 + 66*x\^{}8 + 66*x\^{}7 + x\^{}6 + x\^{}4 + x\^{}3 + 66*x + 2
+3*x\^{}19 + 64*x\^{}17 + 3*x\^{}16 + 3*x\^{}13 + 3*x\^{}11 + 3*x\^{}10 + 3*x\^{}9 + 3*x\^{}8 + 3*x\^{}7 + 64*x + 1
+
+    \end{Verbatim}
+
+    \hypertarget{inversuxe3o-do-criptograma}{%
+\subsection{Inversão do
+criptograma}\label{inversuxe3o-do-criptograma}}
+
+    Segundo o artigo de \emph{Silverman}, recuperar a mensagem original a
+partir do criptograma e da chave pública, é equivalente a encontrar o
+vetor mais próximo do target \$ {[}0,criptograma{]} \$, no reticulado
+\textbf{L(h)}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+          
+          \PY{n}{l} \PY{o}{=} \PY{n}{Lat}\PY{p}{(}\PY{p}{)}
+          \PY{n}{message} \PY{o}{=} \PY{n}{vec}\PY{p}{(}\PY{p}{)}
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{message:}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{n}{Q}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+          \PY{n}{e} \PY{o}{=} \PY{n}{l}\PY{o}{.}\PY{n}{encrypt}\PY{p}{(}\PY{n}{message}\PY{p}{)}
+          \PY{n}{e} \PY{o}{=} \PY{n}{qrnd}\PY{p}{(}\PY{n}{e}\PY{p}{)}
+          \PY{n}{vector} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{e}\PY{p}{:}
+              \PY{n}{vector}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+          \PY{n}{zero\PYZus{}41\PYZus{}vector} \PY{o}{=}  \PY{p}{[}\PY{l+m+mi}{0} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{41}\PY{p}{)}\PY{p}{]}
+          \PY{n}{zero\PYZus{}41\PYZus{}vector}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{q}\PY{p}{)}
+          \PY{n}{lred} \PY{o}{=} \PY{n}{l}\PY{o}{.}\PY{n}{L}\PY{o}{.}\PY{n}{reduced\PYZus{}basis}
+          \PY{n}{lred} \PY{o}{=} \PY{n}{lred}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lred} \PY{o}{=} \PY{n}{lred}\PY{o}{.}\PY{n}{insert\PYZus{}row}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{,}\PY{n}{zero\PYZus{}41\PYZus{}vector}\PY{p}{)}
+          \PY{n}{lred} \PY{o}{=} \PY{n}{lred}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+          \PY{n}{L1} \PY{o}{=} \PY{n}{fmi}\PY{o}{.}\PY{n}{IntegerLattice}\PY{p}{(}\PY{n}{lred}\PY{p}{)}
+          \PY{n}{lred} \PY{o}{=} \PY{n}{L1}\PY{o}{.}\PY{n}{reduced\PYZus{}basis}
+          
+          \PY{n}{err1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{lred}\PY{p}{[}\PY{l+m+mi}{41}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          \PY{n}{y1} \PY{o}{=} \PY{n}{err1} \PY{o}{+} \PY{n}{vector}
+          \PY{c+c1}{\PYZsh{} y1 deverá ser igual ao vetor [\PYZhy{}r,m], retirámos \PYZhy{}r e ficámos apenas com m.}
+          \PY{n}{new\PYZus{}vec} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{22}\PY{p}{,}\PY{l+m+mi}{42}\PY{p}{)}\PY{p}{:}
+              \PY{n}{new\PYZus{}vec}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{calculated\PYZus{}message}\PY{l+s+s1}{\PYZsq{}}
+          \PY{k}{print} \PY{n}{Q}\PY{p}{(}\PY{n}{prnd}\PY{p}{(}\PY{n}{new\PYZus{}vec}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+message:
+66*x\^{}19 + 66*x\^{}18 + 66*x\^{}17 + 66*x\^{}15 + 66*x\^{}14 + x\^{}12
+     + 66*x\^{}11 + x\^{}10 + 66*x\^{}9 + x\^{}7 + 66*x\^{}6 + x\^{}3
+     + x\^{}2 + x + 1
+
+calculated\_message
+66*x\^{}19 + x\^{}18 + x\^{}15 + 66*x\^{}14 + x\^{}13 + 66*x\^{}12 
+     + 66*x\^{}11 + x\^{}10 + x\^{}9 + x\^{}6 + x\^{}4 + x\^{}3
+     + x\^{}2 + 66*x + 1
+
+    \end{Verbatim}
+
+    \hypertarget{conclusuxe3o}{%
+\section{Conclusão}\label{conclusuxe3o}}
+
+    Os resultados da realização deste trabalho prático não são, desta vez,
+tão satisfatórios como nos trabalhos anteriores visto que, apesar de
+termos conseguido implementar o algoritmo de \textbf{Boneh \&
+Venkatesan} e o esquema \textbf{NTRUEncrypt}, não conseguimos
+implementar, de forma totalmente correta, os ataques de inversão
+referidos no enunciado. Como é dito em cima, conseguimos entender a
+relação entre o cálculo do vector mais curto e o cálculo do vetor mais
+próximo com as inversões da chave pública e criptograma, respetivamente,
+mas não conseguimos implementar de forma a que conseguíssemos obter
+esses mesmos resultados exatos.
+
+Como deve ser óbvio nesta altura, este trabalho apresentou imensas
+dificuldades, especialmente e decididamente na pergunta 3, mas também no
+esquema \textbf{NTRUEncrypt}, apesar de que, nesse caso, ainda o
+conseguimos implementar de forma a que consiga cifrar e decifrar,
+corretamente, uma mensagem.
+
+    \hypertarget{referuxeancias}{%
+\section{Referências}\label{referuxeancias}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.dropbox.com/sh/f0j9adiaw4v3deb/AADiMJL2SBP8IMjAxA-SxX2Za/WorkSheets/TP4?dl=0\&subfolder_nav_tracking=1}{Worksheets
+  TP4 do professor}
+\item
+  \href{http://archive.dimacs.rutgers.edu/Workshops/Post-Quantum/Slides/Silverman.pdf}{NTRU
+  and Lattice-Based Crypto: Past, Present, and Future de Joseph H.
+  Silverman}
+\item
+  \href{https://www.dropbox.com/sh/ejlraszbb4ogbod/AABacbwfTbUKwRPmPfkgEIuIa/NTRUEncrypt/Supporting_Documentation?dl=0\&subfolder_nav_tracking=1}{NTRUEncrypt
+  Supporting Documentation}
+\item
+  \href{https://paper.dropbox.com/doc/Hidden-Number-Problem-HXjSmxuD62Xr6nEXocfjg}{HNP
+  e abordagem de Boneh \& Venkatesan}
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
