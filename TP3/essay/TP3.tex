@@ -348,8 +348,8 @@ dividida em quatro partes:
   calcular o msb e compara um segredo calculado com o gerado;
 \item
   A segunda parte define as funções de geração do vetor aleatório
-  \textbf{x} e do vetor composto por \$ ui = msb(xi,s) \$ para \$ i=0 \$
-  até \$ i = l - 1 \$.
+  \textbf{x} e do vetor composto por $ ui = msb(xi,s) $ para $ i=0 $
+  até $ i = l - 1 $.
 \item
   A terceira parte define apenas o algoritmo de \emph{Boneh \&
   Venkatesan} .
@@ -365,7 +365,7 @@ HNP}\label{definiuxe7uxe3o-do-oruxe1culo-hnp}}
 
     O propósito desta secção passa por definir o oráculo que gera um segredo
 e, posteriormente, retorna o vetor u, com l elementos, onde cada um é um
-inteiro representativo dos k bits mais significativos de \$ s * xi \$.
+inteiro representativo dos k bits mais significativos de $ s * xi $.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}52}]:} \PY{k}{class} \PY{n+nc}{HNPOracle}\PY{p}{:}
@@ -601,6 +601,30 @@ implementação dos algoritmos descritos na próxima secção.
     De seguida, num sistema criptográfico \textbf{NTRU}, \texttt{f} é a
 chave privada e \texttt{h} a chave pública. Estas são definidas pelo
 seguinte algoritmo e implementadas no método \texttt{keypair}.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\emph{NTRU.keypair}
+
+\textbf{Input:} $seed$
+
+\begin{enumerate}
+\tightlist
+\item
+  Instanciar um $Sampler$ com uma $seed$
+\item
+  $f$ <- $Sampler$
+\item
+  Se $f$ não for invertível $\mod p$, voltar ao passo 2
+\item
+  $g$ <- $Sampler$
+\item
+  $h = g / (pf + 1) \mod q$
+\end{enumerate}
+
+\textbf{Ouput:} Chave pública $h$ e chave privada $(𝑝𝑓,𝑔)$
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
 \emph{NTRU.encrypt}
 
@@ -862,7 +886,7 @@ criptograma}\label{inversuxe3o-do-criptograma}}
 
     Segundo o artigo de \emph{Silverman}, recuperar a mensagem original a
 partir do criptograma e da chave pública, é equivalente a encontrar o
-vetor mais próximo do target \$ {[}0,criptograma{]} \$, no reticulado
+vetor mais próximo do target $ {[}0,criptograma{]} $, no reticulado
 \textbf{L(h)}.
 
     \begin{Verbatim}[commandchars=\\\{\}]
